@@ -1,24 +1,28 @@
 # AsPredicted Form — Session-5 Controls: Analysis Plan for External Timestamping
 
-**Purpose.** The session-5 design and its falsifiable predictions were deposited in an
-archived design document (`audits/P2_preregistration_session5.md`) before any session-5
-data collection, as part of the paper's within-study staged pre-specification. This form
-packages that design into the standard AsPredicted format so it can receive an
-**independent external timestamp** (OSF or AsPredicted.org) *before the remaining calls
-of session 5 complete*. Data collection was interrupted by provider rate-limiting after
-63 of 84 planned API calls; the design, transformations, seeded swap map, and verification
-report were all frozen before the interruption and are hash-bound below.
+**Purpose and timeline (recorded honestly).** The session-5 design and its falsifiable
+predictions were deposited in an archived design document
+(`audits/P2_preregistration_session5.md`) before ANY session-5 data collection, as part
+of the paper's within-study staged pre-specification. Collection was interrupted by
+provider rate-limiting after 63 of 84 planned calls; the remaining 21 calls were
+completed later the same UTC day (2026-10-19, ~16:05 UTC) under the identical archived
+protocol once quota recovered — before this form could receive an external timestamp
+(OSF/AsPredicted filing requires the author's own account). The pre-completion partial
+score files were sealed and are hash-bound below, so this form documents (i) that the
+analysis plan and predictions predate all 84 calls, and (ii) exactly what the sealed
+state was at the interruption. Any FUTURE confirmatory session of this project should
+be externally timestamped BEFORE data collection begins; this form's nine answers and
+hash table are ready to paste for that purpose.
 
 **How to file (for the author):** create an OSF registration (or AsPredicted submission)
-under your own account, paste the nine answers below verbatim, attach
+under your own account, paste the nine answers below, attach
 `audits/P2_preregistration_session5.md` and `data/s5_artifact_hashes.json`, and file.
-The registration date must precede the completion run of the remaining 21 calls to
-constitute an external timestamp for the analysis plan.
+For future sessions, file BEFORE data collection starts.
 
 ---
 
-**Q1. Data collection status.**
-Partially collected. Sessions 1–4 of the project (the original named scoring, anonymized
+**Q1. Data collection status (as of 2026-10-19 16:05 UTC).**
+Complete (84/84 calls, all six conditions at 341/341). At the time this form was drafted, partially collected: Sessions 1–4 of the project (the original named scoring, anonymized
 scoring, three repeat calls, the interleaved session 3, and the mechanism session 4) are
 complete and reported in the paper. For session 5 itself — the design this form covers —
 63 of 84 planned API calls completed (N5: 275/341 headlines, A5/S5/P5: 250/341 each,
