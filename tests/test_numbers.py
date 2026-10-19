@@ -367,6 +367,65 @@ if all(c == 341 for c in _counts.values()):
 else:
     print(f"NOTE: session-5 collection in progress ({_counts}); value checks deferred.")
 
+# (k) session-5 pre-registered results (analysis_v5.py, seed 20261019)
+if all(c == 341 for c in _counts.values()):
+    s5 = load("results_s5.json")
+    check("s5 P1 de-id N5-A5", s5["p1_identity_N5_minus_A5"]["mean_diff"], -2.05, 0.005)
+    check("s5 P1 headline t", s5["p1_identity_N5_minus_A5"]["headline_t"], -2.84, 0.01)
+    check("s5 P1 cluster p", s5["p1_identity_N5_minus_A5"]["cluster_p"], 0.175, 0.005)
+    check("s5 P1 excl V", s5["p1_identity_excl_V"]["mean_diff"], -2.15, 0.005)
+    check("s5 P2 swap N5-S5", s5["p2_swap_N5_minus_S5"]["mean_diff"], 0.34, 0.005)
+    check("s5 P2 swap cluster p", s5["p2_swap_N5_minus_S5"]["cluster_p"], 0.857, 0.005)
+    check("s5 P2 S5-A5", s5["p2_swap_S5_minus_A5"]["mean_diff"], -2.39, 0.005)
+    check("s5 P2 S5-A5 headline p", s5["p2_swap_S5_minus_A5"]["headline_p"], 0.0012, 0.0005)
+    check("s5 P3 prefix", s5["p3_prefix_P5_minus_A5"]["mean_diff"], 0.13, 0.005)
+    check("s5 P4 identical rate", s5["p4_temp0_determinism"]["exact_identical_rate"], 284 / 341, 0.001)
+    check("s5 P4 within sd", s5["p4_temp0_determinism"]["within_sd_T0"], 4.84, 0.01)
+    check("s5 P5 level shift", s5["p5_temp0_vs_default"]["mean_diff"], 1.06, 0.005)
+    check("s5 pred beta N5", s5["prediction"]["N5"]["beta"], 0.0140, 0.0005)
+    check("s5 pred beta A5", s5["prediction"]["A5"]["beta"], 0.0158, 0.0005)
+    check("s5 pred beta S5", s5["prediction"]["S5"]["beta"], 0.0179, 0.0005)
+    check("s5 pred diff N5-A5 p", s5["prediction_diffs"]["N5_minus_A5"]["p"], 0.929, 0.005)
+    check("s5 pred diff N5-S5 p", s5["prediction_diffs"]["N5_minus_S5"]["p"], 0.917, 0.005)
+    in_tex("s5 results in paper", "de-identification", "results.tex")
+    in_tex("s5 swap number", "0.34", "results.tex")
+    in_tex("s5 temp0 rate", "83.3\\%", "results.tex")
+    in_tex("s5 appendix section", "Session-5 Controls: Archived Design Document and Results", "appendix.tex")
+    in_tex("s5 model tag", "analysis\\_v5.py", "appendix.tex")
+    # swap control re-attribution must be stated in the abstract-level documents
+    in_tex("s5 swap in intro", "swap control", "intro.tex")
+
+# (l) batch-mechanism quantification (batch_mechanism_quant.py)
+if all(c == 341 for c in _counts.values()):
+    bq = load("results_batch_quant.json")
+    check("mech theta full mates", bq["theta_full_mates"], 0.381, 0.005)
+    check("mech alpha out mean", bq["alpha_out_mean"], 12.60, 0.05)
+    check("mech alpha in mean", bq["alpha_in_mean"], 13.91, 0.05)
+    check("mech alpha gap", bq["alpha_gap_out_minus_in"], -1.32, 0.05)
+    check("mech pred composition shift", bq["pred_composition_theta_full"], 0.039, 0.005)
+    check("mech gap needed", bq["gap_needed_full_explanation"], 30.1, 0.5)
+    check("mech share out mates", bq["share_out_mates_mean"], 0.31, 0.01)
+    check("mech rebatch identity zero", bq["pred_rebatch_theta_full"], 0.0, 0.001)
+    in_tex("mech quant in intro", "quantifiably explains only about 1\\%", "intro.tex")
+    in_tex("mech pred shift in results", "0.04", "results.tex")
+    in_tex("mech table rows", "Level shift predicted by \\emph{linear} anchoring, composition contrast", "appendix.tex")
+
+# (m) title, channel naming, and new forbidden phrases
+in_tex("title de-identification", "De-Identification, Batch Composition", "titleblock.tex")
+for _bad in ["pessimism prior", "make no attempt to hide", "committed, in sequence",
+             "got both wrong", "no human labels existed", "Pre-Registered Control Session",
+             "ten times across", "Identity Priors, Batch Composition"]:
+    n_checks[0] += 1
+    if _bad in _all_tex:
+        failures.append(f"forbidden phrase present: {_bad!r}")
+in_tex("thirteen passes intro", "thirteen independent passes across five sittings", "intro.tex")
+in_tex("fifteen draws robust", "fifteen archived named draws", "robustness.tex")
+n_checks[0] += 1
+if "fourteen archived" in _all_tex or "twelve independent passes" in _all_tex:
+    failures.append("stale draw count (fourteen archived / twelve independent passes) still present")
+in_tex("checklist appendix present", "Minimal Viable Audit Protocol", "appendix.tex")
+in_tex("downstream figure present", "fig_downstream.png", "appendix.tex")
+
 # ---------------- report ----------------
 n_total = n_checks[0]
 print(f"test_numbers.py: {n_total - len(failures)}/{n_total} checks passed")

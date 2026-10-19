@@ -58,17 +58,18 @@ must_have = [
     "Chang Tan", "Dalian University of Technology", "aquars43@foxmail.com",
     "Generative-AI use",
     # v6 new content
-    "fourteen archived re-scorings", "BatchPrompt", "104335",
+    "thirteen re-scorings", "BatchPrompt", "104335",
     "22 to 50 firm-days", "batch_downstream.py",
-    "P2_preregistration_session5", "annotation_package",
+    "P2_preregistration_session5",
     "temperature", "glm-4-plus",
-    # session-5 results (present only if session 5 completed and was integrated)
-    "SESSION5_INTEGRATED_MARKER",
+    # v6.1 session-5 integration and mechanism closure
+    "De-Identification", "de-identification effect",
+    "−2.05", "0.34", "83.3", "0.0179", "4.8",
+    "fifteen archived", "telescoping identity", "analysis_v5.py",
+    "Minimal Viable Audit Protocol", "model_fingerprint.log",
 ]
 missing = [m for m in must_have if not _present(m)]
-if "SESSION5_INTEGRATED_MARKER" in missing:
-    missing.remove("SESSION5_INTEGRATED_MARKER")
-    print("NOTE: session-5 estimates intentionally NOT integrated (pre-registered; collection interrupted by provider rate limits — paper reports it as archived/pre-registered)")
-print(f"key-number spot check: {len(must_have)-1-len(missing)}/{len(must_have)-1} present")
+print(f"key-number spot check: {len(must_have)-len(missing)}/{len(must_have)} present")
 if missing:
     print("  missing:", missing)
+

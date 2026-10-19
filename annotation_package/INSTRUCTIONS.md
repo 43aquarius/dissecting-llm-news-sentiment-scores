@@ -41,3 +41,13 @@ The team runs `kappa_analysis.py` on the merged sheet to compute:
 
 These statistics will be reported in the paper as the human-validation of the
 echo classifier.
+
+## Optional second task: false-negative sample (`false_negative_sample.csv`)
+
+The main sheet estimates the classifier's *precision* (how many flagged headlines
+are genuine). The optional second sheet estimates its *miss rate*: it contains 50
+randomly selected in-window headlines (relevance >= 30) that the regex did NOT
+flag. Label them with the same P/E/D/N codebook under the same independence
+protocol. Any headline labeled P in this sheet is a false negative of the
+classifier; the share of P labels estimates the miss rate among relevance-
+qualified headlines, and the κ analysis script handles both sheets.

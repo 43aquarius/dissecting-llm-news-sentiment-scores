@@ -15,10 +15,10 @@ for src in (COVER, BODY):
         w.add_page(pg)
 
 w.add_metadata({
-    "/Title": "Dissecting LLM News Sentiment Signals: Scoring Noise, Session Drift, Price Echoes, and Coverage Selection in Short-Horizon Return Predictability",
-    "/Author": "Z.ai Research",
+    "/Title": "Dissecting LLM News Sentiment Scores: De-Identification, Batch Composition, Scoring Noise, and Price Echoes in Return Predictability",
+    "/Author": "Chang Tan",
     "/Subject": "Measurement audit of LLM news sentiment scoring for stock return prediction",
-    "/Keywords": "large language models; sentiment analysis; return predictability; measurement validity; session drift; look-ahead bias; replication",
+    "/Keywords": "large language models; sentiment analysis; return predictability; measurement validity; batch composition; look-ahead bias; replication",
     "/Creator": "Tectonic + pypdf pipeline",
 })
 with open(OUT, "wb") as f:

@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this repository, please cite the working paper."
-title: "Dissecting LLM News Sentiment Scores: Identity Priors, Batch Composition, Scoring Noise, and Price Echoes in Return Predictability"
+title: "Dissecting LLM News Sentiment Scores: De-Identification, Batch Composition, Scoring Noise, and Price Echoes in Return Predictability"
 authors:
   - family-names: Tan
     given-names: Chang
@@ -18,5 +18,5 @@ keywords:
   - Loughran-McDonald dictionary
   - replication
 date-released: "2026-10-19"
-version: "6.0.0"
+version: "6.1.0"
 license: MIT

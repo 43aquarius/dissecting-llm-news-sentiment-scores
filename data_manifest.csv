@@ -54,3 +54,18 @@ llm_scores_s5_t0a.json,"session-5 named scores at temperature=0, round a (T0a)",
 llm_scores_s5_t0b.json,"session-5 named scores at temperature=0, round b (T0b)",llm_score_v5.mjs (real API calls),341 records,Sec 4.2 / App Session 5,archived (log in logs/)
 results_batch_downstream.json,"downstream consequences of batch composition (slopes, spreads, ranks, thresholds, daily series)",batch_downstream.py (seed 20261019),7 sources x 5 uses,Sec 5.2 / App (downstream table),verified (recomputable)
 results_s5.json,"session-5 pre-registered contrasts (identity replication, swap, prefix, temperature-0)",analysis_v5.py (seed 20261019),6 conditions,Sec 5.2 / 5.3,verified (recomputable; present if collection complete at packaging)
+data/results_s5.json,analysis_v5.py (seed 20261019),session-5 pre-registered results (P1-P5 + prediction layer),verified-by-test-suite
+data/results_batch_quant.json,batch_mechanism_quant.py,linear-anchoring accounting for the composition effect,verified-by-test-suite
+data/model_fingerprint.json,model_fingerprint.mjs,served-model fingerprint probes (self-ID + foreign-model-string),archived-log
+data/s5_artifact_hashes.json,sha256 of frozen session-5 artifacts,hash binding for the AsPredicted form,verified
+data/figures/fig_downstream.png,figures_v7.py,downstream-consequences figure (slopes/thresholds/daily series),regenerated
+src/batch_mechanism_quant.py,analysis script,linear anchoring accounting with full mate pool,deterministic
+src/figures_v7.py,figure script,fig_downstream.png generator (ctrl-sample aligned),deterministic
+src/llm_score_v5_resume.mjs,scoring runner,session-5 resume runner (exponential backoff + quota probing),archived
+src/llm_score_v5_attempt.mjs,scoring runner,session-5 single-probe completion runner (executed),archived
+src/model_fingerprint.mjs,probe script,served-model fingerprint probes,archived
+src/build_false_negative_sample.py,kit builder,"false-negative sampling frame (seed 20261019, n=50)",deterministic
+annotation_package/false_negative_sample.csv,build_false_negative_sample.py,50 seeded non-flagged headlines for miss-rate estimation,seeded
+audits/aspredicted_session5_form.md,prepared form,AsPredicted-format session-5 registration (hash-bound),document
+logs/model_fingerprint.log,probe run,fingerprint probe log with timestamps,archived
+paper/Dissecting_LLM_News_Sentiment_Scores_v6_1.pdf,compiled,v6.1 merged deliverable (cover + 37 pp.),final

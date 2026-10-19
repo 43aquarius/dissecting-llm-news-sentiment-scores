@@ -1,0 +1,44 @@
+{
+ "timestamp": "2026-10-19T16:07:32.702Z",
+ "probes": [
+  {
+   "type": "F1_self_identification",
+   "served_model": "glm-4-plus",
+   "answer": "I am the GLM model, developed by Zhipu AI, with the exact model name and version not publicly disclosed by my system."
+  },
+  {
+   "type": "F2_metadata_with_foreign_model_string",
+   "requested": "some-other-model-x",
+   "served_model": "glm-4-plus",
+   "content": "ok"
+  },
+  {
+   "type": "F3_battery",
+   "q": 0,
+   "served_model": "glm-4-plus",
+   "answer": "Paris"
+  },
+  {
+   "type": "F3",
+   "q": 1,
+   "error": "Error: API request failed with status 429: {\"error\":\"Too many requests, please t"
+  },
+  {
+   "type": "F3",
+   "q": 2,
+   "error": "Error: API request failed with status 429: {\"error\":\"Too many requests, please t"
+  },
+  {
+   "type": "F3",
+   "q": 3,
+   "error": "Error: API request failed with status 429: {\"error\":\"Too many requests, please t"
+  },
+  {
+   "type": "F3",
+   "q": 4,
+   "error": "Error: API request failed with status 429: {\"error\":\"Too many requests, please t"
+  }
+ ],
+ "gate": "open",
+ "gate_served_model": "glm-4-plus"
+}

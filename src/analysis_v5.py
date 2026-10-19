@@ -117,7 +117,7 @@ R["p2_context"] = {
 R["p3_prefix_P5_minus_A5"] = paired(H, "P5", "A5")
 
 # P4: decoding determinism (T0a vs T0b)
-ident = (H["T0a"] == H["T0b")
+ident = (H["T0a"] == H["T0b"])
 R["p4_temp0_determinism"] = {
     "exact_identical_rate": float(ident.mean()),
     "n_identical": int(ident.sum()),

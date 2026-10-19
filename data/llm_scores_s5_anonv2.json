@@ -998,5 +998,369 @@
  "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/third-quarter-2026-earnings.pdf": {
   "sentiment": 0,
   "relevance": 70
+ },
+ "https://newsroom.wf.com/news-releases/news-details/2026/Wells-Fargo-Reports-Third-Quarter-2026-Financial-Results/default.aspx": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.wellsfargo.com/assets/pdf/about/investor-relations/earnings/second-quarter-2026-earnings.pdf": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.reuters.com/business/finance/wells-fargo-profit-rises-robust-loan-growth-interest-income-2026-10-13": {
+  "sentiment": 20,
+  "relevance": 90
+ },
+ "https://www.businesswire.com/news/home/20261005655050/en/Wells-Fargo-to-Announce-Third-Quarter-2026-Earnings-on-Oct.-13-2026": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://investor.visa.com/news/news-details/2026/Visa-to-Announce-Fiscal-Third-Quarter-2026-Financial-Results-on-July-28-2026/default.aspx": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.trefis.com/stock/v/articles/609329/visa-stock-is-being-repriced-for-something-other-than-card-volume/2026-07-30": {
+  "sentiment": 0,
+  "relevance": 70
+ },
+ "https://www.litefinance.org/blog/analysts-opinions/visa-stock-forecast-and-price-prediction": {
+  "sentiment": 0,
+  "relevance": 60
+ },
+ "https://www.stocktitan.net/news/V/visa-to-announce-fiscal-third-quarter-2026-financial-results-on-july-zkmgdcpgb563.html": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.aila.org/library/visa-bulletin-for-october-2026": {
+  "sentiment": 0,
+  "relevance": 50
+ },
+ "https://www.murthy.com/2026/09/29/october-2026-visa-bulletin": {
+  "sentiment": 0,
+  "relevance": 50
+ },
+ "https://www.envoyglobal.com/news-alert/october-2026-visa-bulletin": {
+  "sentiment": 0,
+  "relevance": 50
+ },
+ "https://www.clarkhill.com/news-events/news/october-2026-visa-bulletin-employment-based-immigration-updates": {
+  "sentiment": -10,
+  "relevance": 70
+ },
+ "https://www.fragomen.com/insights/united-states-october-2026-visa-bulletin-significant-advancements-for-china-while-worldwide-eb-2-and-eb-3-retrogress-uscis-to-honor-dates-for-filing.html": {
+  "sentiment": 10,
+  "relevance": 70
+ },
+ "https://www.stocktitan.net/news/MA/mastercard-incorporated-to-host-conference-call-on-second-quarter-v52xu29vnn1i.html": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.investors.com/research/mastercard-leads-10-to-best-stock-lists": {
+  "sentiment": 30,
+  "relevance": 80
+ },
+ "https://www.zacks.com/stock/news/2951696/mastercard-stock-falls-below-200-day-sma-buy-the-dip-or-wait": {
+  "sentiment": -20,
+  "relevance": 70
+ },
+ "https://tickernerd.com/stock/ma-forecast": {
+  "sentiment": 0,
+  "relevance": 60
+ },
+ "https://tradingeconomics.com/ma:us/news/590593": {
+  "sentiment": 20,
+  "relevance": 70
+ },
+ "https://investor.mastercard.com/investor-news/investor-news-details/2026/Mastercard-Incorporated-Second-Quarter-2026-Financial-Results-Available-on-Companys-Website/default.aspx": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://investor.mastercard.com/events-and-presentations/events/event-details/2026/Q2-2026-Mastercard-Inc-Earnings-Conference-Call/default.aspx": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.mastercard.com/us/en/news-and-trends/press/2026/october/mastercard-at-money-2020-2026.html": {
+  "sentiment": 10,
+  "relevance": 70
+ },
+ "https://www.stocktitan.net/sec-filings/XOM/8-k-exxon-mobil-corp-reports-material-event-efde516cb4c1.html": {
+  "sentiment": 30,
+  "relevance": 80
+ },
+ "https://finance.yahoo.com/energy/articles/exxonmobil-xom-6-9-geopolitical-171024141.html": {
+  "sentiment": 0,
+  "relevance": 30
+ },
+ "https://www.tradingkey.com/news/market-movers/262092892-market-movers-xom-20260810": {
+  "sentiment": 10,
+  "relevance": 70
+ },
+ "https://investor.exxonmobil.com/company-information/press-releases/detail/1208/exxonmobil-announces-second-quarter-2026-results": {
+  "sentiment": 0,
+  "relevance": 30
+ },
+ "https://finance.yahoo.com/energy/articles/exxonmobil-40-2026-rising-oil-190811096.html": {
+  "sentiment": 60,
+  "relevance": 90
+ },
+ "https://www.reuters.com/business/energy/exxonmobil-quarterly-profit-hits-four-year-high-misses-analyst-estimates-2026-07-31": {
+  "sentiment": -70,
+  "relevance": 95
+ },
+ "https://www.wsj.com/business/energy-oil/exxon-is-nearing-a-preliminary-deal-to-invest-in-venezuelas-oil-fields-8c02126b": {
+  "sentiment": 30,
+  "relevance": 85
+ },
+ "https://www.businesswire.com/news/home/20260702569699/en/Advisory-Chevron-Corporations-2Q-2026-Earnings-Conference-Call-and-Webcast": {
+  "sentiment": 0,
+  "relevance": 70
+ },
+ "https://chevroncorp.gcs-web.com/static-files/6fe32bf1-951a-44c8-81ee-74cd626c0095": {
+  "sentiment": 0,
+  "relevance": 30
+ },
+ "https://www.tikr.com/blog/chevron-is-up-35-in-2026-and-back-near-its-record-is-it-too-late-to-buy": {
+  "sentiment": 40,
+  "relevance": 85
+ },
+ "https://www.chevron.com/newsroom/2026/q3/chevron-reports-second-quarter-2026-results": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.stocktitan.net/news/CVX/advisory-chevron-corporation-s-3q-2026-earnings-conference-call-and-tovz92g7xlm8.html": {
+  "sentiment": 0,
+  "relevance": 60
+ },
+ "https://boereport.com/2026/07/31/chevron-reports-second-quarter-2026-results": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.reuters.com/business/energy/chevron-evacuates-some-workers-gulf-mexico-platforms-risk-storm-2026-10-07": {
+  "sentiment": -60,
+  "relevance": 90
+ },
+ "https://www.fool.com/investing/2026/07/26/should-you-buy-procter-gamble-stock-before-july-29": {
+  "sentiment": 0,
+  "relevance": 40
+ },
+ "https://www.forbes.com/sites/petercohan/2026/07/15/ibm-stock-loses-67-billion--causes-and-recovery-outlook": {
+  "sentiment": -80,
+  "relevance": 95
+ },
+ "https://www.wsj.com/livecoverage/stock-market-today-bank-earnings-07-14-2026/card/ibm-stock-headed-for-worst-day-since-black-monday-aVOaopNaIY92lZEe6aTZ": {
+  "sentiment": -90,
+  "relevance": 95
+ },
+ "https://tradingeconomics.com/ibm:us/news/582502": {
+  "sentiment": 40,
+  "relevance": 85
+ },
+ "https://www.ad-hoc-news.de/boerse/news/corporate-news/ibm-stock-holds-in-the-low-230s-as-quantum-milestone-meets-ongoing-fraud/69971554": {
+  "sentiment": 20,
+  "relevance": 80
+ },
+ "https://newsroom.ibm.com/2026-07-22-IBM-RELEASES-SECOND-QUARTER-RESULTS": {
+  "sentiment": 0,
+  "relevance": 85
+ },
+ "https://www.sdxcentral.com/news/ibm-ceo-admits-to-execution-short-fall-but-touts-some-rebound": {
+  "sentiment": -50,
+  "relevance": 90
+ },
+ "https://tickeron.com/blogs/jpmorgan-chase-jpm-posts-6-net-income-growth-in-q3-2026-with-strong-nii-momentum-18984": {
+  "sentiment": 60,
+  "relevance": 90
+ },
+ "https://www.reuters.com/business/finance/jpmorgans-profit-rises-investment-banking-trading-strength-2026-10-13": {
+  "sentiment": -70,
+  "relevance": 95
+ },
+ "https://www.jpmorganchase.com/ir/news/2026/jpmc-to-host-third-quarter-2026-earnings-call": {
+  "sentiment": 0,
+  "relevance": 0
+ },
+ "https://tickeron.com/blogs/bank-of-america-bac-climbs-8-2-as-earnings-momentum-builds-15625": {
+  "sentiment": 70,
+  "relevance": 95
+ },
+ "https://newsroom.bankofamerica.com/content/newsroom/press-releases/2026/07/bank-of-america-declares-preferred-stock-dividends-payable-in-au.html": {
+  "sentiment": 20,
+  "relevance": 85
+ },
+ "https://www.prnewswire.com/news-releases/bank-of-america-declares-preferred-stock-dividends-payable-in-august-and-september-2026-302828793.html": {
+  "sentiment": 20,
+  "relevance": 85
+ },
+ "https://www.cnbc.com/2026/07/29/procter-gamble-pg-q4-2026-earnings.html": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://us.pg.com/newsroom/news-releases/PG-to-Webcast-the-Procter--Gamble-2026-Virtual-Annual-Meeting-of-Shareholders-October-13": {
+  "sentiment": 0,
+  "relevance": 60
+ },
+ "https://fortune.com/company/procter-gamble/earnings/q3-2026": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://kalkine.com/news/announcements/procter-gamble-executive-receives-stock-options-in-october-2026?srsltid=AU7gw4U1GE4O5vmH6nXqRnzWDwtruDEaekSjpLX71O2VP3jbaCyTX7G4": {
+  "sentiment": 0,
+  "relevance": 60
+ },
+ "https://www.tikr.com/blog/coca-cola-is-up-28-in-2026-and-near-highs-is-it-too-late-to-buy": {
+  "sentiment": 20,
+  "relevance": 70
+ },
+ "https://investors.coca-colacompany.com/news-events/press-releases/detail/1173/the-coca-cola-company-announces-timing-of-third-quarter-2026-earnings-release": {
+  "sentiment": 0,
+  "relevance": 70
+ },
+ "https://investors.coca-colacompany.com/news-events/press-releases/detail/1168/coca-cola-reports-second-quarter-2026-results-and-raises-full-year-guidance": {
+  "sentiment": 50,
+  "relevance": 90
+ },
+ "https://www.coca-colacompany.com/media-center/coca-cola-reports-second-quarter-2026-results": {
+  "sentiment": 50,
+  "relevance": 90
+ },
+ "https://www.investopedia.com/here-is-how-much-traders-expect-walmart-stock-to-move-after-earnings-wmt-q2-2026-12057126": {
+  "sentiment": 0,
+  "relevance": 60
+ },
+ "https://tradingeconomics.com/wmt:us/news/590893": {
+  "sentiment": 30,
+  "relevance": 70
+ },
+ "https://corporate.walmart.com/news/2026/08/13/walmart-to-host-second-quarter-earnings-conference-call-august-20-2026": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.wsj.com/business/earnings/warlmart-earnings-q2-2026-wmt-stock-122b69ee?eafs_enabled=false": {
+  "sentiment": -60,
+  "relevance": 85
+ },
+ "https://www.nbcnews.com/select/shopping/walmart-oct-deal-days-2026-rcna601690": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.foxbusiness.com/retail/walmart-launches-weeklong-fall-sale-overlapping-amazon-prime-big-deal-days": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.al.com/shopping/2026/10/walmarts-weeklong-october-sale-includes-apple-lego-and-home-deals.html": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.simplysaleswithalyssaandsarah.com/walmart-deal-days": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.usatoday.com/story/shopping/deals/retailers/walmart/2026/10/05/live-walmart-deals-event-october/92097144007": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.today.com/shop/walmart-deals-october-dates-announcement-2026-rcna597983": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.stocktitan.net/news/COST/costco-wholesale-corporation-reports-fourth-quarter-and-fiscal-year-hsqvdvy2xqod.html": {
+  "sentiment": 40,
+  "relevance": 90
+ },
+ "https://investor.costco.com/news/news-details/2026/Costco-Wholesale-Corporation-Reports-June-Sales-Results-and-Announces-Quarterly-Cash-Dividend/default.aspx": {
+  "sentiment": 0,
+  "relevance": 70
+ },
+ "https://investor.costco.com/news/news-details/2026/Costco-Wholesale-Corporation-Reports-Fourth-Quarter-and-Fiscal-Year-2026-Operating-Results/default.aspx": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.reuters.com/business/retail-consumer/costco-beats-quarterly-sales-estimates-resilient-demand-essentials-2026-09-24": {
+  "sentiment": 30,
+  "relevance": 85
+ },
+ "https://www.chowhound.com/2280054/costco-best-new-items-october-2026": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.mashed.com/2272761/best-items-buy-costco-october": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://parade.com/food/best-costco-finds-october-2026": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://shopping.yahoo.com/deals/articles/15-items-costco-price-cuts-142321403.html": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.tastingtable.com/2273107/best-costco-products-october-2026": {
+  "sentiment": 10,
+  "relevance": 50
+ },
+ "https://www.investor.jnj.com/investor-news/news-details/2026/Johnson--Johnson-reports-Q3-2026-results-raises-2026-guidance/default.aspx": {
+  "sentiment": 75,
+  "relevance": 90
+ },
+ "https://tickeron.com/blogs/johnson-johnson-jnj-climbs-18-in-30-days-on-pipeline-momentum-and-analyst-upgrade-14486": {
+  "sentiment": 80,
+  "relevance": 85
+ },
+ "https://www.fool.com/investing/2026/08/31/johnson-johnson-owns-stakes-in-15-stocks-heres-the": {
+  "sentiment": 0,
+  "relevance": 40
+ },
+ "https://www.jnj.com/media-center/press-releases/johnson-johnson-q3-2026-earnings-ceo-and-cfo-prepared-remarks": {
+  "sentiment": 0,
+  "relevance": 70
+ },
+ "https://www.investor.jnj.com/overview/default.aspx": {
+  "sentiment": 0,
+  "relevance": 20
+ },
+ "https://www.caterpillar.com/en/news/corporate-press-releases/h/2q26-results-caterpillar-inc.html": {
+  "sentiment": 0,
+  "relevance": 85
+ },
+ "https://finance.yahoo.com/energy/articles/caterpillar-sees-strong-2026-start-220313330.html": {
+  "sentiment": 70,
+  "relevance": 80
+ },
+ "https://www.reuters.com/business/aerospace-defense/ge-aerospace-lifts-2026-forecast-airlines-keep-up-maintenance-spending-2026-07-16": {
+  "sentiment": 40,
+  "relevance": 90
+ },
+ "https://www.barchart.com/story/news/3081943/dear-ge-aerospace-stock-fans-mark-your-calendars-for-july-16": {
+  "sentiment": 0,
+  "relevance": 30
+ },
+ "https://www.prnewswire.com/news-releases/ge-aerospace-board-of-directors-authorizes-quarterly-dividend-302885226.html": {
+  "sentiment": 60,
+  "relevance": 85
+ },
+ "https://www.barchart.com/story/news/4887437/what-to-expect-from-ge-aerospace-s-q3-2026-earnings-report": {
+  "sentiment": 0,
+  "relevance": 75
+ },
+ "https://www.zacks.com/stock/news/2971745/pfizer-rises-almost-7-post-q2-results-how-to-play-the-stock": {
+  "sentiment": 70,
+  "relevance": 85
+ },
+ "https://s206.q4cdn.com/795948973/files/doc_financials/2026/q2/Q2-2026-PFE-Earnings-Release-FINAL.pdf": {
+  "sentiment": 75,
+  "relevance": 90
+ },
+ "https://www.pfizer.com/news/press-release/press-release-detail/pfizer-declares-fourth-quarter-2026-dividend": {
+  "sentiment": 50,
+  "relevance": 80
+ },
+ "https://www.pfizer.com/news/press-release/press-release-detail/pfizer-and-biontech-receive-us-fda-approval-xfg-adapted": {
+  "sentiment": 85,
+  "relevance": 95
+ },
+ "https://www.biopharmadive.com/news/pfizer-cost-cuts-savings-2q-2026-earnings/826930": {
+  "sentiment": -30,
+  "relevance": 85
  }
 }
