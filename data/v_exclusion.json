@@ -1,0 +1,78 @@
+{
+ "v_failure": {
+  "n_v_articles": 10,
+  "n_anon_noop_still_names_visa": 10,
+  "n_visa_bulletin_immigration": 5,
+  "bulletin_relevances": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "n_v_in_rel30_sample": 5,
+  "n_focal_leaks_other_tickers": 0,
+  "third_party_residual_true_aliases": {
+   "n": 5,
+   "share": 0.01466275659824047
+  },
+  "illustrative_case": {
+   "title": "Visa Stock Just Posted Its Best Quarter Since 2022.",
+   "named": 80,
+   "anon": 0,
+   "relevance": 90
+  }
+ },
+ "robustness": {
+  "all_341": {
+   "same_session_identity_repm_minus_anon": {
+    "n": 341,
+    "estimate": -1.0410557184750733,
+    "t": -1.5977564839984797,
+    "p": 0.11102609232943976,
+    "wilcoxon_p": 0.03716563740710908
+   },
+   "cross_session_published_shift_orig_minus_anon": {
+    "n": 341,
+    "estimate": 4.75073313782991,
+    "t": 5.1397463412159325,
+    "p": 4.649962970600891e-07,
+    "wilcoxon_p": 7.627900269167636e-07
+   },
+   "session_drift_orig_minus_repm": {
+    "n": 341,
+    "estimate": 5.791788856304983,
+    "t": 7.0326347571681875,
+    "p": 1.1188708379124541e-11,
+    "wilcoxon_p": 1.6004011109285837e-11
+   },
+   "icc_pooled_4draws": 0.9187642174212328,
+   "icc_named_oct16_3draws": 0.9492372685550144
+  },
+  "excluding_V": {
+   "same_session_identity_repm_minus_anon": {
+    "n": 331,
+    "estimate": -1.2940584088620337,
+    "t": -2.046845050408798,
+    "p": 0.041465071578385464,
+    "wilcoxon_p": 0.026442544951049928
+   },
+   "cross_session_published_shift_orig_minus_anon": {
+    "n": 331,
+    "estimate": 4.6525679758308165,
+    "t": 5.037216108413377,
+    "p": 7.792127471367058e-07,
+    "wilcoxon_p": 1.1881453668081807e-06
+   },
+   "session_drift_orig_minus_repm": {
+    "n": 331,
+    "estimate": 5.94662638469285,
+    "t": 7.022467210947498,
+    "p": 1.249682324814106e-11,
+    "wilcoxon_p": 1.9888233655599045e-11
+   },
+   "icc_pooled_4draws": 0.9178843122289003,
+   "icc_named_oct16_3draws": 0.9487285052108857
+  }
+ }
+}

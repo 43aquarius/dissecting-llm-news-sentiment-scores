@@ -1,0 +1,298 @@
+{
+ "revision_scope": "B1 power, C1 endpoint stability, C2 residual third-party identity",
+ "mde_method": "MDE_80 = (z_.975 + z_.80) * SE; power = Phi(|d|/SE - 1.96) + Phi(-|d|/SE - 1.96)",
+ "endpoint_stability": {
+  "sessions": {
+   "original_named": "2026-10-15 16:01-16:24 UTC (llm_score.log, llm_score2.log)",
+   "anon_and_repeats": "2026-10-16 04:24-04:33 UTC (llm_score_v2.log)",
+   "gap_hours": 12.0
+  },
+  "n_articles": 341,
+  "cross_session": {
+   "label": "cross-session (original Oct 15 vs repeats Oct 16)",
+   "pairs": [
+    "original (Oct 15) vs rep1 (Oct 16)",
+    "original (Oct 15) vs rep2 (Oct 16)",
+    "original (Oct 15) vs rep3 (Oct 16)"
+   ],
+   "mean_pearson": 0.9053867330570696,
+   "pearson_each": [
+    0.9121407685123482,
+    0.9022262348320748,
+    0.9017931958267859
+   ],
+   "mean_spearman": 0.8905481276914858,
+   "mean_abs_diff_points": 11.314760508308895,
+   "mean_exact_match": 0.42424242424242425
+  },
+  "within_session": {
+   "label": "within-session (repeats vs repeats, Oct 16)",
+   "pairs": [
+    "rep1 (Oct 16) vs rep2 (Oct 16)",
+    "rep1 (Oct 16) vs rep3 (Oct 16)",
+    "rep2 (Oct 16) vs rep3 (Oct 16)"
+   ],
+   "mean_pearson": 0.9503684811698997,
+   "pearson_each": [
+    0.9533001937595684,
+    0.9421141928796232,
+    0.9556910568705076
+   ],
+   "mean_spearman": 0.9402604489296404,
+   "mean_abs_diff_points": 6.5200391006842615,
+   "mean_exact_match": 0.5689149560117303
+  },
+  "cross_minus_within_mean_abs_diff_points": 4.794721407624633,
+  "mannwhitney_p": 9.844271067047684e-17,
+  "welch_p": 1.8812882280693137e-20,
+  "paired_by_article_p": 3.042570780704376e-12
+ },
+ "power": {
+  "rows": [
+   {
+    "test": "H1 baseline next-day coefficient (named)",
+    "observed": 0.014891563336250304,
+    "se": 0.00708001570545782,
+    "mde80": 0.01983526580017505,
+    "power_at_observed": 0.5570210554472008,
+    "n": 205
+   },
+   {
+    "test": "H2 difference: beta_named - beta_anon",
+    "observed": 0.00044746037617742103,
+    "se": 0.002265612347798055,
+    "mde80": 0.006347305569405814,
+    "power_at_observed": 0.05448027033684362,
+    "n": 205
+   },
+   {
+    "test": "H2 difference: beta_named - beta_dictionary",
+    "observed": -0.011875946616428606,
+    "se": 0.03348959372088056,
+    "mde80": 0.09382394342451318,
+    "power_at_observed": 0.06452658695042612,
+    "n": 205
+   },
+   {
+    "test": "H4 difference: beta_priced - beta_clean",
+    "observed": 0.04363767356666183,
+    "se": 0.029671176426602133,
+    "mde80": 0.08312632280912215,
+    "power_at_observed": 0.31263171815087354,
+    "n": 205
+   },
+   {
+    "test": "H2 identity level shift (score points)",
+    "observed": 4.750733137829912,
+    "se": 0.9243127622337117,
+    "mde80": 2.5895407699825337,
+    "power_at_observed": 0.9992630714439892,
+    "n": 341
+   },
+   {
+    "test": "H5 coverage selection (|ret| gap, bps; firm+day FE)",
+    "observed": 61.05103563834916,
+    "se": 22.157201232516382,
+    "mde80": 62.07528261499941,
+    "power_at_observed": 0.7868092153757422,
+    "n": 2628
+   },
+   {
+    "test": "H2 same-session identity shift (score points)",
+    "observed": 1.0410557184750733,
+    "se": 0.6515734587224269,
+    "mde80": 1.8254384283548706,
+    "power_at_observed": 0.35878552523597373,
+    "n": 341
+   }
+  ],
+  "h1_sd_sent": 0.3606082871748181,
+  "h1_mde80_in_sd_units": 0.007152761225858372,
+  "same_session_identity_row": {
+   "test": "H2 same-session identity shift (score points)",
+   "observed": 1.0410557184750733,
+   "se": 0.6515734587224269,
+   "mde80": 1.8254384283548706,
+   "power_at_observed": 0.35878552523597373,
+   "n": 341
+  }
+ },
+ "session_confounding": {
+  "n_articles": 341,
+  "published_shift_named_minus_anon": 4.750733137829912,
+  "session_drift_named_oct15_minus_oct16": {
+   "estimate": 5.791788856304983,
+   "t": 7.0326347571681875,
+   "p": 1.1188708379124541e-11
+  },
+  "same_session_identity_effect_anon_minus_named": {
+   "estimate": 1.0410557184750733,
+   "t": 1.5977564839984797,
+   "p": 0.11102609232943976,
+   "wilcoxon_p": 0.03716563740710908,
+   "per_repeat": {
+    "s_rep1": {
+     "shift": 1.3049853372434033,
+     "t": 1.615601429884241,
+     "p": 0.10710802212625546
+    },
+    "s_rep2": {
+     "shift": 1.6715542521994138,
+     "t": 2.3432648210663745,
+     "p": 0.019691603346829307
+    },
+    "s_rep3": {
+     "shift": 0.14662756598240634,
+     "t": 0.2092248981406177,
+     "p": 0.8343979764279605
+    }
+   }
+  },
+  "mean_by_draw": {
+   "s_orig": 16.87683284457478,
+   "s_anon": 12.126099706744869,
+   "s_rep1": 10.821114369501466,
+   "s_rep2": 10.454545454545455,
+   "s_rep3": 11.979472140762462
+  },
+  "icc_variants": {
+   "named_only_oct16_3draws": 0.9492372685550144,
+   "pooled_4draws_2sessions": 0.9187642174212328,
+   "oct16_anon_plus_3reps": 0.9383519029606773
+  },
+  "displacement_benchmarks": {
+   "anon_vs_rep_mean_abs_diff": 7.864125122189638,
+   "rep_vs_rep_mean_abs_diff": 6.5200391006842615,
+   "orig_vs_anon_mean_abs_diff": 11.20234604105572
+  },
+  "protocol_note": "v1 and v2 named protocols verbatim-identical (system prompt, user message, batch=25, thinking disabled); the gap reflects session-level variation (endpoint state and/or batch composition), not protocol change"
+ },
+ "same_session_prediction": {
+  "beta_named_oct16_repmean": 0.014652021041573399,
+  "t": 1.8679870798864882,
+  "beta_anon_oct16": 0.014444102960072883,
+  "t_anon": 1.782283925874011,
+  "difference": 0.00020791808150051605,
+  "boot_ci95": [
+   -0.003377496880397724,
+   0.003667722285412013
+  ],
+  "boot_p": 0.9049049049049049,
+  "B": 999,
+  "n": 205
+ },
+ "session_robustness_h1": {
+  "beta_orig_oct15": 0.014891563336250304,
+  "t_orig": 2.1033234890666614,
+  "per_repeat": {
+   "s_rep1": {
+    "beta": 0.014550803503684987,
+    "t": 2.122175979227168,
+    "n": 205
+   },
+   "s_rep2": {
+    "beta": 0.014510471602983225,
+    "t": 1.7637285633360584,
+    "n": 205
+   },
+   "s_rep3": {
+    "beta": 0.012831758518939739,
+    "t": 1.676884055067906,
+    "n": 205
+   }
+  },
+  "beta_repmean_oct16": 0.014652021041573399,
+  "t_repmean": 1.8679870798864882
+ },
+ "third_party": {
+  "case_insensitive_upper_bound": {
+   "share_original_titles_with_third_party": 0.01466275659824047,
+   "share_anonymized_titles_with_third_party": 0.01466275659824047,
+   "n_original": 5,
+   "n_anonymized": 5,
+   "n_total": 341,
+   "examples": [
+    {
+     "title": "What BofA and Morgan Stanley Are Saying About the company",
+     "focal": "AAPL",
+     "third": [
+      "BAC",
+      "MS"
+     ]
+    },
+    {
+     "title": "the company Stock: Up Nearly 5% After Nvidia's Earnings Beat",
+     "focal": "ADBE",
+     "third": [
+      "NVDA"
+     ]
+    },
+    {
+     "title": "the company Stock Rises On Microsoft Capex Restraint",
+     "focal": "NVDA",
+     "third": [
+      "MSFT"
+     ]
+    },
+    {
+     "title": "the company Is Up 174% in 2026 and AMD Is Up 175%",
+     "focal": "INTC",
+     "third": [
+      "AMD"
+     ]
+    }
+   ]
+  },
+  "case_sensitive_lower_bound": {
+   "share_original_titles_with_third_party": 0.01466275659824047,
+   "share_anonymized_titles_with_third_party": 0.01466275659824047,
+   "n_original": 5,
+   "n_anonymized": 5,
+   "n_total": 341,
+   "examples": [
+    {
+     "title": "What BofA and Morgan Stanley Are Saying About the company",
+     "focal": "AAPL",
+     "third": [
+      "BAC",
+      "MS"
+     ]
+    },
+    {
+     "title": "the company Stock: Up Nearly 5% After Nvidia's Earnings Beat",
+     "focal": "ADBE",
+     "third": [
+      "NVDA"
+     ]
+    },
+    {
+     "title": "the company Stock Rises On Microsoft Capex Restraint",
+     "focal": "NVDA",
+     "third": [
+      "MSFT"
+     ]
+    },
+    {
+     "title": "the company Is Up 174% in 2026 and AMD Is Up 175%",
+     "focal": "INTC",
+     "third": [
+      "AMD"
+     ]
+    }
+   ]
+  }
+ },
+ "focal_firm_failure_V": {
+  "n_v_articles": 10,
+  "n_still_name_visa": 10,
+  "share_of_341": 0.02932551319648094,
+  "n_visa_bulletin_immigration": 5,
+  "n_v_in_rel30_sample": 5,
+  "illustrative_case": {
+   "title": "Visa Stock Just Posted Its Best Quarter Since 2022.",
+   "named": 80,
+   "anon": 0,
+   "relevance": 90
+  }
+ }
+}

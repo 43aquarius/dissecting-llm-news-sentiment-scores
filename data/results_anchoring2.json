@@ -1,0 +1,11 @@
+{
+ "anchoring_beta_twofe": 0.45254873558141084,
+ "t": 10.063100254994056,
+ "n_obs": 2728,
+ "placebo_beta_origonly": 0.811096053087257,
+ "placebo_t": 30.02258218831041,
+ "corr_own_companymean_s4_orig": 0.39169379594078935,
+ "corr_own_companymean_s4_shuf": 0.3921580557529354,
+ "corr_own_companymean_s4_v1c": 0.3462461562757783,
+ "batch_level_corr_demeaned": 0.9882063175768913
+}

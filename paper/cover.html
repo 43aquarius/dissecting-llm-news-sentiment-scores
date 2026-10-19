@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    @page { size: 794px 1123px; margin: 0; }
+    :root {
+      --c-bg: #162032;
+      --c-accent: #8B7E5A;
+      --c-text: #FFFFFF;
+      --c-muted: #8898A8;
+      --c-footer: #607080;
+    }
+    html, body { margin: 0; padding: 0; width: 794px; height: 1123px; background: var(--c-bg); color: var(--c-text); font-family: 'Inter', sans-serif; }
+    @media screen {
+      html { height: auto; display: flex; justify-content: center; min-height: 100vh; background: var(--c-bg); }
+      body { transform-origin: top center; scale: min(1, calc(100vw / 794), calc(100vh / 1123)); margin: 0 auto; box-shadow: 0 0 60px rgba(0,0,0,0.3); }
+    }
+    .cover { width: 794px; height: 1123px; position: relative; box-sizing: border-box; }
+    .vline { position: absolute; left: 57px; top: 76px; bottom: 76px; width: 2.5px; background: var(--c-accent); }
+    .content { position: absolute; left: 101px; right: 76px; top: 0; bottom: 0; }
+    .label { position: absolute; top: 132px; font-size: 9pt; color: var(--c-accent); letter-spacing: 3px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+    .title { position: absolute; top: 210px; font-size: 33pt; font-weight: 700; line-height: 1.28; font-family: 'Playfair Display', serif; color: var(--c-text); max-width: 580px; }
+    .subtitle { position: absolute; top: 480px; font-size: 14pt; line-height: 1.5; color: var(--c-accent); max-width: 520px; font-family: 'Playfair Display', serif; font-style: italic; }
+    .summary { position: absolute; top: 620px; font-size: 11.5pt; line-height: 1.65; color: var(--c-muted); max-width: 500px; font-weight: 300; }
+    .authors { position: absolute; top: 830px; font-size: 12pt; color: var(--c-text); letter-spacing: 0.5px; }
+    .institution { position: absolute; top: 868px; font-size: 10pt; color: var(--c-muted); line-height: 1.4; }
+    .meta { position: absolute; top: 940px; font-size: 9pt; color: var(--c-muted); line-height: 1.7; }
+    .footer { position: absolute; bottom: 76px; left: 0; right: 0; display: flex; justify-content: space-between; font-size: 9pt; color: var(--c-footer); }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="vline"></div>
+    <div class="content">
+      <div class="label">Working Paper &middot; Measurement Audit</div>
+      <div class="title">Dissecting LLM News Sentiment Scores</div>
+      <div class="subtitle">Identity Priors, Batch Composition, Scoring Noise, and Price Echoes in Return Predictability</div>
+      <div class="summary">A measurement audit on 36 large U.S. equities over July&ndash;October 2026. The same headlines scored under conditions that each vary one ingredient&mdash;identity visible, removed, or swapped, repeat calls, controlled batch composition, temperature-zero decoding, and the dictionary&mdash;then re-scored in pre-specified staged sessions reveal a marginal baseline whose significance depends on the scoring draw, a reliable but stochastic instrument, a mild negative identity prior masked by session drift and mostly carried by batch composition, predictive content directionally concentrated in price-describing headlines, and a sample selected on realized volatility.</div>
+      <div class="authors">Chang Tan</div>
+      <div class="institution">Dalian University of Technology &middot; aquars43@foxmail.com<br>October 2026</div>
+      <div class="meta">JEL: G10 &middot; G12 &middot; C52 &middot; C55<br>Keywords: large language models &middot; sentiment analysis &middot; measurement validity &middot; look-ahead bias</div>
+      <div class="footer">
+        <span>WP-2026-10</span>
+        <span>Draft &mdash; comments welcome</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

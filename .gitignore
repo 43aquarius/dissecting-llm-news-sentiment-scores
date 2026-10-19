@@ -1,0 +1,20 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.toc
+*.lof
+*.lot
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+# Secrets
+.env
+*_token*
+.github_token

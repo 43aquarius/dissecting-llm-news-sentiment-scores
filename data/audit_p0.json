@@ -1,0 +1,437 @@
+{
+ "audit_date": "2026-10-18",
+ "purpose": "P0 independent recomputation",
+ "issue1_corpus": {
+  "n_universe_tickers": 36,
+  "n_articles_total": 542,
+  "n_unique_urls_total": 542,
+  "n_unique_titles_total": 523,
+  "n_in_window_articles": 341,
+  "n_in_window_unique_urls": 341,
+  "n_in_window_unique_titles": 334,
+  "n_urls_appearing_under_multiple_tickers": 0,
+  "n_in_window_urls_duplicated": 0,
+  "panel_rows": 2664,
+  "panel_firms": 36,
+  "panel_days": 74
+ },
+ "issue1_correct_table6": {
+  "n_tickers": 36,
+  "sum_articles_in_window": 341,
+  "sum_firmdays_rel30": 276,
+  "table": [
+   {
+    "ticker": "AAPL",
+    "articles_in_window": 16,
+    "firmdays_rel30": 11
+   },
+   {
+    "ticker": "ADBE",
+    "articles_in_window": 10,
+    "firmdays_rel30": 9
+   },
+   {
+    "ticker": "AMD",
+    "articles_in_window": 13,
+    "firmdays_rel30": 12
+   },
+   {
+    "ticker": "AMZN",
+    "articles_in_window": 8,
+    "firmdays_rel30": 6
+   },
+   {
+    "ticker": "AVGO",
+    "articles_in_window": 13,
+    "firmdays_rel30": 12
+   },
+   {
+    "ticker": "BA",
+    "articles_in_window": 5,
+    "firmdays_rel30": 5
+   },
+   {
+    "ticker": "BAC",
+    "articles_in_window": 7,
+    "firmdays_rel30": 6
+   },
+   {
+    "ticker": "CAT",
+    "articles_in_window": 6,
+    "firmdays_rel30": 5
+   },
+   {
+    "ticker": "COST",
+    "articles_in_window": 15,
+    "firmdays_rel30": 13
+   },
+   {
+    "ticker": "CRM",
+    "articles_in_window": 17,
+    "firmdays_rel30": 9
+   },
+   {
+    "ticker": "CVX",
+    "articles_in_window": 7,
+    "firmdays_rel30": 6
+   },
+   {
+    "ticker": "DIS",
+    "articles_in_window": 4,
+    "firmdays_rel30": 4
+   },
+   {
+    "ticker": "GE",
+    "articles_in_window": 8,
+    "firmdays_rel30": 8
+   },
+   {
+    "ticker": "GOOGL",
+    "articles_in_window": 6,
+    "firmdays_rel30": 6
+   },
+   {
+    "ticker": "GS",
+    "articles_in_window": 11,
+    "firmdays_rel30": 7
+   },
+   {
+    "ticker": "IBM",
+    "articles_in_window": 8,
+    "firmdays_rel30": 7
+   },
+   {
+    "ticker": "INTC",
+    "articles_in_window": 14,
+    "firmdays_rel30": 13
+   },
+   {
+    "ticker": "JNJ",
+    "articles_in_window": 7,
+    "firmdays_rel30": 4
+   },
+   {
+    "ticker": "JPM",
+    "articles_in_window": 4,
+    "firmdays_rel30": 4
+   },
+   {
+    "ticker": "KO",
+    "articles_in_window": 10,
+    "firmdays_rel30": 8
+   },
+   {
+    "ticker": "LLY",
+    "articles_in_window": 6,
+    "firmdays_rel30": 6
+   },
+   {
+    "ticker": "MA",
+    "articles_in_window": 9,
+    "firmdays_rel30": 8
+   },
+   {
+    "ticker": "META",
+    "articles_in_window": 11,
+    "firmdays_rel30": 8
+   },
+   {
+    "ticker": "MS",
+    "articles_in_window": 7,
+    "firmdays_rel30": 2
+   },
+   {
+    "ticker": "MSFT",
+    "articles_in_window": 10,
+    "firmdays_rel30": 7
+   },
+   {
+    "ticker": "NFLX",
+    "articles_in_window": 14,
+    "firmdays_rel30": 12
+   },
+   {
+    "ticker": "NVDA",
+    "articles_in_window": 13,
+    "firmdays_rel30": 11
+   },
+   {
+    "ticker": "ORCL",
+    "articles_in_window": 12,
+    "firmdays_rel30": 10
+   },
+   {
+    "ticker": "PFE",
+    "articles_in_window": 5,
+    "firmdays_rel30": 4
+   },
+   {
+    "ticker": "PG",
+    "articles_in_window": 6,
+    "firmdays_rel30": 6
+   },
+   {
+    "ticker": "QCOM",
+    "articles_in_window": 7,
+    "firmdays_rel30": 7
+   },
+   {
+    "ticker": "TSLA",
+    "articles_in_window": 9,
+    "firmdays_rel30": 9
+   },
+   {
+    "ticker": "V",
+    "articles_in_window": 10,
+    "firmdays_rel30": 4
+   },
+   {
+    "ticker": "WFC",
+    "articles_in_window": 12,
+    "firmdays_rel30": 9
+   },
+   {
+    "ticker": "WMT",
+    "articles_in_window": 13,
+    "firmdays_rel30": 11
+   },
+   {
+    "ticker": "XOM",
+    "articles_in_window": 8,
+    "firmdays_rel30": 7
+   }
+  ]
+ },
+ "issue1_panel": {
+  "panel_firmdays_rel30": 240,
+  "panel_has_news_any": 244,
+  "n_trading_days_with_news": 70
+ },
+ "issue1_reg_sample": {
+  "news_firmdays": 240,
+  "regression_N": 205,
+  "n_firms_reg": 35,
+  "n_days_reg": 59
+ },
+ "table1_check": {
+  "named_mean": 16.87683284457478,
+  "named_sd": 38.968268651613585,
+  "named_nonzero": 0.7008797653958945,
+  "anon_mean": 12.126099706744869,
+  "anon_sd": 36.44631740102025,
+  "anon_nonzero": 0.6011730205278593,
+  "lm_mean": 0.24651026392961878,
+  "lm_sd": 4.6793969405362725,
+  "lm_nonzero": 0.1348973607038123,
+  "relevance_mean": 72.02346041055719,
+  "relevance_sd": 18.03622272936551,
+  "rep_means": {
+   "s_rep1": 10.821114369501466,
+   "s_rep2": 10.454545454545455,
+   "s_rep3": 11.979472140762462
+  },
+  "rep_sds": {
+   "s_rep1": 36.85305031578875,
+   "s_rep2": 34.9875837411328,
+   "s_rep3": 35.496017022004416
+  }
+ },
+ "table1_firmday_check": {
+  "named_mean": 0.13818154761904763,
+  "named_sd": 0.36194042837853935,
+  "named_nonzero": 0.7083333333333334,
+  "anon_mean": 0.0985079365079365,
+  "anon_sd": 0.3376590185073914,
+  "lm_mean": 0.0019438700396825395,
+  "lm_sd": 0.043921460172905505,
+  "nnews_mean": 1.2458333333333333,
+  "nnews_max": 7
+ },
+ "issue2_session": {
+  "n": 341,
+  "published_shift": 4.750733137829912,
+  "published_t": 5.1397463412159325,
+  "published_p": 4.649962970600891e-07,
+  "session_drift": 5.791788856304985,
+  "drift_t": 7.0326347571681875,
+  "drift_p": 1.1188708379124541e-11,
+  "same_session_identity_named_minus_anon": -1.0410557184750733,
+  "identity_t": -1.5977564839984797,
+  "identity_p": 0.11102609232943976,
+  "identity_ci95": [
+   -2.322678385024021,
+   0.24056694807387435
+  ],
+  "identity_SE": 0.6515734587224269,
+  "identity_wilcoxon_by_zeromethod": {
+   "wilcox": 0.03716563740710908,
+   "pratt": 0.031218280563152,
+   "zsplit": 0.035332930674709224
+  },
+  "identity_sign_test_p": 0.04408796929534594,
+  "per_repeat": {
+   "s_rep1": {
+    "shift_named_minus_anon": -1.3049853372434033,
+    "t": -1.615601429884241,
+    "p": 0.10710802212625546,
+    "wilcoxon_wilcox_p": 0.06831952569756825
+   },
+   "s_rep2": {
+    "shift_named_minus_anon": -1.6715542521994138,
+    "t": -2.3432648210663745,
+    "p": 0.019691603346829307,
+    "wilcoxon_wilcox_p": 0.0024336553948476358
+   },
+   "s_rep3": {
+    "shift_named_minus_anon": -0.14662756598240634,
+    "t": -0.2092248981406177,
+    "p": 0.8343979764279605,
+    "wilcoxon_wilcox_p": 0.7631494538702082
+   }
+  },
+  "decomposition_check": -8.881784197001252e-16,
+  "exact_match_pub": 0.4340175953079179,
+  "mean_abs_diff_pub": 11.20234604105572,
+  "pearson_pub": 0.8996745198022748,
+  "spearman_pub": 0.8883243216183307
+ },
+ "issue5_power": {
+  "H1_baseline": {
+   "observed": 0.014891563336250304,
+   "se": 0.00708001570545782,
+   "t": 2.1033234890666614,
+   "power_at_observed": 0.5570210554472008,
+   "paper_says": {
+    "obs": 0.0149,
+    "se": 0.0071,
+    "power": 0.56
+   }
+  },
+  "H2_named_minus_anon": {
+   "observed": 0.00044746037617742103,
+   "se_implied": 0.002265612347798055,
+   "power_at_observed": 0.05448027033684362,
+   "paper_says": {
+    "obs": 0.00044746037617742103,
+    "power": 0.05
+   }
+  },
+  "H2_named_minus_lm": {
+   "observed": -0.011875946616428606,
+   "se_implied": 0.03348959372088056,
+   "power_at_observed": 0.06452658695042612,
+   "paper_says": {
+    "obs": -0.011875946616428606,
+    "power": 0.07
+   }
+  },
+  "H4_priced_minus_clean": {
+   "observed": 0.04363767356666183,
+   "se_implied": 0.022472317301415003,
+   "power_at_observed": 0.4928182185472639,
+   "paper_says": {
+    "power": 0.49
+   }
+  },
+  "H2_level_shift": {
+   "observed": 4.750733137829912,
+   "se": 0.9243127622337117,
+   "power_at_observed": 0.9992630714439892,
+   "paper_says": {
+    "power": 1.0
+   }
+  },
+  "H5_selection": {
+   "observed": 61.05103563834916,
+   "se": 19.557906274223424,
+   "power_at_observed": 0.8772989052808612,
+   "paper_says": {
+    "power": 0.88
+   }
+  },
+  "FOOTNOTE_same_session_identity": {
+   "observed": -1.0410557184750733,
+   "se": 0.6515734587224269,
+   "mde80": 1.8254384283548706,
+   "power_formula": 0.35878552523597373,
+   "paper_says": {
+    "se": 0.65,
+    "mde80": 1.8,
+    "power": 0.22
+   },
+   "verdict": "paper power 0.22 UNREPRODUCIBLE from stated formula+inputs (formula gives ~0.36)"
+  }
+ },
+ "issue3_echo": {
+  "priced_headlines": 52,
+  "priced_frac": 0.15249266862170088,
+  "priced_N_firmdays": 38,
+  "clean_N_firmdays": 167,
+  "priced_beta": 0.04695039996951992,
+  "priced_t": 1.7981670305178572,
+  "clean_beta": 0.0033127264028580895,
+  "clean_t": 0.6063899123528244,
+  "diff": 0.04363767356666183,
+  "fresh_boot_ci95": [
+   -0.006008892650969768,
+   0.10719975686322766
+  ],
+  "fresh_boot_p": 0.0986908358509567,
+  "B": 993,
+  "paper_says": {
+   "priced_beta": 0.047,
+   "priced_t": 1.8,
+   "priced_N": 38,
+   "clean_beta": 0.003,
+   "clean_t": 0.61,
+   "clean_N": 167,
+   "diff": 0.0436,
+   "boot_p": 0.077
+  }
+ },
+ "issue4_selection": {
+  "mean_abs_ret_news_bps": 214.62783351364698,
+  "mean_abs_ret_nonews_bps": 153.5767978752978,
+  "welch_t": 3.121552725652035,
+  "welch_p": 0.002011193398184899,
+  "twoway_cluster_t": 3.4886238281608986,
+  "twoway_cluster_p": 0.00048551388321859426,
+  "firm_day_FE_t": 2.755358630256734,
+  "firm_day_FE_p": 0.005862783421238707,
+  "firmFE_daycluster_t": 2.489383963641576,
+  "firmFE_daycluster_p": 0.012796468261721672,
+  "daycluster_boot_p": 0.002002002002002002,
+  "daycluster_boot_ci95": [
+   24.81198458401039,
+   99.60228636267647
+  ],
+  "paper_says": {
+   "welch_t": 3.12,
+   "p": 0.002,
+   "means_bps": [
+    215,
+    154
+   ]
+  }
+ },
+ "h1_h2_reg_check": {
+  "H1_beta": 0.014891563336250304,
+  "H1_t": 2.1033234890666614,
+  "H1_se": 0.00708001570545782,
+  "H1_p": 0.03543750152200332,
+  "H1_plus_sameday_t": 1.8206226764467,
+  "H1_plus_sameday_beta": 0.014137782064969535,
+  "H2_anon_beta": 0.014444102960072883,
+  "H2_anon_t": 1.782283925874011,
+  "H2_lm_beta": 0.02676750995267891,
+  "H2_lm_t": 0.9980440799110979,
+  "same_day_named_t": 3.327848600174782,
+  "same_day_anon_t": 3.1061321254620333
+ },
+ "icc_check": {
+  "icc_2_4_pooled": 0.9187642174212328,
+  "icc_2_3_within": 0.9492372685550144,
+  "exact_all4": 0.2991202346041056,
+  "mean_within_sd": 7.801213588409887
+ }
+}

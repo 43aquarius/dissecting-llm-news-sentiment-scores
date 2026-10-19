@@ -1,0 +1,16 @@
+{
+ "theta_clean": 0.35868815461102,
+ "t": 4.930112303471123,
+ "se": 0.07275456065341147,
+ "n_obs": 2728,
+ "placebo_orig_theta": 2.6295388225376737,
+ "placebo_orig_t": 25.25971514357125,
+ "response_mood_icc": 0.8990137853474788,
+ "mates_fixed_mean_s4_orig": 13.913123167155426,
+ "mates_fixed_mean_s4_shuf": 13.913123167155426,
+ "mates_fixed_mean_s4_v1c": 13.913123167155426,
+ "predicted_level_from_anchoring": {
+  "shuf_minus_orig": 0.0,
+  "v1c_minus_orig": 0.0
+ }
+}

@@ -1,0 +1,203 @@
+{
+ "script": "coverage_table.py",
+ "rows": [
+  {
+   "ticker": "AAPL",
+   "articles_in_window": 16,
+   "firm_days_trading": 9
+  },
+  {
+   "ticker": "ADBE",
+   "articles_in_window": 10,
+   "firm_days_trading": 9
+  },
+  {
+   "ticker": "AMD",
+   "articles_in_window": 13,
+   "firm_days_trading": 8
+  },
+  {
+   "ticker": "AMZN",
+   "articles_in_window": 8,
+   "firm_days_trading": 6
+  },
+  {
+   "ticker": "AVGO",
+   "articles_in_window": 13,
+   "firm_days_trading": 10
+  },
+  {
+   "ticker": "BA",
+   "articles_in_window": 5,
+   "firm_days_trading": 4
+  },
+  {
+   "ticker": "BAC",
+   "articles_in_window": 7,
+   "firm_days_trading": 5
+  },
+  {
+   "ticker": "CAT",
+   "articles_in_window": 6,
+   "firm_days_trading": 5
+  },
+  {
+   "ticker": "COST",
+   "articles_in_window": 15,
+   "firm_days_trading": 11
+  },
+  {
+   "ticker": "CRM",
+   "articles_in_window": 17,
+   "firm_days_trading": 8
+  },
+  {
+   "ticker": "CVX",
+   "articles_in_window": 7,
+   "firm_days_trading": 5
+  },
+  {
+   "ticker": "DIS",
+   "articles_in_window": 4,
+   "firm_days_trading": 4
+  },
+  {
+   "ticker": "GE",
+   "articles_in_window": 8,
+   "firm_days_trading": 6
+  },
+  {
+   "ticker": "GOOGL",
+   "articles_in_window": 6,
+   "firm_days_trading": 4
+  },
+  {
+   "ticker": "GS",
+   "articles_in_window": 11,
+   "firm_days_trading": 7
+  },
+  {
+   "ticker": "IBM",
+   "articles_in_window": 8,
+   "firm_days_trading": 7
+  },
+  {
+   "ticker": "INTC",
+   "articles_in_window": 14,
+   "firm_days_trading": 11
+  },
+  {
+   "ticker": "JNJ",
+   "articles_in_window": 7,
+   "firm_days_trading": 4
+  },
+  {
+   "ticker": "JPM",
+   "articles_in_window": 4,
+   "firm_days_trading": 4
+  },
+  {
+   "ticker": "KO",
+   "articles_in_window": 10,
+   "firm_days_trading": 6
+  },
+  {
+   "ticker": "LLY",
+   "articles_in_window": 6,
+   "firm_days_trading": 6
+  },
+  {
+   "ticker": "MA",
+   "articles_in_window": 9,
+   "firm_days_trading": 8
+  },
+  {
+   "ticker": "META",
+   "articles_in_window": 11,
+   "firm_days_trading": 7
+  },
+  {
+   "ticker": "MS",
+   "articles_in_window": 7,
+   "firm_days_trading": 2
+  },
+  {
+   "ticker": "MSFT",
+   "articles_in_window": 10,
+   "firm_days_trading": 5
+  },
+  {
+   "ticker": "NFLX",
+   "articles_in_window": 14,
+   "firm_days_trading": 11
+  },
+  {
+   "ticker": "NVDA",
+   "articles_in_window": 13,
+   "firm_days_trading": 8
+  },
+  {
+   "ticker": "ORCL",
+   "articles_in_window": 12,
+   "firm_days_trading": 9
+  },
+  {
+   "ticker": "PFE",
+   "articles_in_window": 5,
+   "firm_days_trading": 4
+  },
+  {
+   "ticker": "PG",
+   "articles_in_window": 6,
+   "firm_days_trading": 4
+  },
+  {
+   "ticker": "QCOM",
+   "articles_in_window": 7,
+   "firm_days_trading": 7
+  },
+  {
+   "ticker": "TSLA",
+   "articles_in_window": 9,
+   "firm_days_trading": 8
+  },
+  {
+   "ticker": "V",
+   "articles_in_window": 10,
+   "firm_days_trading": 3
+  },
+  {
+   "ticker": "WFC",
+   "articles_in_window": 12,
+   "firm_days_trading": 9
+  },
+  {
+   "ticker": "WMT",
+   "articles_in_window": 13,
+   "firm_days_trading": 9
+  },
+  {
+   "ticker": "XOM",
+   "articles_in_window": 8,
+   "firm_days_trading": 7
+  }
+ ],
+ "n_tickers": 36,
+ "sum_articles_in_window": 341,
+ "sum_firm_days_trading": 240,
+ "panel_regression_sample": 240,
+ "chain_341_276_240": {
+  "in_window_articles": 341,
+  "rel30_articles": 335,
+  "firm_days_rel30_all_calendar": 276,
+  "firm_days_rel30_non_trading_dropped": 36
+ },
+ "assertions": {
+  "36_tickers": true,
+  "sum_341": true,
+  "sum_240_matches_panel": true,
+  "no_ghost_rows": true,
+  "rendered_unique_tickers": true,
+  "rendered_sums_match": true
+ }
+}

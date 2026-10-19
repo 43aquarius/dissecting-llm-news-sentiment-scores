@@ -1,0 +1,197 @@
+{
+ "design": {
+  "n_articles_in_window": 341,
+  "n_firmdays": 240,
+  "n_reg_sample": 205,
+  "scoring_rounds": "original(named) + anonymized + 3 repeat named calls",
+  "test_family": [
+   "H1 named baseline fwd1",
+   "H2 named-vs-anon difference",
+   "H3 repeat-call ICC",
+   "H4 price-language echo split",
+   "H5 coverage selection"
+  ]
+ },
+ "h3_stability": {
+  "n": 341,
+  "rounds": 4,
+  "icc_2k": 0.9187642174212328,
+  "mean_pairwise_pearson": 0.9278776071134845,
+  "min_pairwise_pearson": 0.9017931958267859,
+  "exact_identical_all4": 0.2991202346041056,
+  "mean_abs_diff_any_pair": 7.801213588409887,
+  "icc_boot_ci95": [
+   0.9008325233838558,
+   0.9332178467900648
+  ]
+ },
+ "h2_measurement": {
+  "n": 341,
+  "mean_named": 16.87683284457478,
+  "mean_anon": 12.126099706744869,
+  "mean_shift": 4.750733137829912,
+  "shift_t": 5.1397463412159325,
+  "shift_p": 4.649962970600891e-07,
+  "wilcoxon_p": 7.627900269167636e-07,
+  "pearson": 0.8996745198022748,
+  "spearman": 0.8883243216183307,
+  "exact_match": 0.4340175953079179,
+  "mean_abs_diff": 11.20234604105572,
+  "repeat_noise_benchmark_mad": 7.801213588409887,
+  "changed_frac": 0.5659824046920822
+ },
+ "h1_baseline": {
+  "spec": "ret_fwd1 ~ sent + ret_lag1 + vol_21 + mkt_ew (two-way cluster)",
+  "coef": 0.014891563336250304,
+  "se": 0.00708001570545782,
+  "t": 2.1033234890666614,
+  "p": 0.03543750152200332,
+  "n": 205,
+  "wild_cluster_bootstrap_p": 0.030015007503751877,
+  "wild_boot_B": 1999,
+  "wild_boot_tq": [
+   -1.9339949240576209,
+   -0.007493911494541553,
+   1.8956436211672978
+  ],
+  "plus_sameday_ctrl": {
+   "coef": 0.014137782064969535,
+   "t": 1.8206226764467,
+   "p": 0.06866423336275741,
+   "n": 205
+  }
+ },
+ "h2_prediction": {
+  "named": {
+   "coef": 0.014891563336250304,
+   "t": 2.1033234890666614,
+   "n": 205
+  },
+  "anon": {
+   "coef": 0.014444102960072883,
+   "t": 1.782283925874011,
+   "n": 205
+  },
+  "lm_dict": {
+   "coef": 0.02676750995267891,
+   "t": 0.9980440799110979,
+   "n": 205
+  },
+  "difference_tests": {
+   "named_minus_anon": {
+    "obs": 0.00044746037617742103,
+    "boot_ci95": [
+     -0.004359502152194189,
+     0.004521535127085145
+    ],
+    "boot_p": 0.8868868868868869,
+    "B": 999
+   },
+   "named_minus_lm": {
+    "obs": -0.011875946616428606,
+    "boot_ci95": [
+     -0.07366776954104468,
+     0.05760902659405921
+    ],
+    "boot_p": 0.7307307307307307,
+    "B": 999
+   }
+  }
+ },
+ "h4_echo": {
+  "priced_any": {
+   "n": 38,
+   "coef": 0.04695039996951992,
+   "t": 1.7981670305178572
+  },
+  "clean": {
+   "n": 167,
+   "coef": 0.0033127264028580895,
+   "t": 0.6063899123528244
+  },
+  "same_day_named": {
+   "coef": 0.028323393426625952,
+   "t": 3.327848600174782
+  },
+  "same_day_anon": {
+   "coef": 0.026602783558155204,
+   "t": 3.1061321254620333
+  },
+  "priced_headline_frac": 0.15249266862170088,
+  "priced_minus_clean_boot": {
+   "obs": 0.04363767356666183,
+   "boot_ci95": [
+    -0.005852650560901212,
+    0.11045622470667643
+   ],
+   "boot_p": 0.1001709745549633,
+   "B": 9943
+  }
+ },
+ "h5_selection": {
+  "n_panel_firmdays": 2628,
+  "mean_abs_ret_news_bps": 214.62783351364698,
+  "mean_abs_ret_nonews_bps": 153.5767978752978,
+  "welch_t_descriptive": 3.121552725652035,
+  "welch_p_descriptive": 0.002011193398184899,
+  "main_test": "firm+day FE, two-way clustered",
+  "fe2_t": 2.755358630256734,
+  "fe2_p": 0.005862783421238707,
+  "firmFE_daycluster_t": 2.489383963641576,
+  "firmFE_daycluster_p": 0.012796468261721672,
+  "daycluster_boot_p": 0.00020002000200020003,
+  "daycluster_boot_ci95_bps": [
+   25.2449955899258,
+   102.67944580672668
+  ],
+  "daycluster_boot_B": 9999,
+  "corr_firm_newscount_vol": 0.46672704763382306
+ },
+ "heterogeneity_interactions": {
+  "size": {
+   "interaction_t": 2.248900387347937,
+   "interaction_coef": 0.024769935643284592,
+   "p": 0.02451883436307159
+  },
+  "news": {
+   "interaction_t": 1.903551929445902,
+   "interaction_coef": 0.051247987078796194,
+   "p": 0.0569685644482747
+  },
+  "vol": {
+   "interaction_t": 0.007260381550529264,
+   "interaction_coef": 9.917591793404186e-05,
+   "p": 0.9942071045489579
+  }
+ },
+ "bh_multiple_testing": {
+  "H1 named fwd1": {
+   "raw_p": 0.03543750152200332,
+   "bh_q": 0.06201562766350581
+  },
+  "H2 named-vs-anon level shift": {
+   "raw_p": 4.649962970600891e-07,
+   "bh_q": 1.6274870397103119e-06
+  },
+  "H2 named-vs-anon predictive diff": {
+   "raw_p": 0.8868868868868869,
+   "bh_q": 0.8868868868868869
+  },
+  "H2 named-vs-lm predictive diff": {
+   "raw_p": 0.7307307307307307,
+   "bh_q": 0.8525191858525192
+  },
+  "H4 priced-vs-clean difference": {
+   "raw_p": 0.1001709745549633,
+   "bh_q": 0.14023936437694862
+  },
+  "H5 coverage selection": {
+   "raw_p": 0.005862783421238707,
+   "bh_q": 0.013679827982890316
+  },
+  "H3 ICC>0.5 (one-sided)": {
+   "raw_p": 0.0,
+   "bh_q": 0.0
+  }
+ }
+}

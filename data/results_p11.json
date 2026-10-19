@@ -1,0 +1,106 @@
+{
+ "classification": {
+  "n_flagged": 52,
+  "n_flagged_rel30": 52,
+  "counts": {
+   "P": 43,
+   "D": 3,
+   "E": 3,
+   "N": 3
+  },
+  "regex_precision_realized_price": 0.8269230769230769,
+  "classifier": "LLM-assisted structured re-classification (rulebook in data/priced_classification.json); not independent human annotation"
+ },
+ "splits": {
+  "regex_priced": {
+   "n": 38,
+   "coef": 0.04695039996951992,
+   "t": 1.7981670305178572,
+   "p": 0.07215054250935193
+  },
+  "regex_clean": {
+   "n": 167,
+   "coef": 0.0033127264028580895,
+   "t": 0.6063899123528244,
+   "p": 0.544255865493716
+  },
+  "strictP": {
+   "n": 33,
+   "coef": 0.04753485268542441,
+   "t": 1.6116589883421215,
+   "p": 0.10703616674026696
+  },
+  "non_strictP": {
+   "n": 172,
+   "coef": 0.003948366276132456,
+   "t": 0.7620155381674086,
+   "p": 0.4460507304814456
+  },
+  "clean_noflag": {
+   "n": 167,
+   "coef": 0.0033127264028580895,
+   "t": 0.6063899123528244,
+   "p": 0.544255865493716
+  },
+  "flagged_nonP": {
+   "n": 5
+  }
+ },
+ "category_descriptives": {
+  "strictP": {
+   "n_firmdays": 33,
+   "mean_sent": 21.071428571428573,
+   "mean_abs_sameday_ret_bps": 360.5452204439792,
+   "mean_sameday_ret_bps": 77.2430659718895,
+   "mean_fwd1_ret_bps": 99.17135621048246
+  },
+  "flagged_nonP": {
+   "n_firmdays": 5,
+   "mean_sent": 13.333333333333336,
+   "mean_abs_sameday_ret_bps": 120.0089462072114,
+   "mean_sameday_ret_bps": -21.813670156359798,
+   "mean_fwd1_ret_bps": 43.32375672552619
+  },
+  "clean": {
+   "n_firmdays": 167,
+   "mean_sent": 13.516966067864272,
+   "mean_abs_sameday_ret_bps": 177.73129545238274,
+   "mean_sameday_ret_bps": 15.565571086313794,
+   "mean_fwd1_ret_bps": -2.4503610041171724
+  }
+ },
+ "dominance": {
+  "n_strictP_firmdays": 33,
+  "n_companies": 20,
+  "top_companies": {
+   "AAPL": 3,
+   "ADBE": 3,
+   "CRM": 3,
+   "AMD": 2,
+   "NVDA": 2,
+   "AVGO": 2,
+   "LLY": 2,
+   "INTC": 2
+  },
+  "max_share_one_company": 0.09090909090909091,
+  "loco_beta_range": [
+   0.018288455150644294,
+   0.059425909561885405
+  ],
+  "loco_diff_range": [
+   0.014340088874511839,
+   0.055477543285752946
+  ],
+  "loco_sign_flip_frac": 0.0,
+  "jko_beta_range": [
+   0.018934724629629494,
+   0.0559241380210351
+  ],
+  "jko_diff_range": [
+   0.014964985698430848,
+   0.05234793835669923
+  ],
+  "jko_sign_flip_frac": 0.0,
+  "jko_n_evals": 20
+ }
+}

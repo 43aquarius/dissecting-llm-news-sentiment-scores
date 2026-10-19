@@ -1,0 +1,290 @@
+% ============ Appendices ============
+\section{LLM Scoring Prompt}\label{app:prompt}
+
+The following system prompt was applied verbatim to every batch of 25 headlines in all conditions; the named and repeat conditions prefix each headline with ``[Company]'', and the anonymized condition presents the de-identified headline text with no prefix. The scoring model is \texttt{glm-4-plus} (Z.ai), accessed through its API. Every request disables the model's extended-reasoning (``thinking'') mode~---a request-level switch that turns off chain-of-thought generation before the answer, forcing direct output~---and otherwise uses the provider's default decoding parameters: no temperature, top-$p$, or seed overrides, so the sampling distribution is whatever the endpoint defaults to, and its stochasticity is a measured property of the instrument (Section~\ref{sec:results:h3}) rather than an assumption. Batches that failed to parse were retried up to three times. All raw responses and batch logs are archived in the replication package.
+
+\begin{quote}
+\footnotesize\ttfamily\raggedright\setlength{\parindent}{0pt}
+You are an expert financial analyst specialized in news
+sentiment analysis for equity research. You evaluate how news
+headlines affect a company's stock value.\par
+\vspace{4pt}
+For each headline you must return:\par
+- "sentiment": integer from -100 to +100. -100 = extremely
+  negative impact on the company's stock value; 0 = neutral or
+  no clear impact; +100 = extremely positive impact.
+  Judge from the perspective of a shareholder of the company.\par
+- "relevance": integer from 0 to 100. 100 = headline is
+  directly about the company's business, earnings, products,
+  guidance, or stock; 0 = headline mentions the company only
+  incidentally or is a generic market/quote page.\par
+\vspace{4pt}
+Rules:\par
+- Base your judgment ONLY on the information in the headline text.\par
+- Earnings beats, raised guidance, product launches,
+  upgrades, buybacks = positive.\par
+- Earnings misses, cut guidance, lawsuits, recalls,
+  downgrades, layoffs = negative.\par
+- Speculation or rumor framing lowers the magnitude toward zero.\par
+- Generic quote pages, price summaries without direction, or
+  calendar pages = sentiment 0, relevance low.\par
+\vspace{4pt}
+Return ONLY a valid JSON array. One object per headline, in
+the same order as given, with fields: "id", "sentiment",
+"relevance". No other text.
+\end{quote}
+
+\section{Anonymization Procedure}\label{app:anon}
+
+Company identifiers are removed by a case-insensitive alias table mapping each firm's name, common short forms, and ticker to the phrase ``the company'' (e.g., ``Apple Is Up 20\% in 2026. What Will It Take for AAPL Stock'' becomes ``the company Is Up 20\% in 2026. What Will It Take for the company Stock''). 325 of 341 in-window headlines (95.3\%) are altered. The procedure is conservative: product names, third-party firms mentioned inside a headline, and stylistic cues are left intact, so the anonymized condition is a lower bound on de-identification. Quantifying the residual firm-identity component under the executed alias table: 5 of 341 anonymized headlines (1.5\%) still name at least one other sample firm~---under both a case-insensitive and a case-sensitive matching convention~---with analyst actions (``BofA,'' ``Morgan Stanley'') and co-mentioned mega-caps the typical cases. The dominant de-identification gap is therefore product language (e.g., device or franchise names) rather than residual firm names. Ambiguous tickers that collide with common words (e.g., ``COST,'' ``CAT,'' ``V'') are replaced only in their exact all-caps form.
+
+\paragraph{A disclosed failure of the procedure.} The executed alias table contains no entry for ticker V (whose identifiers would have been ``Visa''), and all ten in-window V headlines contain the word ``Visa'' but never the standalone all-caps token ``V.'' The anonymization was therefore a no-op for those ten headlines: the text sent to the model under the anonymized condition still named the focal company~---2.9\% of the 341~---and the condition contrast for them is effectively named-versus-named. Five of the ten are U.S.\ State Department ``Visa Bulletin'' immigration headlines (unrelated to the payments company; all scored at relevance 20, so they never enter the firm-day sample but do enter the article-level tests), and five enter the relevance-qualified sample. The failure is instructive in two ways. First, it materially moves the marginal same-session identity contrast: excluding the ten V headlines sharpens it from $-1.04$ ($p=0.11$) to $-1.29$ ($p=0.04$; Wilcoxon $p=0.03$), which is why Section~\ref{sec:results:h2} reports the contrast as a range rather than a verdict. Second, and more generally, it was caught only by re-running the anonymizer with a verification pass~---checking that anonymized text no longer matches the focal firm's identifiers~---which we now treat as a mandatory step of the protocol rather than an optional one. The illustrative pair: the named condition ``[Visa] Visa Stock Just Posted Its Best Quarter Since 2022.'' scored $+80$ (relevance 90), while the ``anonymized'' condition~---the identical text minus the prefix~---scored $0$; the difference is a clean single-headline demonstration of how much identity information the prefix-plus-name carries. Computed by \texttt{v\_exclusion.py} from the archived corpus and scores.
+
+\section{Firm-Level Coverage}\label{app:coverage}
+
+Table~\ref{tab:coverage} reports news coverage by firm: in-window headlines and relevance-qualified trading-day firm-days. Coverage ranges from 4 to 17 articles per firm and correlates with firm prominence in web search, which motivates the selection analysis of Section~\ref{sec:results:h5} and the size interaction of Appendix~\ref{sec:appaux}. The table is generated directly by \texttt{coverage\_table.py} from the archived corpus, scoring, and panel files, so every cell is reproducible; the generator asserts that the rendered cells show each of the 36 firms exactly once and that the column totals equal the verified corpus totals (341 in-window articles, 240 relevance-qualified trading-day firm-days).
+
+\input{sections/gen/table_coverage}
+
+\section{Auxiliary Analyses}\label{sec:appaux}
+
+This appendix reports the three descriptive exercises summarized in Section~\ref{sec:robust:aux}: the horizon path, the portfolio sorts, and the heterogeneity interactions. None is part of the declared test family; each is reported under the audit's inference standard.
+
+\subsection{The horizon path, re-read}
+
+The horizon path shows a sign pattern~---positive at $t+1$ ($t=2.10$), negative at $t+2$ ($t=-2.04$, $p=0.042$), fading by $t+3$ ($t=-1.52$)~---that invites an attention-driven overshooting-and-correction reading. The audit re-reads the pattern rather than discarding it. A subsample selected on high absolute returns (H5) and scored with text that partially echoes those returns (H4) mechanically produces short-horizon continuation followed by reversal: this is the classical news-event return dynamics documented by \citet{chan2003} for reasons (liquidity provision, bid--ask bounce, order-flow imbalance) that require no sentiment semantics at all. Under the decomposition~\eqref{eq:score}, the observed path is what $\rho>0$ plus event-selection generates; the reversal is therefore \emph{consistent with} the echo channel and does not independently identify overshooting. We accordingly read the reversal as a pattern consistent with the echo interpretation rather than as an independent finding, and note that the next-day open-to-close coefficient is small and insignificant ($t=0.45$)~---better read as the echo's asymmetry between the overnight and intraday windows on an underpowered sample than as evidence of overnight diffusion.
+
+\subsection{Portfolio sorts, honestly reported}
+
+Sentiment-sorted quintile portfolios on the baseline sample earn $-20.3$, $+18.9$, $+6.5$, $+35.0$, and $+69.6$ \bps{} from Q1 to Q5, a Q5$-$Q1 spread of 89.9 \bps{} with a Welch $t=1.24$ ($p=0.22$). Three facts deserve equal prominence: the sort is \emph{not monotone} (Q2 exceeds Q3); the spread is not statistically significant; and the IC and direction tests are null (mean daily IC $+0.035$, $t=0.30$ over 25 usable cross-sections; direction logit $p=0.20$, marginal effect 11.5 points). Under the audit's standard, the economic-significance evidence does not clear its own bar, and gross-of-cost spreads on an event-selected sample of 47 observations per quintile should not be quoted as tradable. No transaction-cost claim is made beyond the observation that any cost level above zero further erodes a statistically insignificant spread.
+
+\subsection{Heterogeneity: interactions, not splits}
+
+A split-sample presentation~---coefficient significance in above- versus below-median subsamples~---is the natural first pass at heterogeneity, and it is the rhetoric the econometrics literature warns against, since separate significances do not test a difference. Table~\ref{tab:inter} reports the formal interaction-term tests. The size interaction is significant ($t=2.25$, $p=0.025$): predictability genuinely concentrates in above-median-dollar-volume firms, which in this corpus is nearly mechanical~---mega-caps dominate search coverage, so the instrument is most precise (densest text input) exactly there. The news-intensity interaction is marginal ($t=1.90$, $p=0.057$). The volatility interaction is zero ($t=0.01$): a volatility-regime split showing coefficients that differ by 0.0007 across regimes with different standard errors implies an interaction indistinguishable from zero, so no state-dependence claim survives a formal test. Figure~\ref{fig:hetv2} contrasts the two inference styles directly~---the point of the exercise is methodological as much as substantive.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Heterogeneity: formal interaction tests versus split-sample statistics}
+\label{tab:inter}
+\begin{threeparttable}
+\begin{tabular}{lccc}
+\toprule
+Channel & Interaction coefficient & $t$ & $p$ \\
+\midrule
+Sentiment $\times$ large firm (above-median dollar volume) & 0.0248 & 2.25 & 0.025 \\
+Sentiment $\times$ multi-headline firm-day & 0.0512 & 1.90 & 0.057 \\
+Sentiment $\times$ high-volatility regime & 0.0001 & 0.01 & 0.994 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Interactions from $r_{i,t+1} \sim \text{sentiment} + \text{sentiment}\times\text{modifier} + \text{modifier} + \text{same-day return} + \text{controls}$, two-way clustered, $N=205$. A volatility-regime split ($t=2.49$ vs.\ $t=1.00$) implies an interaction indistinguishable from zero.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{../data/figures/fig_heterogeneity_v2.png}
+\caption{Split-sample $t$-statistics (grey) versus formal interaction $t$-statistics (blue) for the three heterogeneity channels. Only the size effect survives formal testing; the volatility claim collapses to zero.}
+\label{fig:hetv2}
+\end{figure}
+
+\section{Power and Minimal Detectable Effects}\label{app:power}
+
+For each test in the declared family, Table~\ref{tab:power} reports the observed effect, its standard error, the two-sided 5\% minimum detectable effect at 80\% power ($\text{MDE}_{80} = (z_{0.975}+z_{0.80})\times\text{SE} = 2.80\times\text{SE}$), and the power of the test against the observed effect, $\Phi(|\delta|/\text{SE}-1.96)+\Phi(-|\delta|/\text{SE}-1.96)$. Standard errors for regression coefficients are the two-way clustered values of Table~\ref{tab:core}; standard errors for the difference tests are implied by the bootstrap confidence intervals of Table~\ref{tab:diff} (width divided by $2\times1.96$); the level-shift rows use their paired standard errors; the selection row uses the two-way clustered standard error of the fixed-effects specification of Section~\ref{sec:results:h5}, estimated on the $N=2{,}628$ firm-days with non-missing same-day returns (the 2,664-cell panel less the 36 first-trading-day cells, which lack a prior close and hence a same-day return). The table quantifies what the paper's non-rejections can and cannot rule out: the named-versus-anonymized predictive difference rules out substitutions larger than $0.006$~---about 42\% of the baseline coefficient itself~---while the named-versus-dictionary contrast rules out almost nothing ($\text{MDE}_{80}=0.094$, more than six times the baseline). At the return layer, the design can only detect next-day coefficients of $0.020$ or larger (72 \bps{} per one-standard-deviation sentiment move, against the observed 54 \bps{}), and the achieved power against the observed effect is 0.56: the marginal significance of H1 is exactly what an underpowered design produces around a true effect of this size. The H4 echo split has power 0.31 against its observed difference, which is why Section~\ref{sec:results:h4} labels it directional rather than established. At the measurement layer, the level-shift and selection tests are comfortably powered (0.999 and 0.79), which is the statistical counterpart of the paper's narrative: the channels the audit finds with confidence are the ones it can measure. The same-session identity row is the staged contrast: at $|\delta|=1.04$ points and $\text{SE}=0.65$, the design reaches power $0.36$~---the marginal mean-test result is what a design of this size produces around a one-point effect, and the rank test and V exclusion are the sharper instruments (Section~\ref{sec:results:h2}).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Power and minimal detectable effects for the declared family}
+\label{tab:power}
+\begin{tabular}{lcccc}
+\toprule
+Test & Observed & SE & $\text{MDE}_{80}$ & Power \\
+\midrule
+H1: baseline next-day coefficient (named) & 0.0149 & 0.0071 & 0.020 & 0.56 \\
+H2: $\beta_{\text{named}}-\beta_{\text{anonymized}}$ & 0.0004 & 0.0023 & 0.006 & 0.05 \\
+H2: $\beta_{\text{named}}-\beta_{\text{dictionary}}$ & $-$0.0119 & 0.0335 & 0.094 & 0.07 \\
+H4: $\beta_{\text{price-lang.}}-\beta_{\text{clean}}$ & 0.0436 & 0.0297 & 0.083 & 0.31 \\
+H2: identity level shift (points, $n=341$) & 4.75 & 0.92 & 2.59 & 1.00 \\
+H5: coverage selection (\bps, $n=2{,}628$) & 61.1 & 22.2 & 62.1 & 0.79 \\
+H2: same-session identity shift (points, $n=341$) & $-$1.04 & 0.65 & 1.83 & 0.36 \\
+H2: interleaved identity shift (points, $n=341$, session 3) & $-$2.82 & 1.03 & 2.88 & 0.78 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Two-sided 5\% tests; $\text{MDE}_{80}=2.80\times\text{SE}$. ``Power'' is achieved power at the observed effect. The identity-level-shift row is the cross-session contrast as declared; the same-session row is its staged re-estimate; the last row is the interleaved-session confirmatory contrast under the conservative batch-call-clustered SE (the headline-level SE of 0.66 would give power 0.99; the round-level meta-test is stronger still). The H4 and H5 rows use the $B=9{,}999$ bootstrap CI and the fixed-effects clustered SE of the panel inference specification. Computed by \texttt{revision\_power.py} (family and session-2 rows) and \texttt{analysis\_v3.py} / \texttt{reinference.py} (session-3 row) from archived artifacts.
+\end{tablenotes}
+\end{table}
+
+\section{Session Composition and Scoring-Session Drift}\label{app:session}
+
+Table~\ref{tab:session} documents the three original scoring sittings. The original named round scored all 542 headlines in two runs on 2026-10-15 (16:01 and 16:24 UTC); the audit round fielded the anonymized condition and three named repeats on the identical 341 in-window headlines in a single sitting on 2026-10-16 (04:24--04:33 UTC); the confirmatory session interleaved four named and four anonymized rounds plus the 542-composition control on 2026-10-18 (04:54--05:34 UTC, from the millisecond log). The named protocol is verbatim-identical across sittings (system prompt, user-message format, batch size 25; every request disables the model's extended-reasoning mode and otherwise uses the provider's default decoding parameters, as documented in Appendix~\ref{app:prompt}); the original batches additionally contained the 201 out-of-window headlines, so batch composition differs between sittings~---and Appendix~\ref{app:interleaved} measures exactly how much that difference is worth. A provenance distinction is recorded for the timestamps: the session-2 and session-3 times are read from millisecond-resolution entries in the batch logs (\texttt{llm\_score\_v2.log}, \texttt{llm\_score\_v3.log}), while the original scorer logged progress without timestamps, so the session-1 times are the modification timestamps of the first run's log file and of the archived output file (16:01:25 and 16:24:00 UTC respectively)~---they mark the end of each run rather than its start, and are file-system evidence rather than in-log evidence; both record types are archived.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Scoring sessions and cross-session stability of the named protocol}
+\label{tab:session}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lc}
+\toprule
+Quantity & Value \\
+\midrule
+Session 1 (named, 542 headlines) & 2026-10-15, 16:01--16:24 UTC \\
+Session 2 (anonymized $+$ 3 named repeats, 341 headlines) & 2026-10-16, 04:24--04:33 UTC \\
+Session 3 (4 named $+$ 4 anonymized interleaved, $+$ 542-composition control) & 2026-10-18, 04:54--05:34 UTC \\
+Gap, session 1 to session 2 & $\approx$ 12 hours \\
+\midrule
+Named level drift, session 1 $-$ session 2 (points) & $+5.79$ ($t=7.03$, $p<10^{-11}$) \\
+Same-session identity shift, named $-$ anonymized (points) & $-1.04$ ($t=1.60$, $p=0.111$) \\
+\quad excluding the ten ticker-V headlines & $-1.29$ ($t=-2.05$, $p=0.041$) \\
+Identity shift, interleaved session 3 (points) & $-2.82$ (round-level $t=6.8$; clustered $t=2.7$) \\
+\quad excluding the ten ticker-V headlines & $-3.13$ (clustered $t=4.8$) \\
+Batch-composition effect, within session 3 (points) & $+3.61$ (clustered $t=2.7$) \\
+Session 4 replication, run order inverted (points) & $+3.50$ (clustered $t=2.2$) \\
+Decomposition check & $+5.79-1.04=+4.75$ (two-session shift) \\
+\midrule
+Mean cross-session pairwise $r$ (original vs.\ repeats) & 0.905 \\
+Mean within-session pairwise $r$ (repeats vs.\ repeats) & 0.950 \\
+Mean $|$diff$|$: cross-session / within-session (points) & 11.3 / 6.5 \\
+Anonymized-vs-repeat / repeat-vs-repeat $|$diff$|$ (points) & 7.9 / 6.5 \\
+ICC(2,3), named within session 2 & 0.949 \\
+ICC(2,4), named within session 3 & 0.949 \\
+ICC(2,4), pooled across sessions (published) & 0.919 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item Article level, $n=341$. Cross-session agreement is significantly worse than within-session agreement (Mann--Whitney on $|$diff$|$ distributions, $p<10^{-6}$): the scoring process varies between sittings by more than call-level noise alone. What looked like endpoint drift is now largely attributed: the batch-composition row shows that $+3.61$ of the $+5.79$-point cross-session gap is reproduced by composition alone inside a single sitting (Appendix~\ref{app:interleaved}), with a non-monotonic endpoint residual of $\pm1$ point per session pair. Rows computed by \texttt{revision\_power.py} and \texttt{v\_exclusion.py}; session-3 rows by \texttt{analysis\_v3.py}; raw batch logs in \texttt{scripts/llm\_score*.log}.
+\end{tablenotes}
+\end{table}
+
+Three interpretive cautions. First, the drift is a level phenomenon: session 1's named scores are six points more bullish on average than session 2's named scores of the identical headlines, while the slope-relevant structure (which headlines are relatively positive) is largely preserved ($r=0.905$ across sessions). Second, the pooled ICC(2,4)$=0.919$ draws from both sittings and therefore already incorporates the cross-session component; within-session reliability is higher (0.949), and the interleaved session shows that within-session reliability is itself stable across sittings~---0.949 in both. Third, the direction of endpoint drift is not a constant: the third sitting did drift back toward session-1 levels ($+1.14$ points at the 341 composition), exactly the caution the level anatomy implies. The honest constraint on pipelines remains a design rule rather than a correction: contrast conditions within a sitting, freeze the batch composition, and treat any cross-sitting comparison as confounded by construction.
+
+\section{The Interleaved Replication Session}\label{app:interleaved}
+
+The confirmatory experiment was pre-specified in an archived design document before any session-3 data existed: re-field named and anonymized conditions on the identical 341 headlines \emph{in one sitting}, with condition order alternated at the batch level, at least four rounds per condition, plus one pass of the identical headlines inside the original 542-article batch structure as a composition control. The executed design: four rounds; within each round, fourteen batches of 25; even-numbered batches call named-then-anonymized and odd-numbered call anonymized-then-named; eight score files plus the composition file; every call logged with a timestamp and model identifier (\texttt{glm-4-plus}); the analysis is \texttt{analysis\_v3.py} and the raw log is \texttt{scripts/llm\_score\_v3.log}. Batch parity is a fixed property of a headline (its position in the stream), so the parity contrast identifies call-order contamination, not order effects: the identity effect is $3.34$ points (anonymized-minus-named) on named-first batches versus $2.27$ on anon-first batches~---no artifact.
+
+The composition decomposition is exact by transitivity, and each leg is separately interpretable:
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Decomposing the cross-session named-level drift (points, article level, $n=341$)}
+\label{tab:comp}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcc}
+\toprule
+Cell & Sitting & Mean score \\
+\midrule
+Named, 542-article composition & 2026-10-15 (session 1) & $+16.88$ \\
+Named, 341-only composition & 2026-10-16 (session 2) & $+11.09$ \\
+Named, 341-only composition & 2026-10-18 (session 3) & $+12.22$ \\
+Named, 542-article composition & 2026-10-18 (session 3) & $+15.84$ \\
+\midrule
+\multicolumn{3}{l}{\emph{Legs of the decomposition}} \\
+Endpoint, session 1 $-$ session 3 (both 542-composition) & & $+1.05$ \\
+Composition, 542-composition $-$ 341-composition (within session 3) & & $+3.61$ ($t=4.55$) \\
+Endpoint, session 3 $-$ session 2 (both 341-composition) & & $+1.14$ \\
+Total, session 1 (542) $-$ session 2 (341) & & $+5.79$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item The four cells identify the additive decomposition exactly: total drift $=$ endpoint leg $+$ composition leg $+$ endpoint leg. The composition leg is measured inside a single sitting~---same endpoint, same protocol, only the surrounding batch content differs~---so re-batching alone accounts for 62\% of what the two-session evidence had attributed to ``the session.'' The endpoint legs are non-monotonic (session 3 sits between sessions 1 and 2), so the endpoint residual is a $\pm1$-point-per-session-pair wander, not a trend. Computed by \texttt{analysis\_v3.py} from \texttt{llm\_scores\_s3\_*.json} and the archived session-1/2 scores.
+\end{tablenotes}
+\end{table}
+
+Anonymized levels track the same structure: $+12.13$ (session 2) and $+15.04$ (session 3, four-round average)~---the anonymized protocol moves between sittings too, which is why cross-session named-versus-anonymized contrasts absorb drift on \emph{both} sides.
+
+\paragraph{The mechanism sitting (2026-10-18, fourth session).} A fourth sitting ran the pre-specified discriminating design, with the run order \emph{inverted} so that time-of-session works against the composition effect: (i)~the 542-article composition pass ran first, (ii)~the standard 341 pass second, and (iii)~a seeded random shuffle of the 341 third (seed 20261018, order archived as \texttt{s4\_shuffle\_order.json}; the original order is company-blocked by collection, the shuffle mixes companies within every batch). Three results. First, the composition effect replicates under the inverted order at $+3.50$ (batch-call-clustered $t=2.17$, $p=0.042$; pooled with session 3: $+3.56$, $z=3.4$): since the 542 pass ran \emph{early} this time, a time-of-session explanation would have flipped the sign~---the effect is batch composition, not sitting position, and the drift between sessions 3 and 4 at fixed composition is $+0.57$ ($t=0.3$). Second, re-batching the \emph{same} 341 headlines at random moves levels by $+4.72$ (clustered $t=2.02$, $p=0.065$~---suggestive, one sitting): batch assignment matters even within a fixed corpus, so the composition channel is not specifically about out-of-window headlines. Third, the mechanism:
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Mechanism statistics (eight named-condition passes, sessions 3--4)}
+\label{tab:mech}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lc}
+\toprule
+Quantity & Estimate \\
+\midrule
+Clean anchoring on batch-mates' fixed content, $\theta$ & $+0.36$ ($t=4.9$) \\
+\quad asymmetry: extra slope when batch-mates' mean is positive & $+0.69$ ($t=2.3$; negative-mate slope $\approx 0$) \\
+Response-level mood (shared by the 25 scores of one API response) & SD $2.6$; 13\% of residual variance \\
+Idiosyncratic per-headline noise & SD $6.7$; 87\% \\
+Level shift predicted by \emph{linear} anchoring under any re-batching & exactly $0$ (telescoping identity) \\
+Observed level shifts: 542-composition / random re-batch & $+3.56$ pooled ($z=3.4$) / $+4.72$ ($p=0.065$) \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item The anchoring coefficient regresses each headline's score on the mean of its batch-mates' grand means (estimated across all passes, noise-averaged), with headline and pass fixed effects~---the regressor is a deterministic function of the batch assignment, free of same-response noise endogeneity. The telescoping identity: for any partition into balanced batches, the average of \emph{leave-one-out batch-mate means} over all headlines equals the global mean, so a linear anchoring term cannot move the corpus mean; observed level shifts therefore require the estimated non-linearity (asymmetric assimilation: positive batch-mates pull scores up, negative ones do not push them down) and/or interactions with the response-level mood. A full quantitative account of the shifts from these coefficients alone is not closed~---honestly: the \emph{existence} of batch effects is established at $z\approx3$--$5$ across two sessions with inverted run order; the \emph{mechanism} is pinned to the response (anchoring is real, asymmetric, and level-neutral in its linear part) but not fully derived. Computed by \texttt{anchoring\_regression3.py} and \texttt{reinference.py}.
+\end{tablenotes}
+\end{table}
+
+The mechanism table carries the paper's most cautionary arithmetic. A naive reading~---``anchoring $\theta=0.36$, batch means differ, therefore levels shift''~---fails on the telescoping identity: linear anchoring redistributes scores \emph{within} a corpus but provably cannot move the average, so the observed $+3.5$-point shifts must live in the non-linear part (the estimated asymmetry) or in interactions with response mood. The practical rule is unaffected by the open derivation: hold the batch composition fixed across anything being compared, because re-batching moves levels by more than most effects of interest, and the direction of the move is not predictable from the batch means alone.
+
+\paragraph{Downstream consequences of the composition effect.} A natural objection: if levels move but slopes do not, what is the harm? Table~\ref{tab:downstream} quantifies which downstream uses of the score survive re-batching and which do not, using the archived sources of sessions 1--4 (all named protocol, identical 341 headlines; staged addition computed from archived draws, outside the declared family; \texttt{batch\_downstream.py}). Slopes and ranks are robust: the predictive coefficient stays in $[0.010, 0.016]$ across all seven sources, every composition and re-batch contrast of slopes is insignificant ($p>0.9$), and the cross-sectional ranking of firm-days correlates at $\rho\geq 0.81$ across compositions (0.97 at fixed composition across sessions). Absolute-scale uses are not robust: between the two compositions of the same session, a fixed ``score $\geq +50$'' filter more than doubles its trade count (22 to 50 firm-days in session 3; 27 to 43 in session 4), the daily-mean series shifts by 4.0--4.6 points, and the sign of the day-over-day change in daily sentiment flips on 16--24\% of trading days. The composition effect is therefore a \emph{level} pathology with boundary costs: harmless to conditional, cross-sectional, and regression uses in this sample, and disqualifying for threshold rules, absolute-score comparisons across pipelines, and time-series signals built on the score's level.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{What re-batching does to downstream uses of the score (archived sources, sessions 1--4)}
+\label{tab:downstream}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lccc}
+\toprule
+Downstream use & 341-composition & 542-composition / re-batch & Verdict \\
+\midrule
+Predictive slope $\beta$ (session 3) & $0.0146$ ($t=1.67$) & $0.0128$ ($t=1.96$); diff $p=0.97$ & robust \\
+Predictive slope $\beta$ (session 4) & $0.0157$ ($t=1.49$) & $0.0110$ / $0.0104$; diffs $p>0.9$ & robust \\
+Firm-day rank stability (Spearman $\rho$) & --- & $0.91$ / $0.86$ / $0.81$ (re-batch) & robust \\
+Q5$-$Q1 spread (\bps, Welch $t$) & $+156$ (1.5) & $+95$ (1.2) / $-2$ ($-$0.1) & unstable, always insignificant \\
+Firm-days $\geq +50$ (session 3) & 22 (10.7\%) & 50 (24.4\%) & \emph{doubled} \\
+Firm-days $\geq +50$ (session 4) & 27 (13.2\%) & 43 (21.0\%) / 49 (23.9\%, re-batch) & \emph{doubled} \\
+Daily-mean level (points) & reference & $+4.5$ / $+4.0$ / $+4.6$ & shifted \\
+Day-over-day sign flips of daily mean & reference & 16\% / 17\% / 24\% & contaminated \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item All rows from \texttt{batch\_downstream.py} (seed 20261019) over the identical 341 in-window headlines scored under the named protocol: session-3 pair (341-only four-round average vs.\ the same session's 542-composition pass) and session-4 triple (341-only pass vs.\ the 542-composition pass vs.\ the seeded random re-batch). Slope differences use day-cluster bootstrap ($B=999$). Spread columns report the Q5$-$Q1 mean next-day return with Welch $t$ in parentheses. The threshold rows count firm-days whose mean score is at least $+50$ points; the daily-mean rows describe the daily cross-sectional mean of firm-day sentiment. ``Robust'' means the contrast across compositions is statistically zero; threshold and time-series uses move by construction because the level moves.
+\end{tablenotes}
+\end{table}
+
+\section{Pre-Registered Control Session (Archived Design)}\label{app:session5}
+
+A fifth sitting~---identity-swap (each headline's focal identifiers replaced by a seeded random other firm's identifiers, so the text remains a natural company headline but names the wrong company), neutral prefix (``[Company X]'' over the corrected anonymized text), corrected anonymization (the alias table now covers the ticker-V identifiers of Appendix~\ref{app:anon}; a forced verification pass reports zero residual focal identifiers across all transformed texts), and two named passes at \texttt{temperature}$\,=0$~---was pre-specified in an archived design document with falsifiable predictions before any of its data was collected (\texttt{audits/P2\_preregistration\_session5.md}). Data collection was interrupted by sustained provider rate-limiting after 63 of the 84 planned calls; the pre-registration, the transformation code (with the seeded swap map and the verification report), the per-call log, and the partial score files are all archived in the replication package, and the collection is resumable without design changes. In keeping with the paper's discipline, no estimate from this sitting is reported until the collection is complete; the pre-registered predictions and the analysis plan are on file for the completed version.
+
+\section{Classification Audit of the Price-Language Flag}\label{app:classification}
+
+All 52 headlines flagged by the realized-price regular expression of Section~\ref{sec:results:h4} were re-classified one by one against a written rulebook with four categories: \textbf{P}~---the headline states or clearly implies the company's stock price has already moved (including moves stated with a fundamental cause, e.g.\ ``shares jump on blowout results''); \textbf{E}~---the matched keyword is a fundamental magnitude (``revenue rises 12\%''), with no realized stock move; \textbf{D}~---a directional forecast only (``could sink,'' ``may drop to \$300''); \textbf{N}~---a regex false positive (``execution short fall''; ``Walmart just dropped October deals''~---retail promotions). The tie rule: dual-content headlines with both a realized move and a fundamental result classify as P, since the defining feature of an echo headline is that the move is reported. The classifier is disclosed for what it is: LLM-assisted, structured, item-by-item, run by the same class of model that produced the scores~---an internal consistency audit of the flag, not independent human annotation, and not a gold standard (the rulebook and all 52 labels are archived as \texttt{priced\_classification.json}). To make human validation executable without re-design, the replication package includes a complete two-rater annotation kit for the same 52 headlines~---per-item sheets, the rulebook, an independence protocol, and a script that computes Cohen's $\kappa$ between the human raters and their agreement with the machine labels once the sheets are filled (\texttt{annotation\_package/}); no human labels existed when this paper was written, and the machine labels above are the only audit of the flag it can report.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Auditing the echo classifier and the echo split}
+\label{tab:cls}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lc}
+\toprule
+Quantity & Value \\
+\midrule
+Flagged headlines / re-classified as realized-price (P) & 52 / 43 (82.7\%) \\
+Fundamental magnitude (E) / directional forecast (D) / false positive (N) & 3 / 3 / 3 \\
+Firm-days, regex flag vs.\ strict-P & 38 vs.\ 33 (20 companies) \\
+$\beta$, regex-flagged vs.\ strict-P (same-day control spec) & $0.0470$ ($t=1.80$) vs.\ $0.0475$ ($t=1.61$) \\
+Mean $|$same-day return$|$, strict-P vs.\ clean vs.\ flagged-non-P & 361 / 178 / 120 \bps \\
+Largest single-firm share of strict-P firm-days & 9\% \\
+Leave-one-firm-day-out: $\beta$ range / sign flips of diff & $[0.018, 0.059]$ / 0 \\
+Leave-one-company-out: $\beta$ range / sign flips of diff & $[0.019, 0.056]$ / 0 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item The refined split uses only firm-days with at least one strict-P headline. The misclassified firm-days' 120 \bps{} of same-day absolute return~---below even the clean group's 178~---is the strongest internal validation of the classification: headlines that are not echoes do not behave like echoes. Jackknife rows drop each strict-P firm-day (or each company holding one) and re-estimate both split coefficients; the difference never changes sign in any replicate. Computed by \texttt{p11\_classification\_analysis.py} from \texttt{priced\_headlines.json}, \texttt{priced\_classification.json}, and the archived panel.
+\end{tablenotes}
+\end{table}
