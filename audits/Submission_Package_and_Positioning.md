@@ -35,6 +35,19 @@
 
 **决策建议**：FRL 首投；若审稿意见指向"样本小"，按意见补扩窗口后转投；EL letter 版作为并行小文（把批次构成效应单独抽出）——注意两版不可重复发表同一结果，若 FRL 版已含构成效应，EL letter 版须撤回该想法或改投不同角度。
 
+## 二·补、FRL 篇幅事实修正与 letter 版定案（2026-10-20，检索基准日当日核验）
+
+**事实修正（重要）**：本节上文"现稿压缩正文后量级匹配/约 9,000 词"的假设**不成立**。FRL 官方 Guide for Authors 明文规定 **"Papers for submission should be concise — less than 2500 words"**（ScienceDirect 期刊指南页，2026-10-20 检索；Wikipedia "Finance Research Letters" 词条独立确认 letters journal 2,500 词上限）；模板页另示摘要约 250 词。FRL 评审为**单盲**（SciRev 评论页："reviewers know the author's name"），故无需匿名版。
+
+**执行决策（按"先核验后行动"原则落实）**：
+- 已制作 **FRL letter 版**：`submission_frl/frl_letter.pdf`（6 页；正文 1,408 词 < 2,500；摘要约 190 词；2 表；18 条参考文献）。全部数字来自存档结果文件，通过 `scripts/frl_letter_check.py` **109/109 断言**（数字=存档、措辞守卫、词数上限三重检查）。
+- **40 页完整工作论文作 online appendix** 随信提交（GitHub Release v6.3.0），单盲评审下作者信息公开合规。
+- 配套件：`highlights.txt`（5 条，逐条 ≤85 字符脚本核验）、`cover_letter_FRL.md`（终版）、`declarations_FRL.md`（COI/funding 待作者一句话确认 + CRediT + AI 披露 + 字数声明）。
+- **letter 与 WP 的一处数字差异（诚信记录）**：WP 正文附录 G "sessions 3–4 固定构成漂移 +0.57 (t=0.3)"，存档精确值 0.5645 正确舍入为 **+0.56**（t=0.31）；letter 采用 +0.56。WP 该处在下一版修订时同步修正（列入待修清单，0.005 量级显示误差，不影响任何结论）。
+- **替代路径（若作者不采纳 letter 化）**：转投接受全文长度的期刊（如 Journal of Empirical Finance / Journal of Banking & Finance）需重新定位与压缩到其常规 8,000–12,000 词区间；本 letter 版不阻碍该路径，WP 原稿保留。
+
+**letter 版核验状态**：109/109 断言通过；Tectonic 编译 0 error；PDF 6 页，关键串（t=2.73/6.82/+3.56/0.919/83.3%/0.047/2.76/165×/placeholder-rewording/temperature zero/equivalence）全部在位。
+
 ## 三、H 回应函状态（v5.1）
 
 原 H_revision_response.md（v3 状态）逐条对照更新：

@@ -69,10 +69,15 @@ GitHub：`https://github.com/43aquarius/dissecting-llm-news-sentiment-scores`（
 | 9 未完成实验如实入局限 | ✅ 人工金标准/跨模型/精确时间戳三项如实声明 |
 | 10 不选择性删除不利实验 | ✅ v1→v6.2 全部撤回与更正链写入论文与修订日志 |
 
-## 四、投稿前剩余动作（按优先级）
+## 四、投稿前剩余动作（按优先级；2026-10-20 第二轮更新）
 
-1. **FRL 格式适配**（必须，作者执行）：正文压缩至期刊要求（FRL 研论文通常 ≤9,000 词左右，当前正文约 12,000 词）；参考文献转 FRL 样式；图表单列适配。建议路径：主体投 FRL；附录 A（最小可行审计协议）可发展为独立 practitioner 短文。
-2. **匿名版制备**（投稿系统要求时）：titleblock 去作者信息+致谢；复现包链接改为匿名引用方式（GitHub 仓库名含作者 ID `43aquarius`，双盲评审需用匿名仓库或改为"available upon request"）。
-3. **COI/funding 声明**（必须）：一句话即可（无资助、无利益冲突或如实声明）。
-4. **cover letter**：`Submission_Package_and_Positioning.md` 已含 v6 版草稿，需按 v6.2 更新亮点（补：TOST 等效性框架、四条 2026 新文献、Kong et al. 清单呼应）。
-5. **作者可选实验**（不阻塞投稿）：人工双标注员 κ（annotation_package 即取即用）；3–5 供应商跨模型复现（设计与可证伪预测已存档于复现包）。
+1. ~~**FRL 格式适配**~~ → **✅ 已完成（2026-10-20）**：官方指南实际要求 **<2,500 词**（非前轮假设的约 9,000 词，已修正）。已产出 **FRL letter 版** `submission_frl/frl_letter.pdf`（6 页，正文 1,408 词，2 表，18 引用）+ `frl_letter.tex` 源码 + `scripts/frl_letter_check.py`（**109/109 断言**：数字=存档、措辞守卫、词数上限）。40 页完整工作论文作 online appendix。定位修正与 letter 决策记录见 `Submission_Package_and_Positioning.md` 二·补节。
+2. ~~**匿名版制备**~~ → **✅ 无需（已核验）**：FRL 为单盲评审（SciRev：审稿人可见作者名），单盲下不要求匿名稿；如后续改投双盲期刊再按此清单制备（复现包链接需匿名化处理，仓库名含作者 ID `43aquarius`）。
+3. **COI/funding 声明**（必须，**唯一剩余必做项**）：`submission_frl/declarations_FRL.md` 第 1、2 节已备好一句话模板，**作者确认或改写后随投稿系统提交**。
+4. ~~**cover letter**~~ → **✅ 已完成**：`submission_frl/cover_letter_FRL.md`（v6.3 版：letter 定位、去识别/构成/随机性/等效性四亮点、单模型诚实声明、AI 披露、COI/funding 占位）。
+5. ~~**highlights**~~ → **✅ 已完成**：`submission_frl/highlights.txt`（5 条，逐条 ≤85 字符，脚本核验）。
+6. **作者可选实验**（不阻塞投稿）：人工双标注员 κ（annotation_package 即取即用）；3–5 供应商跨模型复现（设计与可证伪预测已存档于复现包）。
+
+### 新增待修记录（下一版 WP 修订时处理，不影响投稿）
+- WP 附录 G "sessions 3–4 固定构成漂移 +0.57 (t=0.3)"：存档精确值 0.5645，正确舍入 **+0.56**（t=0.31）。letter 已用 0.56；WP 正文与 `tests/test_numbers.py`（当前无此断言，建议补一条）下版同步修正。
+- **GitHub PAT 轮换**（安全，作者执行）：fine-grained token 曾在聊天明文出现并用于三次推送与 Release 发布，建议立即在 GitHub → Settings → Developer settings → Fine-grained tokens 撤销并重建。
