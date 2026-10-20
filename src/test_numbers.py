@@ -367,6 +367,122 @@ if all(c == 341 for c in _counts.values()):
 else:
     print(f"NOTE: session-5 collection in progress ({_counts}); value checks deferred.")
 
+# (k) session-5 pre-registered results (analysis_v5.py, seed 20261019)
+if all(c == 341 for c in _counts.values()):
+    s5 = load("results_s5.json")
+    check("s5 P1 de-id N5-A5", s5["p1_identity_N5_minus_A5"]["mean_diff"], -2.05, 0.005)
+    check("s5 P1 headline t", s5["p1_identity_N5_minus_A5"]["headline_t"], -2.84, 0.01)
+    check("s5 P1 cluster p", s5["p1_identity_N5_minus_A5"]["cluster_p"], 0.175, 0.005)
+    check("s5 P1 excl V", s5["p1_identity_excl_V"]["mean_diff"], -2.15, 0.005)
+    check("s5 P2 swap N5-S5", s5["p2_swap_N5_minus_S5"]["mean_diff"], 0.34, 0.005)
+    check("s5 P2 swap cluster p", s5["p2_swap_N5_minus_S5"]["cluster_p"], 0.857, 0.005)
+    check("s5 P2 S5-A5", s5["p2_swap_S5_minus_A5"]["mean_diff"], -2.39, 0.005)
+    check("s5 P2 S5-A5 headline p", s5["p2_swap_S5_minus_A5"]["headline_p"], 0.0012, 0.0005)
+    check("s5 P3 prefix", s5["p3_prefix_P5_minus_A5"]["mean_diff"], 0.13, 0.005)
+    check("s5 P4 identical rate", s5["p4_temp0_determinism"]["exact_identical_rate"], 284 / 341, 0.001)
+    check("s5 P4 within sd", s5["p4_temp0_determinism"]["within_sd_T0"], 4.84, 0.01)
+    check("s5 P5 level shift", s5["p5_temp0_vs_default"]["mean_diff"], 1.06, 0.005)
+    check("s5 pred beta N5", s5["prediction"]["N5"]["beta"], 0.0140, 0.0005)
+    check("s5 pred beta A5", s5["prediction"]["A5"]["beta"], 0.0158, 0.0005)
+    check("s5 pred beta S5", s5["prediction"]["S5"]["beta"], 0.0179, 0.0005)
+    check("s5 pred diff N5-A5 p", s5["prediction_diffs"]["N5_minus_A5"]["p"], 0.929, 0.005)
+    check("s5 pred diff N5-S5 p", s5["prediction_diffs"]["N5_minus_S5"]["p"], 0.917, 0.005)
+    in_tex("s5 results in paper", "de-identification", "results.tex")
+    in_tex("s5 swap number", "0.34", "results.tex")
+    in_tex("s5 temp0 rate", "83.3\\%", "results.tex")
+    in_tex("s5 appendix section", "Session-5 Controls: Archived Design Document and Results", "appendix.tex")
+    in_tex("s5 model tag", "analysis\\_v5.py", "appendix.tex")
+    # swap control re-attribution must be stated in the abstract-level documents
+    in_tex("s5 swap in intro", "swap control", "intro.tex")
+
+# (l) batch-mechanism quantification (batch_mechanism_quant.py)
+if all(c == 341 for c in _counts.values()):
+    bq = load("results_batch_quant.json")
+    check("mech theta full mates", bq["theta_full_mates"], 0.381, 0.005)
+    check("mech alpha out mean", bq["alpha_out_mean"], 12.60, 0.05)
+    check("mech alpha in mean", bq["alpha_in_mean"], 13.91, 0.05)
+    check("mech alpha gap", bq["alpha_gap_out_minus_in"], -1.32, 0.05)
+    check("mech pred composition shift", bq["pred_composition_theta_full"], 0.039, 0.005)
+    check("mech gap needed", bq["gap_needed_full_explanation"], 30.1, 0.5)
+    check("mech share out mates", bq["share_out_mates_mean"], 0.31, 0.01)
+    check("mech rebatch identity zero", bq["pred_rebatch_theta_full"], 0.0, 0.001)
+    in_tex("mech quant in intro", "quantifiably explains only about 1\\%", "intro.tex")
+    in_tex("mech pred shift in results", "0.04", "results.tex")
+    in_tex("mech table rows", "Level shift predicted by \\emph{linear} anchoring, composition contrast", "appendix.tex")
+
+# (m) title, channel naming, and new forbidden phrases
+in_tex("title de-identification", "De-Identification, Batch Composition", "titleblock.tex")
+for _bad in ["pessimism prior", "make no attempt to hide", "committed, in sequence",
+             "got both wrong", "no human labels existed", "Pre-Registered Control Session",
+             "ten times across", "Identity Priors, Batch Composition"]:
+    n_checks[0] += 1
+    if _bad in _all_tex:
+        failures.append(f"forbidden phrase present: {_bad!r}")
+in_tex("thirteen passes intro", "thirteen independent passes across five sittings", "intro.tex")
+in_tex("fifteen draws robust", "fifteen archived named draws", "robustness.tex")
+n_checks[0] += 1
+if "fourteen archived" in _all_tex or "twelve independent passes" in _all_tex:
+    failures.append("stale draw count (fourteen archived / twelve independent passes) still present")
+in_tex("checklist appendix present", "Minimal Viable Audit Protocol", "appendix.tex")
+in_tex("downstream figure present", "fig_downstream.png", "appendix.tex")
+
+# (n) equivalence testing (equivalence_testing.py, v6.2) and verified literature
+eq = load("results_equivalence.json")
+check("eq benchmark beta", eq["design"]["benchmark_beta_named"], 0.014892, 5e-6)
+check("eq primary margin", eq["design"]["primary_margin"], 0.007446, 5e-6)
+check("eq sd sent firmday", eq["design"]["sample_sd_sent_firmday"], 0.3606, 0.005)
+CE = eq["contrasts"]
+check("eq C1 emt", CE["C1_named_vs_anon_crosssession"]["emt"], 0.0040, 0.0003)
+check("eq C8 emt", CE["C8_s2repmean_vs_anon_samesession"]["emt"], 0.0032, 0.0003)
+check("eq C2 emt", CE["C2_named_vs_anon_interleaved"]["emt"], 0.0062, 0.0004)
+check("eq C3 emt", CE["C3_N5_vs_A5"]["emt"], 0.0052, 0.0003)
+check("eq C4 emt", CE["C4_N5_vs_S5"]["emt"], 0.0083, 0.0004)
+check("eq C5 emt", CE["C5_named_vs_lmdict"]["emt"], 0.0658, 0.003)
+check("eq C6 emt", CE["C6_priced_vs_clean"]["emt"], 0.0976, 0.005)
+check("eq C7 emt", CE["C7_clean_vs_zero"]["emt"], 0.0136, 0.0007)
+# internal consistency: percentile verdict must equal CI-inside-margin test
+for _k, _v in CE.items():
+    _d = _v["delta_50pct"]["margin"]
+    _verdict = _v["ci90"][0] > -_d and _v["ci90"][1] < _d
+    n_checks[0] += 1
+    if _verdict != _v["delta_50pct"]["percentile_verdict"]:
+        failures.append(f"eq verdict/CI inconsistency in {_k}")
+for _k in ("C1_named_vs_anon_crosssession", "C8_s2repmean_vs_anon_samesession",
+           "C2_named_vs_anon_interleaved", "C3_N5_vs_A5"):
+    n_checks[0] += 1
+    if not CE[_k]["delta_50pct"]["percentile_verdict"]:
+        failures.append(f"eq {_k} should be equivalent at delta*")
+for _k in ("C4_N5_vs_S5", "C5_named_vs_lmdict", "C6_priced_vs_clean", "C7_clean_vs_zero"):
+    n_checks[0] += 1
+    if CE[_k]["delta_50pct"]["percentile_verdict"]:
+        failures.append(f"eq {_k} should NOT be equivalent at delta*")
+check("eq C5 power", CE["C5_named_vs_lmdict"]["delta_50pct"]["power_at_zero"], 0.0, 0.02)
+check("eq C5 n multiple", CE["C5_named_vs_lmdict"]["delta_50pct"]["n_multiple_for_80pct"], 164.5, 4.0)
+check("eq C6 n multiple", CE["C6_priced_vs_clean"]["delta_50pct"]["n_multiple_for_80pct"], 143.7, 4.0)
+check("eq C7 n multiple", CE["C7_clean_vs_zero"]["delta_50pct"]["n_multiple_for_80pct"], 6.1, 0.4)
+check("eq C2 power", CE["C2_named_vs_anon_interleaved"]["delta_50pct"]["power_at_zero"], 0.74, 0.05)
+in_tex("tost table present", "Equivalence assessment (TOST) of predictive-coefficient contrasts", "appendix.tex")
+in_tex("tost emt defined", "equivalence margin threshold", "appendix.tex")
+in_tex("tost exploratory label", "labeled exploratory and reported outside the declared family", "appendix.tex")
+in_tex("tost in prediction layer", "two-one-sided-tests (TOST) equivalence assessment", "results.tex")
+in_tex("tost principle in theory", "a non-rejected difference is not evidence of equivalence", "theory.tex")
+in_tex("abstract formal equivalence", "formally equivalent", "titleblock.tex")
+in_tex("intro equivalence verdict", "now carries a formal equivalence verdict", "intro.tex")
+in_tex("discussion equivalence", "neither different from nor equivalent to the dictionary", "discussion.tex")
+in_tex("h4 clean not equivalent", "not established as \\emph{equivalent} to zero", "results.tex")
+in_tex("forest caption updated", "inconclusive in both directions (Appendix~\\ref{app:power})", "results.tex")
+in_tex("tost tab rows", "Clean coefficient vs.\\ zero & $+0.0033$", "appendix.tex")
+for _ref in ("christensen2026", "bisharat2026", "kong2026", "jo2026"):
+    in_tex(f"ref {_ref}", "{" + _ref + "}", "references.tex")
+in_tex("litreview kong taxonomy", "look-ahead, survivorship, narrative, objective, cost", "litreview.tex")
+in_tex("litreview christensen", "AI-generated covariates whose measurement error cannot be validated away", "litreview.tex")
+in_tex("litreview jo scale", "re-bin a fifth of texts", "litreview.tex")
+for _bad2 in ["a genuine negative prior", "statistically indistinguishable from one another",
+              "indistinguishable, as a predictive coefficient"]:
+    n_checks[0] += 1
+    if _bad2 in _all_tex:
+        failures.append(f"forbidden stale phrase present: {_bad2!r}")
+
 # ---------------- report ----------------
 n_total = n_checks[0]
 print(f"test_numbers.py: {n_total - len(failures)}/{n_total} checks passed")

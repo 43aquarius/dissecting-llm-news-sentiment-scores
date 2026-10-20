@@ -76,3 +76,10 @@
 - Cross-model replication remains infeasible in this environment (single-vendor SDK,
   model parameter ignored by the serving layer; probe logs archived). The first
   follow-up design is specified in the paper's threats section and the AsPredicted form.
+
+## v6.2 addendum (2026-10-20)
+
+- New: `src/equivalence_testing.py` -> `data/results_equivalence.json`. Rebuilds the v2/session-3/session-5 regression samples exactly (13 assertions against stored coefficients) and runs the day-cluster paired bootstrap (B=9,999, seed 20261020) for eight contrasts, storing full distributions. Percentile TOST at delta* = 0.5 x benchmark; EMT = max(|q5|,|q95|) reported margin-free; analytic power at true difference zero; sample multiples for 80% power use SE* = delta/(1.2816+1.645).
+- The echo-split contrast (`C6`/`C7`) replicates the P0-10 same-day-control specification with the >=25-obs-per-side guard.
+- Paper integration: `sections/appendix.tex` (new subsection `app:equiv`, table `tab:tost`), `sections/results.tex` (prediction layer, H4, two captions), `sections/theory.tex` (converse inference clause), `sections/intro.tex`, `sections/discussion.tex`, `sections/titleblock.tex`, `sections/litreview.tex`, `sections/references.tex` (+4 entries), `sections/robustness.tex`.
+- Verify with: `python src/equivalence_testing.py` (writes results_equivalence.json), `python tests/test_numbers.py` (290 checks), `bash`-free in-package compile: `cd paper && tectonic main.tex`.

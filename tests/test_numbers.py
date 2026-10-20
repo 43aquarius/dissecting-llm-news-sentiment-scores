@@ -426,6 +426,63 @@ if "fourteen archived" in _all_tex or "twelve independent passes" in _all_tex:
 in_tex("checklist appendix present", "Minimal Viable Audit Protocol", "appendix.tex")
 in_tex("downstream figure present", "fig_downstream.png", "appendix.tex")
 
+# (n) equivalence testing (equivalence_testing.py, v6.2) and verified literature
+eq = load("results_equivalence.json")
+check("eq benchmark beta", eq["design"]["benchmark_beta_named"], 0.014892, 5e-6)
+check("eq primary margin", eq["design"]["primary_margin"], 0.007446, 5e-6)
+check("eq sd sent firmday", eq["design"]["sample_sd_sent_firmday"], 0.3606, 0.005)
+CE = eq["contrasts"]
+check("eq C1 emt", CE["C1_named_vs_anon_crosssession"]["emt"], 0.0040, 0.0003)
+check("eq C8 emt", CE["C8_s2repmean_vs_anon_samesession"]["emt"], 0.0032, 0.0003)
+check("eq C2 emt", CE["C2_named_vs_anon_interleaved"]["emt"], 0.0062, 0.0004)
+check("eq C3 emt", CE["C3_N5_vs_A5"]["emt"], 0.0052, 0.0003)
+check("eq C4 emt", CE["C4_N5_vs_S5"]["emt"], 0.0083, 0.0004)
+check("eq C5 emt", CE["C5_named_vs_lmdict"]["emt"], 0.0658, 0.003)
+check("eq C6 emt", CE["C6_priced_vs_clean"]["emt"], 0.0976, 0.005)
+check("eq C7 emt", CE["C7_clean_vs_zero"]["emt"], 0.0136, 0.0007)
+# internal consistency: percentile verdict must equal CI-inside-margin test
+for _k, _v in CE.items():
+    _d = _v["delta_50pct"]["margin"]
+    _verdict = _v["ci90"][0] > -_d and _v["ci90"][1] < _d
+    n_checks[0] += 1
+    if _verdict != _v["delta_50pct"]["percentile_verdict"]:
+        failures.append(f"eq verdict/CI inconsistency in {_k}")
+for _k in ("C1_named_vs_anon_crosssession", "C8_s2repmean_vs_anon_samesession",
+           "C2_named_vs_anon_interleaved", "C3_N5_vs_A5"):
+    n_checks[0] += 1
+    if not CE[_k]["delta_50pct"]["percentile_verdict"]:
+        failures.append(f"eq {_k} should be equivalent at delta*")
+for _k in ("C4_N5_vs_S5", "C5_named_vs_lmdict", "C6_priced_vs_clean", "C7_clean_vs_zero"):
+    n_checks[0] += 1
+    if CE[_k]["delta_50pct"]["percentile_verdict"]:
+        failures.append(f"eq {_k} should NOT be equivalent at delta*")
+check("eq C5 power", CE["C5_named_vs_lmdict"]["delta_50pct"]["power_at_zero"], 0.0, 0.02)
+check("eq C5 n multiple", CE["C5_named_vs_lmdict"]["delta_50pct"]["n_multiple_for_80pct"], 164.5, 4.0)
+check("eq C6 n multiple", CE["C6_priced_vs_clean"]["delta_50pct"]["n_multiple_for_80pct"], 143.7, 4.0)
+check("eq C7 n multiple", CE["C7_clean_vs_zero"]["delta_50pct"]["n_multiple_for_80pct"], 6.1, 0.4)
+check("eq C2 power", CE["C2_named_vs_anon_interleaved"]["delta_50pct"]["power_at_zero"], 0.74, 0.05)
+in_tex("tost table present", "Equivalence assessment (TOST) of predictive-coefficient contrasts", "appendix.tex")
+in_tex("tost emt defined", "equivalence margin threshold", "appendix.tex")
+in_tex("tost exploratory label", "labeled exploratory and reported outside the declared family", "appendix.tex")
+in_tex("tost in prediction layer", "two-one-sided-tests (TOST) equivalence assessment", "results.tex")
+in_tex("tost principle in theory", "a non-rejected difference is not evidence of equivalence", "theory.tex")
+in_tex("abstract formal equivalence", "formally equivalent", "titleblock.tex")
+in_tex("intro equivalence verdict", "now carries a formal equivalence verdict", "intro.tex")
+in_tex("discussion equivalence", "neither different from nor equivalent to the dictionary", "discussion.tex")
+in_tex("h4 clean not equivalent", "not established as \\emph{equivalent} to zero", "results.tex")
+in_tex("forest caption updated", "inconclusive in both directions (Appendix~\\ref{app:power})", "results.tex")
+in_tex("tost tab rows", "Clean coefficient vs.\\ zero & $+0.0033$", "appendix.tex")
+for _ref in ("christensen2026", "bisharat2026", "kong2026", "jo2026"):
+    in_tex(f"ref {_ref}", "{" + _ref + "}", "references.tex")
+in_tex("litreview kong taxonomy", "look-ahead, survivorship, narrative, objective, cost", "litreview.tex")
+in_tex("litreview christensen", "AI-generated covariates whose measurement error cannot be validated away", "litreview.tex")
+in_tex("litreview jo scale", "re-bin a fifth of texts", "litreview.tex")
+for _bad2 in ["a genuine negative prior", "statistically indistinguishable from one another",
+              "indistinguishable, as a predictive coefficient"]:
+    n_checks[0] += 1
+    if _bad2 in _all_tex:
+        failures.append(f"forbidden stale phrase present: {_bad2!r}")
+
 # ---------------- report ----------------
 n_total = n_checks[0]
 print(f"test_numbers.py: {n_total - len(failures)}/{n_total} checks passed")

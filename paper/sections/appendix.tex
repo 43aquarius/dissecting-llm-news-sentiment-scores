@@ -60,7 +60,7 @@ Sentiment-sorted quintile portfolios on the baseline sample earn $-20.3$, $+18.9
 
 \subsection{Heterogeneity: interactions, not splits}
 
-A split-sample presentation~---coefficient significance in above- versus below-median subsamples~---is the natural first pass at heterogeneity, and it is the rhetoric the econometrics literature warns against, since separate significances do not test a difference. Table~\ref{tab:inter} reports the formal interaction-term tests. The size interaction is significant ($t=2.25$, $p=0.025$): predictability genuinely concentrates in above-median-dollar-volume firms, which in this corpus is nearly mechanical~---mega-caps dominate search coverage, so the instrument is most precise (densest text input) exactly there. The news-intensity interaction is marginal ($t=1.90$, $p=0.057$). The volatility interaction is zero ($t=0.01$): a volatility-regime split showing coefficients that differ by 0.0007 across regimes with different standard errors implies an interaction indistinguishable from zero, so no state-dependence claim survives a formal test. Figure~\ref{fig:hetv2} contrasts the two inference styles directly~---the point of the exercise is methodological as much as substantive.
+A split-sample presentation~---coefficient significance in above- versus below-median subsamples~---is the natural first pass at heterogeneity, and it is the rhetoric the econometrics literature warns against, since separate significances do not test a difference. Table~\ref{tab:inter} reports the formal interaction-term tests. The size interaction is significant ($t=2.25$, $p=0.025$): predictability genuinely concentrates in above-median-dollar-volume firms, which in this corpus is nearly mechanical~---mega-caps dominate search coverage, so the instrument is most precise (densest text input) exactly there. The news-intensity interaction is marginal ($t=1.90$, $p=0.057$). The volatility interaction is zero ($t=0.01$): a volatility-regime split showing coefficients that differ by 0.0007 across regimes with different standard errors implies no detectable interaction, so no state-dependence claim survives a formal test. Figure~\ref{fig:hetv2} contrasts the two inference styles directly~---the point of the exercise is methodological as much as substantive.
 
 \begin{table}[htbp]
 \centering
@@ -78,7 +78,7 @@ Sentiment $\times$ high-volatility regime & 0.0001 & 0.01 & 0.994 \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}[flushleft]\footnotesize
-\item Interactions from $r_{i,t+1} \sim \text{sentiment} + \text{sentiment}\times\text{modifier} + \text{modifier} + \text{same-day return} + \text{controls}$, two-way clustered, $N=205$. A volatility-regime split ($t=2.49$ vs.\ $t=1.00$) implies an interaction indistinguishable from zero.
+\item Interactions from $r_{i,t+1} \sim \text{sentiment} + \text{sentiment}\times\text{modifier} + \text{modifier} + \text{same-day return} + \text{controls}$, two-way clustered, $N=205$. A volatility-regime split ($t=2.49$ vs.\ $t=1.00$) implies no detectable interaction.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -117,6 +117,38 @@ H2: interleaved identity shift (points, $n=341$, session 3) & $-$2.82 & 1.03 & 2
 \item Two-sided 5\% tests; $\text{MDE}_{80}=2.80\times\text{SE}$. ``Power'' is achieved power at the observed effect. The identity-level-shift row is the cross-session contrast as declared; the same-session row is its staged re-estimate; the last row is the interleaved-session confirmatory contrast under the conservative batch-call-clustered SE (the headline-level SE of 0.66 would give power 0.99; the round-level meta-test is stronger still). The H4 and H5 rows use the $B=9{,}999$ bootstrap CI and the fixed-effects clustered SE of the panel inference specification. Computed by \texttt{revision\_power.py} (family and session-2 rows) and \texttt{analysis\_v3.py} / \texttt{reinference.py} (session-3 row) from archived artifacts.
 \end{tablenotes}
 \end{table}
+
+\subsection{Equivalence Assessment of the Instrument Contrasts}\label{app:equiv}
+
+Table~\ref{tab:power} runs the power logic one way~---what differences this sample could detect. The instrument conclusions require running it the other way as well: a non-rejected difference is not evidence of equivalence, and several statements a reader might naturally form (``the conditions are indistinguishable,'' ``the clean subsample shows no signal'') are equivalence claims wearing difference-test clothes. We therefore re-assess every predictive-coefficient contrast as a two-one-sided-tests (TOST) equivalence assessment on the same day-cluster bootstrap machinery as Table~\ref{tab:diff}, with $B=9{,}999$ resamples of the trading-day clusters (fresh seed) and the bootstrap's 90\% percentile interval as the test statistic: a contrast is equivalent at margin $\delta$ iff its entire 90\% interval lies inside $(-\delta, +\delta)$. The primary margin follows replication practice~---$\delta^{*}=0.0074$, one half of the benchmark named coefficient, the ``same order of magnitude'' standard: a predictive difference below half the effect itself cannot reverse any qualitative statement about the instrument, while a difference above it would mean the two conditions measure materially different signals. In response units, $\delta^{*}$ is 27 \bps{} of next-day return per one-standard-deviation firm-day sentiment shock (SD $0.361$), against a benchmark response of 54 \bps{}. Because a margin is a convention, each contrast's \emph{equivalence margin threshold} (EMT)~---the smallest margin at which it passes, i.e.\ $\max(|q_{5}|,|q_{95}|)$~---is reported alongside, so any reader-preferred margin can be tested by inspection. The margin rule was fixed before any verdict was computed; the analysis as a whole was designed in revision, after the difference tests were known, and is therefore labeled exploratory and reported outside the declared family (Section~\ref{sec:framework:inference}).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Equivalence assessment (TOST) of predictive-coefficient contrasts}
+\label{tab:tost}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrcl}
+\toprule
+Contrast & $\widehat{\Delta}$ & 90\% CI & EMT & EMT/$\hat\beta$ & Power & Verdict at $\delta^{*}$ \\
+\midrule
+Named $-$ anonymized (cross-session) & $+0.0004$ & $[-0.0035, +0.0040]$ & 0.0040 & 0.27 & 0.90 & Equivalent \\
+Named $-$ anonymized (same-session) & $+0.0002$ & $[-0.0027, +0.0032]$ & 0.0032 & 0.21 & 0.99 & Equivalent \\
+Named $-$ anonymized (interleaved) & $+0.0013$ & $[-0.0025, +0.0062]$ & 0.0062 & 0.42 & 0.74 & Equivalent \\
+Named $-$ anonymized (session 5) & $-0.0018$ & $[-0.0052, +0.0021]$ & 0.0052 & 0.35 & 0.91 & Equivalent \\
+Named $-$ swapped (session 5) & $-0.0039$ & $[-0.0083, +0.0004]$ & 0.0083 & 0.56 & 0.75 & Not established \\
+Named $-$ LM dictionary & $-0.0119$ & $[-0.0658, +0.0415]$ & 0.0658 & 4.42 & 0.00 & Uninformative \\
+Priced $-$ clean (echo split) & $+0.0436$ & $[+0.0005, +0.0976]$ & 0.0976 & 6.55 & 0.00 & Uninformative \\
+Clean coefficient vs.\ zero & $+0.0033$ & $[-0.0071, +0.0136]$ & 0.0136 & 0.91 & 0.00 & Not established \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]\footnotesize
+\item $\widehat{\Delta}$: observed coefficient difference (next-day specification with controls; the echo rows use the same-day-control specification actually estimated). EMT: equivalence margin threshold, the smallest $\delta$ at which the percentile TOST passes, $\max(|q_{5}|,|q_{95}|)$ of the day-cluster bootstrap ($B=9{,}999$, seed 20261020). $\delta^{*}=0.0074$ (half the benchmark named coefficient; 27 \bps{} per one-SD shock). ``Power'': analytic power at a true difference of zero (bootstrap SE, $z_{0.95}=1.645$). Sample multiples needed for 80\% power at $\delta^{*}$: 0.5--1.1 for the four de-identification contrasts and the swap (the present sample meets or exceeds the requirement), 6.1 for clean-vs-zero, 143.7 for the echo split, 164.5 for the dictionary comparison. Exploratory, outside the declared family. Computed by \texttt{equivalence\_testing.py}.
+\end{tablenotes}
+\end{table}
+
+The table upgrades some conclusions and bounds others. \emph{Upgraded}: all four named-versus-anonymized contrasts are formally equivalent at $\delta^{*}$~---EMTs between 0.0032 and 0.0062, i.e.\ 21--42\% of the benchmark~---with power 0.74--0.99 against a true difference of zero, so the de-identification invariance that Section~\ref{sec:results:h2} describes is an equivalence finding, not a failure to find a difference. \emph{Bounded in both directions}: the swap contrast misses at $\delta^{*}$ (EMT 0.0083, 56\% of the benchmark; power 0.75), so equivalence for the swapped instrument requires a wider margin than the convention provides; the dictionary comparison has an EMT of $4.4\times$ the benchmark with zero power~---an 80\%-power equivalence test at $\delta^{*}$ would need roughly 165 times the present sample~---so the LLM-versus-dictionary question is uninformative in both directions; and the priced-versus-clean contrast, whose difference-direction claim Section~\ref{sec:results:h4} reports as directional, fits no defensible equivalence margin either (EMT $6.6\times$ the benchmark; its 90\% interval sits entirely above zero, the same fact as the two-sided $p=0.100$, i.e.\ one-sided $p=0.050$). \emph{Also bounded}: the clean subsample's coefficient is not established as equivalent to zero (EMT 0.0136, 91\% of the benchmark; a sixfold sample would be needed), so ``no clean signal'' is as unsupported as ``a clean signal half the baseline''~---the honest statement is that this sample locates the loading in the echo subsample in point estimate only. Power is adequate exactly where the equivalence verdicts are positive: the current sample meets or exceeds what an 80\%-power equivalence test at $\delta^{*}$ requires for the de-identification contrasts and the swap (0.5--1.1$\times$) and falls short by two orders of magnitude for the dictionary and echo-split comparisons~---the same asymmetry the power table documents for difference testing, now in the equivalence direction.
 
 \section{Session Composition and Scoring-Session Drift}\label{app:session}
 

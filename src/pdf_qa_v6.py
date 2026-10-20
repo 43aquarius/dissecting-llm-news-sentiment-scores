@@ -67,6 +67,13 @@ must_have = [
     "−2.05", "0.34", "83.3", "0.0179", "4.8",
     "fifteen archived", "telescoping identity", "analysis_v5.py",
     "Minimal Viable Audit Protocol", "model_fingerprint.log",
+    # v6.2 equivalence testing and verified literature
+    "Equivalence assessment (TOST)", "equivalence margin threshold",
+    "formally equivalent", "Uninformative", "0.0658", "0.0136",
+    "two-one-sided-tests", "equivalence_testing.py",
+    "Christensen and Hansen", "Bisharat and Hean", "Kong", "Jo",
+    "AEA Papers and Proceedings", "arXiv:2602.14233",
+    "not yet evidence of equivalence", "21–42", "56%",
 ]
 missing = [m for m in must_have if not _present(m)]
 print(f"key-number spot check: {len(must_have)-len(missing)}/{len(must_have)} present")

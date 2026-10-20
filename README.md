@@ -1,101 +1,98 @@
-# Dissecting LLM News Sentiment Scores: De-Identification, Batch Composition, Scoring Noise, and Price Echoes in Return Predictability
+# Replication Package — Dissecting LLM News Sentiment Scores
 
-**Chang Tan** — Dalian University of Technology — aquars43@foxmail.com
+**Paper**: *Dissecting LLM News Sentiment Scores: Identity Priors, Batch Composition, Scoring Noise, and Price Echoes in Return Predictability* (Chang Tan, Dalian University of Technology, October 2026)
 
-*Working paper, October 2026. A measurement audit on 36 U.S. large-cap firms, July–October 2026.*
+This package reproduces every number, table, and figure in the paper from archived inputs. The project has two layers: the **original study** (v1: named LLM sentiment vs. LM dictionary on 542 headlines) and the **audit** (v2: anonymized + repeat-call conditions, augmented inference). Both are fully scripted. A third layer, the **revision** (v3), re-examines the audit itself: power calculations, a session-confounding decomposition that retracts the v2 identity-level-shift interpretation, and same-session re-estimates of every affected contrast. A fourth pass (**v4**, the P0 repair round) fixed 13 transcription and inference defects found by an independent data-and-code audit (`audits/P0_data_code_audit.md`, task list in `audits/P0P1P2_problem_list.md`): tables 1 and 6 are now script-generated, the H5 selection test uses firm-and-day fixed effects with two-way clustered errors, the H4 difference bootstrap runs at B=9,999 under the specification actually estimated, a disclosed anonymization failure (ticker V) is quantified with excluding-V robustness, and the theory proposition is restated as a remark with explicit, testable assumptions. `tests/test_numbers.py` locks every corrected number to its script output. A fifth pass (**v5**, the P1 experiment round) ran the experiments the problem list pre-specified: a same-session interleaved re-fielding of both conditions (four rounds each, batch-order alternated) that establishes the identity prior at $-2.82$ points, a batch-composition control that decomposes the cross-session drift into a $+3.61$-point composition effect and a $\pm1$-point endpoint residual, an item-by-item audit of the price-language classifier (82.7% precision), and an H1 draw-stability panel across all ten scoring draws. `audits/P1_experiments_report.md` documents the round. A mechanism round followed (documented in `audits/P1_experiments_report_addendum.md`): a fourth sitting with inverted run order replicates the composition effect (+3.50, pooled z=3.4), a seeded random re-batch of the same corpus moves levels (+4.72, p=0.065), clean anchoring on batch-mates is +0.36 (asymmetric), 13% of scoring noise is a response-level mood shared by each batch's 25 scores, and all session-3/4 level contrasts are re-reported under batch-call-clustered inference. `tests/test_numbers.py` now runs 133 assertions; journal positioning and the cover letter are in `audits/Submission_Package_and_Positioning.md`.
 
-> [!IMPORTANT]
-> **Downloads**: the compiled paper (35 pp., with cover) and the full replication package (zip) are attached to the [**Releases**](../../releases) page — no build required.
-
-## Abstract
-
-Do LLM sentiment scores on firm news predict stock returns because of what the text *means*, or because of what the scorer *brings to* the text — and to the batch? We audit a short-horizon predictability design on 542 search-collected headlines about 36 large U.S. firms (341 in-window, July–October 2026), scored by GLM-4-Plus under conditions that each vary one ingredient: identity visible, removed, or swapped; repeat calls; controlled batch composition; temperature-zero decoding; and the Loughran–McDonald dictionary. The baseline next-day association is marginal (t = 2.10, BH q = 0.062) and draw-dependent across thirteen re-scorings. The robust findings concern the measurement: de-identification — replacing the firm's name with a placeholder — raises score levels by two to three points without changing predictive content, while swapping the name to another firm moves levels by essentially nothing; batch composition — which headlines share an API call — moves levels by 3.6 points, a channel not previously quantified in this setting; the instrument is stochastic (ICC 0.92; 30% exact replication; temperature zero does not restore determinism); predictability directionally concentrates in the 15% of headlines that echo realized prices (p = 0.10); and news coverage is itself selected on realized volatility (t = 2.76). Anonymized, repeated, batch-frozen, session-interleaved scoring should precede any deployment of LLM sentiment as a predictor.
-
-## Headline findings
-
-| Channel | Result | Inference |
-|---|---|---|
-| **De-identification** — named vs. anonymized vs. identity-swapped | removing the firm's name raises score levels by 2–3 points (interleaved −2.82; corrected-anonymization replication −2.05); **swapping the name to another firm moves levels by +0.34 (n.s.)** — the effect is the removal of a concrete name, not a firm prior; predictive content unchanged in every variant (all difference p ≥ 0.62, swap p = 0.92) | same-session interleaved + swap/prefix controls, batch-call-clustered inference |
-| **Batch composition** — which headlines share an API call | +3.6 points when out-of-window filler headlines join the batches; cross-session drift decomposes exactly into composition (+3.61) + endpoint (±1); linear anchoring explains ~1% of the shift (predicted +0.04), leaving the mechanism to response-level non-linear components | replicated with inverted run order (+3.50, pooled z = 3.4); anchoring θ = 0.36–0.38; downstream: slopes and ranks robust, fixed thresholds and daily signs are *not* |
-| **Scoring noise** — repeat calls of the identical prompt | ICC = 0.92, 30% exact replication, within-SD ≈ 7.2 pts; 13% of variance is a batch-level "mood"; two temperature-zero rounds agree bitwise on only 83.3% of headlines — nondeterminism is partly server-side | two-way variance decomposition; pre-registered temperature-0 controls |
-| **Price echoes** — headlines quoting realized prices | predictability directionally concentrates in the 15% of headlines that echo realized prices (priced β = 0.047 vs. clean β = 0.003, difference p = 0.10) | classifier precision 82.7% (52-headline itemized audit); reported as directional pending independent human labels |
-| **Coverage selection** — which firms get news | coverage is selected on realized volatility (t = 2.76, firm+day FE, two-way clustered) | BH q = 0.014 within the declared family |
-
-The baseline next-day association itself is marginal and draw-dependent: t ∈ [1.47, 2.12] across twelve independent scoring passes (fourteen archived draws including two within-condition means), so the paper's contribution is the **measurement audit**, not a new anomaly.
-
-## What this repository contains
+## Contents
 
 ```
-├── paper/                  LaTeX source (main.tex + sections/), script-generated tables (sections/gen/),
-│                           compiled PDFs (v1 → v6 archive) and the final 35-page deliverable
-├── src/                    Full pipeline: news collection, price collection, LLM scoring runs
-│                           (sessions 1–5), LM dictionary, panel construction, analysis (v1–v5),
-│                           mechanism/anchoring regressions, downstream-consequence analysis,
-│                           table generators, QA scripts, power calculations
-├── data/                   All archived inputs and outputs (see data_manifest.csv): 542 headlines,
-│                           every score file for every condition and session, panel.csv, figures/,
-│                           results JSONs for every analysis layer
-├── audits/                 Process deliverables: original-draft audit (A), literature matrix (B),
-│                           research plan (C), simulated referee (G), revision response (H),
-│                           data-and-code audit (P0), problem list, fix logs, experiment reports (P1),
-│                           pre-registration documents (P2), v6 revision log, journal positioning
-├── annotation_package/     Two-rater human annotation kit for the 52 echo-flagged headlines
-│                           (codebook, instructions, CSV sheets, κ analysis script)
-├── logs/                   Raw API call logs with ISO timestamps for every scoring session
-├── tests/                  test_numbers.py — 183 assertions locking published numbers to script outputs
-├── data_manifest.csv       Provenance, role, and verification status of every data file
-└── replication_notes.md    Reproduction limitations (API access, licensing)
+replication_package_v2/
+├── README.md                 (this file)
+├── data_manifest.csv         (every data file: provenance, role, verification status)
+├── replication_notes.md      (limitations on reproduction: API access, licensing)
+├── audits/                   (process deliverables of the audit)
+│   ├── A_audit_report.md     (original-draft audit: claims table, statistical issues)
+│   ├── B_literature_report.md(verified literature matrix and novelty review)
+│   ├── C_research_plan.md    (direction comparison, pre-specified test family)
+│   ├── G_referee_report.md   (simulated referee reports and journal targeting)
+│   ├── H_revision_response.md (point-by-point response; documents the v2-to-v3 corrections)
+│   ├── P0_data_code_audit.md + P0P1P2_problem_list.md + P0_fix_log_v4.md (v4 repair round)
+│   └── P1_experiments_report.md (v5 experiment round: interleaved session, composition, classification)
+├── paper/                    (LaTeX source: main.tex + sections/ + cover.html)
+├── data/                     (archived inputs and outputs; see manifest)
+├── data/figures/             (all figures embedded in the paper, regenerated by scripts)
+├── src/                      (full pipeline code)
+└── logs/                     (LLM API batch log with timestamps)
 ```
 
-## Reproducing
+## Pipeline (run order)
 
-Environment: Python 3.12 (numpy, pandas, statsmodels, scipy, matplotlib, scikit-learn), Node/Bun with `z-ai-web-dev-sdk`, Tectonic ≥ 0.14 for LaTeX, Playwright + Chromium for the design diagram.
+| Step | Script | Input → Output | Notes |
+|---|---|---|---|
+| 1. News collection | `collect_ws_news.mjs`, `collect_round2.mjs`, `enrich_news.mjs`, `fill_dates.mjs` | web-search API → `data/news_all.json` | 542 unique URLs; cannot be re-run identically (search results drift); archived output is the source of truth |
+| 2. Prices | `collect_prices.py` | NASDAQ public API → `data/prices.csv` | 36 tickers × 74 trading days |
+| 3. LLM scoring v1 | `llm_score.mjs` | `news_all.json` → `llm_scores.json` | named condition, batches of 25, prompt in paper Appendix A |
+| 4. LM dictionary + panel | `build_panel.py` | scores + prices → `panel.csv` | also writes `news_scored.json` |
+| 5. v1 analysis | `analysis.py` | `panel.csv` → `results.json` | reproduces the earlier draft's statistics |
+| 6. **Audit scoring** | `llm_score_v2.mjs` | `news_scored.json` → `llm_scores_anon.json`, `llm_scores_rep{1,2,3}.json` | anonymization + 3 repeat calls, same prompt; log in `logs/` |
+| 7. **Audit analysis** | `analysis_v2.py` | all score files → `results_v2.json` | H1–H5, wild bootstrap, difference bootstraps, BH family, interactions |
+| 8. Audit figures | `figures_v2.py` | data → `data/figures/` | all paper figures except the design diagram |
+| 9. Design diagram | `shot_audit_pipeline.py` (+ `figures/audit_pipeline.html`) | HTML → PNG | requires playwright + chromium |
+| 10. Robustness numbers | `robustness_v2.py`, `audit_substantive.py`, `audit_cluster_se.py` | various → console/`results_v2.json` | spec robustness, placebo permutation, cluster-SE implementation audit |
+| 11. **Revision analyses** | `revision_power.py` | archived scores → `data/results_revision.json` | power/MDE table (App E), session-confounding decomposition (Sec 5.2, App F), same-session contrasts, third-party residual (App B); seed 20261017 |
+| 12. Revision figure | `figures_v3.py` | data → `data/figures/fig_session.png` | session decomposition figure (Fig. 5) |
+| 13. Editorial scripts | `edit_results.py`, `edit_others.py` | v2 LaTeX → v3 LaTeX | one-time text edits, archived for provenance; **permanently retired after v4** (no surgical number edits) |
+| 14. Final assembly | `merge_final.py` | cover.pdf + main.pdf → deliverable | A4 normalization + metadata |
+| 15. Paper | `tectonic paper/main.tex` | LaTeX → PDF | fonts resolved by Tectonic; tables 1 and 6 are \input-ed from `paper/sections/gen/*.tex`, generated by scripts (steps 16-17) |
+| 16. **v4 table generation** | `coverage_table.py`, `descriptives.py` | archived data → `data/coverage_table.json`, `data/descriptives_v2.json`, `paper/sections/gen/table_{coverage,desc}.tex` | Tables 1 and 6 are script-generated; hand transcription of table cells is no longer possible |
+| 17. **v4 audit fixes** | `v_exclusion.py`, `seed_stability.py` | archived data → `data/v_exclusion.json` | Visa anonymization no-op quantification (App B, Sec 5.2); H4/H5 bootstrap seed-stability checks |
+| 18. **Regression tests** | `tests/test_numbers.py` | paper LaTeX + data JSONs → pass/fail | asserts 60 key published numbers equal script outputs; run after any change |
 
-Core verification path (≈ 5 minutes; every number regenerates from archived inputs):
+## Environment
+
+- Python 3.12: numpy, pandas, statsmodels, scipy, matplotlib, scikit-learn (system interpreter; no pinned versions beyond these)
+- Node.js (Bun runtime) with `z-ai-web-dev-sdk` (LLM + web-search + page-reader APIs)
+- Tectonic ≥ 0.14 for LaTeX compilation
+- Playwright + Chromium for the design diagram
+
+## Core verification path (5 minutes)
 
 ```bash
-python3 src/analysis.py        # v1 statistics, bit-for-bit vs data/results.json
-python3 src/analysis_v2.py     # audit-layer H1–H5, wild bootstrap, BH family (seeded)
-python3 src/analysis_v3.py     # session-3 interleaved identity + composition experiments
-python3 src/coverage_table.py  # Table 6 (36 firms, totals 341/240) + gen/table_coverage.tex
-python3 src/descriptives.py    # Table 1, every cell regenerated + gen/table_desc.tex
-python3 src/v_exclusion.py     # disclosed anonymization failure quantification
-python3 src/batch_downstream.py  # downstream consequences of batch composition
-python3 tests/test_numbers.py  # 183 assertions: paper numbers == script outputs
+python3 src/analysis.py        # must reproduce data/results.json bit-for-bit
+python3 src/analysis_v2.py     # must reproduce data/results_v2.json (bootstrap seeds fixed)
+python3 src/figures_v2.py      # regenerates all statistical figures
+python3 src/coverage_table.py  # regenerates Table 6 (36 rows, totals 341/240) + gen/table_coverage.tex
+python3 src/descriptives.py    # regenerates Table 1 (both panels, every cell) + gen/table_desc.tex
+python3 src/v_exclusion.py     # Visa failure quantification + excluding-V robustness
+python3 tests/test_numbers.py  # 60 assertions: paper numbers == script outputs (regression net)
 ```
 
-LLM re-scoring cannot be reproduced bit-for-bit (stochastic decoding, API-side variability) — that fact is one of the paper's findings. Archived score files are the source of truth; re-running the scoring scripts reproduces the *distributional* claims, not the exact draws.
+Random seeds are fixed (`default_rng(20261016)` in `analysis_v2.py`, `42` in the placebo); bootstrap results are reproducible to within Monte Carlo error.
 
 ## Integrity statement
 
-- Every LLM score was produced by real API calls logged with timestamps in `logs/`; no score was hand-edited.
-- All coefficients, bootstrap p-values, ICCs, and q-values in the paper are read directly from `data/*.json` outputs of deterministic scripts; 183 regression assertions (`tests/test_numbers.py`) lock them.
-- Claims found wrong during the audit were **retracted in print** (v1→v2: dictionary "victory", monotonicity, volatility heterogeneity, "no coverage selection"; v2→v3: the identity-prior interpretation of a session-confounded contrast; v3→v5: the identity effect re-established at −2.8 by a pre-registered same-session interleaved design). Retractions are documented in `audits/` and the paper text.
-- Disclosed defects: a anonymization no-op for ticker V (10/341 headlines, 5 "Visa Bulletin" contamination items), quantified with excluding-V robustness in Appendix B; a partial fifth-session data collection (63 of 84 planned calls completed at the time of drafting, pre-registered design and transforms archived, resume-safe checkpoints).
-- The fifth session's identity-swap / neutral-prefix / temperature-zero controls are reported at their current completion levels; a resume runner (`src/llm_score_v5_resume.mjs`) completes the remaining calls when API quota allows.
-- Null results are reported as null results. The staged design's forking-paths concerns are acknowledged in the paper (Section 3.5).
+- All LLM scores (four conditions) were produced by real API calls logged in `logs/llm_score_v2.log` (timestamps, batch ids, parse status). No score was hand-edited.
+- All regression coefficients, bootstrap p-values, ICCs, and BH q-values in the paper are read directly from `data/results_v2.json` / computed by `analysis_v2.py`.
+- The v1 statistics from the earlier draft are preserved unchanged in `data/results.json` and reproduced by `analysis.py`.
+- Claims retracted during the audit are documented in `audits/A_audit_report.md` and Appendix D of the paper.
+- Claims retracted during the **revision** (v3): the v2 interpretation of the +4.75-point named-vs-anonymized level shift as an identity prior is withdrawn (session-confounded; same-session estimate -1.04, mean test p=0.11, rank test p=0.04, excluding-V -1.29 p=0.04); the retraction and its full decomposition are documented in `audits/H_revision_response.md`, paper Section 5.2 and Appendix F, and every number in them recomputes from `revision_power.py` and `v_exclusion.py`.
+- Corrections during the **P0 repair round** (v4): 13 defects (9 P0-level) catalogued in `audits/P0_data_code_audit.md` and fixed item-by-item in `audits/P0_fix_log_v4.md`; the v3 statement "44% of headlines receive the identical score in all four calls" was wrong (the correct value is 29.9%, the 44% was a two-draw pairwise rate), Table 6 contained a firm with no archived records and inconsistent totals, Table 1 mixed an all-542 computation into N=341 rows, the anonymized coefficient was mistranscribed as 0.0148 (correct: 0.0144), the H5 Welch statistic ignored the panel's double indexing, and the H4 bootstrap mixed specifications and was seed-sensitive. All are corrected, verified by `tests/test_numbers.py`.
 
-## Generative-AI use
+## Licensing / redistribution
 
-The studied scoring instrument is a large language model (GLM-4-Plus, accessed via API). The research pipeline (literature collection, scoring runs, analysis code, manuscript drafting) was operated with AI assistance under the author's direction; the author designed the study, pre-specified the staged analyses, verified every reported number against the archived scripts and data, and takes full responsibility. The AI system is not an author.
+- News headlines are short quotations from public web pages, redistributed for research verification (fair-use scale: titles only, no article bodies). Original publishers retain all rights.
+- `lm_master_dict.csv` is the Loughran–McDonald Master Dictionary, obtained via its public distribution; cite Loughran & McDonald (2011) and respect the original license for any redistribution beyond replication.
+- Price data originates from NASDAQ's public chart API and is factual market data.
 
-## Citing
+## v6 round (2026-10-19): three-layer revision under external review guidance
 
-```bibtex
-@techreport{tan2026dissecting,
-  title       = {Dissecting LLM News Sentiment Scores: Identity Priors, Batch Composition,
-                 Scoring Noise, and Price Echoes in Return Predictability},
-  author      = {Tan, Chang},
-  institution = {Dalian University of Technology},
-  type        = {Working paper},
-  year        = {2026},
-  month       = {10},
-  url         = {https://github.com/43aquarius/dissecting-llm-news-sentiment-scores}
-}
-```
+The v6 round executes a three-layer revision plan: (L1) submission hygiene — human authorship with a generative-AI use disclosure, a 198-word abstract, removal of all revision-log phrasing from the manuscript (rewritten as a staged research-design narrative, guarded by `tests/test_numbers.py` forbidden-phrase assertions), unified numbers (clean-vs-priced ratio stated relative to the price-language coefficient, dictionary non-zero share unified at 39/240 = 16.2%, the 2,628-vs-2,664 sample arithmetic explained), a repaired firm-coverage table whose generator had a slicing bug (20 of 36 firms rendered; now assertion-checked), per-item reference verification (three-author correction for the memorization paper, volume/article for the JFE version, exact titles), and NLP-literature anchoring (BatchPrompt, Lost-in-the-Middle, selection-bias) with the "not previously quantified" claim scoped to the LLM-finance setting; (L2) identification — a pre-registered session 5 (`audits/P2_preregistration_session5.md`) fielding identity-swap, neutral-prefix, corrected-anonymization, and temperature-0 controls, a downstream-consequences analysis (`src/batch_downstream.py`: composition leaves slopes and ranks intact but doubles fixed-threshold trade counts and flips daily time-series signs on up to a quarter of days), a two-rater human annotation kit for the 52 echo-flagged headlines (`annotation_package/`, kappa script refuses to fabricate until sheets are filled), and an honest infeasibility disclosure for cross-model validation (the serving API ignores the client-side model parameter; probe archived as `logs/probe_v6.log`); (L3) scope — shortened title, four-channel main line, auxiliary analyses (horizon path, quintile sorts, heterogeneity) moved to a dedicated appendix, and the earlier-draft archive appendix removed. `tests/test_numbers.py` now runs 183 assertions.
 
-## License
+## v6.1 round (2026-10-19): session-5 completion, mechanism closure, and hygiene fixes
 
-- **Code and scripts**: MIT License (see `LICENSE`).
-- **Paper text**: the LaTeX source is provided for verification and extension; cite the working paper.
-- **Data**: headlines are short quotations from public web pages, redistributed at fair-use scale (titles only); original publishers retain all rights. `data/lm_master_dict.csv` is the Loughran–McDonald Master Dictionary obtained from its public distribution — cite Loughran & McDonald (2011) and respect its license for redistribution beyond replication. Price data originates from NASDAQ's public chart API (factual market data).
+The v6.1 round completes the interrupted pre-registered session 5 (21 remaining API calls resumed under the identical archived protocol after the provider rate-limit lifted: 84/84 calls, all six conditions at 341/341) and integrates its results; closes the batch-mechanism accounting; and executes the external-review hygiene list. **Scientific conclusions updated by session 5** (`src/analysis_v5.py`, seed 20261019, pre-registered predictions in `audits/P2_preregistration_session5.md`): (P1) the de-identification level effect replicates at $-2.05$ under corrected anonymization (headline $t=-2.84$; clustered $p=0.18$; excluding-V $-2.15$), consistent with session 3's $-2.82$; (P2) the identity-swap control rules out a firm-specific prior~---swapping each headline's identifiers to a different firm's moves levels by $+0.34$ (ns) while the swapped condition sits $-2.39$ below anonymized~---so the published level channel is re-attributed as a **de-identification effect** (the removal of a concrete name), and the paper's title and terminology are updated accordingly ("Identity Priors" -> "De-Identification"); (P3) the neutral prefix moves levels by $+0.13$ (ns)~---the prefix format is innocent; (P4) two temperature-zero rounds agree bitwise on only 83.3% of headlines (within-SD 4.8 vs 7.2 default)~---nondeterminism is partly server-side and survives the decoding fix; (P5) the temperature-zero level sits $+1.06$ above default decoding. The prediction layer confirms invariance under every variant (named/anonymized-v2/swapped/prefixed betas 0.0140/0.0158/0.0179/0.0134; differences $p\geq0.92$). **Mechanism closure** (`src/batch_mechanism_quant.py`): linear anchoring with the full batch-mate pool predicts $+0.04$ of the observed $+3.56$-point composition shift (~1%)~---full explanation would need a $+30$-point out-vs-in content gap against an actual $-1.3$~---and the estimated asymmetric assimilation points the wrong way too, so both level shifts are bounded into response-level, non-linear components (contrast-type responses to batch context, within-response position, response-level mood), reported as an open mechanism. **Hygiene**: pre-registration wording unified (Appendix H retitled "Archived Design Document"; `audits/aspredicted_session5_form.md` provides the hash-bound AsPredicted form for external timestamping); the "annotation kit ready, no human labels" phrasing removed from the manuscript (LLM-assisted classification still fully disclosed); the introduction's rhetorical AI paragraph removed; AI-use disclosure rewritten to name what the author determined and verified; "ten times across three sessions" corrected to thirteen independent passes across five sittings (fifteen archived draws; range endpoints set by individual passes); Section 5.2 restructured (definitive interleaved design first, naive two-session benchmark second); revision-log phrasing in Section 7.2 neutralized; served-model fingerprint documented (`src/model_fingerprint.mjs` -> `logs/model_fingerprint.log`: self-identification + foreign-model-string probe both return glm-4-plus); cross-model infeasibility restated as an environment constraint with a concrete first-follow-up replication design; new Appendix "A Minimal Viable Audit Protocol"; new Figure `fig_downstream.png` (slopes robust / thresholds not / daily series shifted); false-negative sampling frame added to `annotation_package/` (50 seeded non-flagged headlines). `tests/test_numbers.py` now runs 237 assertions (54 new: session-5 values, mechanism quantification, terminology and forbidden-phrase guards).
+
+## v6.2 round (2026-10-20): equivalence testing (TOST) and literature completion
+
+The v6.2 round closes the two items left open by the full revision prompt: formal equivalence testing and the last named literature threads. **Equivalence testing** (`src/equivalence_testing.py`, seed 20261020, B=9,999, same day-cluster bootstrap machinery as the difference tests, 13 rebuild assertions on stored point estimates): every predictive-coefficient contrast is re-assessed as a two-one-sided-tests (TOST) equivalence assessment at a primary margin of delta* = 0.0074 (half the benchmark named coefficient; 27 bps per one-SD sentiment shock), with each contrast's equivalence margin threshold (EMT = max(|q5|,|q95|)) reported margin-free, plus analytic power at a true difference of zero and the sample multiple needed for 80% power. Verdicts: all four de-identification contrasts (cross-session, same-session, interleaved, session-5 corrected) are **formally equivalent** at delta* (EMTs 21-42% of the benchmark; power 0.74-0.99); the identity-swap contrast is a near-miss (EMT 56%); the dictionary comparison and the priced-vs-clean echo split are **uninformative in both directions** (EMTs 4.4x and 6.6x the benchmark; zero power; ~165x and ~144x samples needed); and the clean subsample's coefficient is **not established as equivalent to zero** (EMT 91% of the benchmark; 6x sample needed), which corrects the paper's own earlier "indistinguishable from zero" phrasing — the same non-rejection-as-equivalence fallacy the paper's inference standard now bars explicitly (theory Sec. 3.5 gains the converse clause). Wording across abstract, introduction, results (five passages, two captions/figure captions), discussion, and literature review is rewritten equivalence-aware; a stale v5-era "genuine negative prior" remnant in the H2 hypothesis bracket is corrected to the de-identification attribution. The analysis is labeled exploratory and reported outside the declared family. New Appendix E subsection with `tab:tost`. **Literature** (`audits/B_literature_report.md`, section B5): four new references, all verified against primary sources — Christensen & Hansen (2026, AEA P&P 116:92-97, peer-reviewed; inference for AI-generated covariates), Bisharat & Hean (2026, SSRN 7177498, preprint status labeled; twelve-instrument evaluation), Kong et al. (2026, arXiv:2602.14233, ten-author position paper; five-bias taxonomy of which this audit's H4/H5 are the look-ahead and selection entries), and Jo-Kim-Hee (2026, arXiv:2610.22187; rating-scale sensitivity of LLM text scoring). The prompt's "Licht et al." thread could not be verified after four search rounds and is **not cited** (recorded in B5). `tests/test_numbers.py` now runs **290 assertions** (+53: TOST values and verdict consistency, equivalence-aware phrasing guards, new-reference presence, three new forbidden stale phrases).

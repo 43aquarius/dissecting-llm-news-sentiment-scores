@@ -45,3 +45,17 @@
 **空白 3**：小样本 LLM 金融研究的推断可靠性。wild cluster bootstrap、系数差异检验、多重检验族在 LLM-金融文献中普遍缺失（L&T 亦未报告差异检验）。
 
 **结论**：原稿按"复现+机制发现"定位不可辩护；按"**测量有效性审计**"定位有真实增量，且与本环境可执行的实验完全匹配。
+
+## B5. 2026-10-20 补充核验轮（执行提示词第四阶段点名线索）
+
+执行提示词点名八条文献线索。此前已核验：Lopez-Lira & Tang（JFE 2026 正式版）、Glasserman-Lin（arXiv WP）、Didisheim-Fraschini-Somoza（EL 2025）、批量提示/上下文效应 NLP 文献（BatchPrompt、Lost in the Middle、Zheng ICLR 2024）。本轮对剩余四条逐一检索核验（web 检索 + 逐条元数据确认）：
+
+| 线索 | 核验结果 | 状态 | 处理 |
+|---|---|---|---|
+| "Hansen 2026 LLM 测量验证" | **已核实**：Christensen, T. & Hansen, S. (2026), "Performing Valid Inference with AI/ML-Generated Covariates: A Guide for Empirical Practice", *AEA Papers and Proceedings* 116, 92–97, DOI 10.1257/pandp.20261020（同行评审正式发表；AI 生成协变量的测量误差推断修正 + ValidMLInference 包；FOMC 情绪应用） | 同行评审 ✓ | 已引用（litreview 审计段落；连接 Remark 1 衰减框架） |
+| "Bisharat & Hean AI 时代金融情绪评估" | **已核实**：Bisharat, A. (Loyola University Chicago) & Hean, O. (Dakota State University) (2026), "Evaluating Financial Sentiment in the Age of AI", SSRN preprint 7177498（十二种情绪模型：词典/金融 transformer/开源 LLM 的超越收益相关的评估） | SSRN 预印本（未经同行评审），按预印本状态如实标注 | 已引用（litreview 审计段落） |
+| "Kong et al. 2026 金融 LLM 评估偏差" | **已核实**：Kong, Y., Lee, H., Hwang, Y., Lopez-Lira, A., Levy, B., Mehta, D., Wen, Q., Choi, C., Lee, Y., Zohren, S. (2026), "Evaluating LLMs in Finance Requires Explicit Bias Consideration", arXiv:2602.14233（2026-02-15 提交；立场论文：五大偏差 look-ahead/survivorship/narrative/objective/cost，164 篇 2023-25 论文综述中单一偏差讨论率 ≤28%，提出结构有效性框架+评估清单；第一作者与已引用的 nie2024survey 综述共享作者） | arXiv 预印本（立场论文），如实标注 | 已引用（litreview 审计段落；本文 H4/H5 即其 look-ahead/selection 条目的 within-study 实例） |
+| "Licht et al. LLM 连续测量" | **四轮定向检索无法核实**到可引用的条目（检索词：Licht + LLM/continuous measurement/scoring/finance/arXiv 2025-2026）。检索中发现的相邻主题论文 arXiv:2610.22187 作者为 Jo/Kim/Hee，非 Licht | **不可核实** | **按诚信原则不引用**；以已核实的 Jo et al. (2026)（评分尺度敏感性）替代该线索的学术功能 |
+| （检索中额外发现） | **已核实**：Jo, W., Kim, G., & Hee, M. S. (2026), "Change the Number, Change the Answer: Assessing Rating Scale Sensitivity in LLM-Based Text Scoring", arXiv:2610.22187（2026-10-15；量表格式/范围/符号单元素改变使标准化分数位移约 0.10、约 20% 文本换类；rubric 提示不降低敏感性） | arXiv 预印本，如实标注 | 已引用（litreview NLP 段落；本文水平通道=其设计敏感性的金融实例） |
+
+**对新颖性主张的影响（B4 更新）**：四条新文献进一步支持而非削弱本文定位。(1) Christensen-Hansen 提供了 AI 协变量推断的形式方法，但不含任何水平通道（去识别、批次构成）的测量——本文的批次构成效应量化仍是空白；(2) Kong et al. 的偏差清单是立场性呼吁，无 within-study 实测——本文正是该呼吁的一个完整实例（且提供了他们清单未包含的批次构成条目）；(3) Bisharat-Hean 评估工具性能但不审计评分的条件敏感性；(4) Jo et al. 展示量表设计敏感性但不在金融收益预测语境。**"多通道联合测量审计"的核心空白主张在 2026-10-20 检索后仍然成立**，且本文已按"not previously quantified in the LLM-finance setting"的收敛措辞引用 NLP 邻近现象。

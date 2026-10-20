@@ -69,3 +69,7 @@ annotation_package/false_negative_sample.csv,build_false_negative_sample.py,50 s
 audits/aspredicted_session5_form.md,prepared form,AsPredicted-format session-5 registration (hash-bound),document
 logs/model_fingerprint.log,probe run,fingerprint probe log with timestamps,archived
 paper/Dissecting_LLM_News_Sentiment_Scores_v6_1.pdf,compiled,v6.1 merged deliverable (cover + 37 pp.),final
+src/equivalence_testing.py,"python (TOST equivalence testing, day-cluster bootstrap B=9999, seed 20261020)",v6.2 round 2026-10-20,8 contrasts,App. E (tab:tost); Sec 5.1,verified (recomputable)
+data/results_equivalence.json,"json (TOST 90% CIs, EMTs, verdicts at delta*=0.0074, power, sample multiples)",equivalence_testing.py,8 contrasts,App. E; Sec 5.1,verified (recomputable)
+paper/Dissecting_LLM_News_Sentiment_Scores_v6_2.pdf,"compiled (v6.2 merged deliverable, cover + 39 pp.)",merge_final.py,40 pages,whole paper,verified (recompilable)
+audits/Submission_Readiness_Checklist.md,"markdown (deliverable 8: pre-submission checklist, 8-deliverable mapping)",v6.2 round 2026-10-20,-,not in paper,verified (report)
