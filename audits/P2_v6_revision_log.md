@@ -86,3 +86,22 @@
 **工程坑记录**：tectonic 首轮编译被宏包缓存重下载超时静默打断（EXIT 经管道误报为 0，PDF 时间戳未变即识别）；重跑真实完成（"Writing main.pdf"）。
 
 **验收**：Tectonic 0 error（39 页正文）；297/297 断言（项目级）；合并封面 40 页；pdf_qa_v6 65/65 关键串、0 字体问题、0 页尺寸问题（仅封面页脚设计元素在边距外，属封面设计）；pdftotext 独立复核：+0.56×2、+0.57×0、COI/funding 两句均渲染；letter 检查网 109/109（letter 无受影响内容，无需重编译）。
+
+## v6.3.2（2026-10-23）：期刊指南合规终检轮（FRL 官方投稿指导对照）
+
+**触发**：用户指令"参照期刊官网的作者投稿指导，做最后的修改"。逐条对照 FRL 官方 Guide for Authors 与期刊主页 Aims & Scope（2026-10-23 经搜索引擎缓存核验；ScienceDirect 对本环境 IP 实施验证码拦截，关键条款经由 2026-10-20 前次直接核验 + 当日缓存双源确认）。
+
+**期刊合规核对表（核验结论）**：
+- 正文 <2,500 词：letter 1,416 词（脚本计）✓；摘要 ≤250 词：约 190 词 ✓；Highlights 5 条逐条 ≤85 字符 ✓；关键词 + JEL 代码 ✓；作者-年份制参考文献（Elsevier Harvard）✓；单盲评审无需匿名版 ✓；声明五件套（COI/funding/CRediT/AI 披露/数据可用性）✓
+- **发现并修复一处 Elsevier 投稿清单违规**："All references mentioned in the Reference List are cited in the text, and vice versa"——letter 文献表 18 条中 4 条（lin2024batch/liu2024lost/zheng2024/teles2025）正文未引用
+
+**改动**：
+- **letter 引用完整性修复**：引言末句接入 NLP 上下文效应括注（引 lin2024batch, liu2024lost, zheng2024, korikov2025），限制段单模型句接入 teles2025；文献表 18→19 条，正文-文献表双向一一对应（脚本验证）
+- **Glasserman & Lin 引用更新为正式发表版**：v6.2 轮已核验其发表于 Journal of Financial Data Science 6(1):25–42, 2024（本日经 pm-research.com 与哥大商学院教师页双源再核验）；letter 与 WP 的 bibitem 由 2023 arXiv 工作论文版更新为 2024 正式版（WP 内 6 处 \citet 渲染自动更新为 2024）
+- **新增 Korikov et al. (2025) 引用**：arXiv:2505.12570（Batched Self-Consistency, EMNLP 2025 主会，TR Labs）——批内构成与排列被信息检索工作显式用作集成手段的外部证据，接入 letter 引言括注与 WP litreview NLP 段，强化批次构成渠道新颖性主张的精确定界（金融测量语境下首次量化，非 NLP 语境下未知）
+- **cover letter 强化**：Fit with the journal 段新增 FRL 官方 Aims & Scope 原文语言（"shed insight on the replicability or lack thereof of established results" / "demonstrate the methodological contingency of findings"）与本文的对应关系；online appendix 版本引用 v6.3.0→v6.3.2
+- **declarations 同步**：Release v6.3.0→v6.3.2；WP 测试网计数 290→297；词数 1,408→1,416；新增"19 条文献双向对应"声明
+
+**核验方法说明**：Chen et al. 2025（Discover Computing 28:74，GLM 金融情绪同源文献）经 Springer 页核验存在，但作者列表提取不完整（含省略号），按"引用必须完整核验"原则本轮不引用——若审稿人要求 GLM 谱系对话，作者可补充。
+
+**验收**：frl_letter_check 109/109（词数 1,416 < 2,500）；letter Tectonic 0 error 6 页；正文-文献表引用集合 diff 为空；WP Tectonic 0 error 39 页正文；test_numbers 297/297（项目级与仓库级）；合并封面 40 页；pdf_qa_v6 65/65 关键串、0 字体、0 页尺寸（仅封面页脚设计元素）；pdftotext 复核：JFDS×1、Korikov×2、EMNLP×1、旧 arXiv 号 2309.17322 零残留、Glasserman and Lin (2024)×6 渲染一致。

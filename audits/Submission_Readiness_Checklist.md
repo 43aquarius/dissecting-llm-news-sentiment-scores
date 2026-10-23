@@ -81,3 +81,28 @@ GitHub：`https://github.com/43aquarius/dissecting-llm-news-sentiment-scores`（
 ### ~~新增待修记录~~ → **✅ 已修（2026-10-23，v6.3.1）**
 - ~~WP 附录 G "sessions 3–4 固定构成漂移 +0.57 (t=0.3)" 舍入笔误~~ → 正文两处已改 **+0.56**（appendix.tex/results.tex），`tests/test_numbers.py` 新增 7 条守卫（钉值 0.5645±0.0005、双文件 +0.56 渲染、+0.57 短语禁用、COI/funding 存在），测试网 290→**297 断言全过**，WP 重编译重合并，pdf_qa 65/65。详见 `P2_v6_revision_log.md` v6.3.1 节。
 - **GitHub PAT 轮换**（安全，作者执行；**仍为唯一安全待办**）：fine-grained token 曾在聊天明文出现并用于多次推送与 Release 发布，建议立即在 GitHub → Settings → Developer settings → Fine-grained tokens 撤销并重建。
+
+## 五、期刊指南合规终检（2026-10-23 第四轮：v6.3.2，用户指令"参照期刊官网投稿指导做最后修改"）
+
+**核验源**：FRL 官方 Guide for Authors 关键条款（<2,500 词；摘要约 250 词；Highlights 3–5 条 ≤85 字符；作者-年份制引用；单盲评审）经 2026-10-20 直接核验 + 2026-10-23 搜索缓存双源确认；期刊主页 Aims & Scope（欢迎"replicability…/ challenge existing methodological approaches…/ methodological contingency of findings"论文；IF 7.1/CiteScore 10.1；4 天首次决定）当日缓存核验。
+
+**逐条合规结果（全部通过）**：
+
+| 指南条款 | 状态 |
+|---|---|
+| 正文 <2,500 词 | ✅ 1,416 词（脚本计） |
+| 摘要 ≤250 词 | ✅ 约 190 词 |
+| Highlights 3–5 条 × ≤85 字符 | ✅ 5 条 |
+| 关键词 + JEL | ✅ 5 关键词 + 4 JEL 码 |
+| 引用制式（作者-年份） | ✅ |
+| 文献表↔正文一一对应 | ✅ **本轮修复**（原 4 条未引用，现 19 条双向对应，脚本验证） |
+| 单盲评审 | ✅ 无需匿名版 |
+| COI/funding/CRediT/AI/数据声明 | ✅ 五件套齐全 |
+| 发表版引用 | ✅ **本轮更新**：Glasserman & Lin → JFDS 6(1):25–42, 2024 |
+
+**本轮改动**：letter 引用完整性修复 + 新增 Korikov et al. (2025, EMNLP) + Glasserman 正式版更新（letter 与 WP 双侧）+ cover letter 官方 scope 语言强化 + 版本引用统一 v6.3.2。验收：letter 109/109（词数 1,416）、WP 297/297、pdf_qa 65/65、引用集合 diff 为空、旧 arXiv 号零残留。
+
+**投稿前剩余动作（终态）**：
+1. **作者事实性核对 COI/funding 两句**（约束性声明；无变化则直接提交）
+2. **GitHub PAT 轮换**（安全，仍为唯一安全待办）
+3. 可选：在 Editorial Manager 提交时补 ORCID 与审稿人建议（2–4 名 LLM 金融测量方向学者）
