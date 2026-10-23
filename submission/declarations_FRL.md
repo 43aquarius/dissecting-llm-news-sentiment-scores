@@ -7,15 +7,11 @@
 
 ## 1. Declaration of competing interest
 
-> ⚠️ **[AUTHOR TO CONFIRM BEFORE SUBMISSION]** — the journal requires an explicit statement. Suggested default if applicable:
->
-> "The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper."
+The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 ## 2. Funding
 
-> ⚠️ **[AUTHOR TO CONFIRM BEFORE SUBMISSION]** — Suggested default if applicable:
->
-> "This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors."
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
 ## 3. CRediT author contributions (single author)
 
@@ -43,7 +39,7 @@ FRL operates single-anonymous review (reviewers know the authors' names); an ano
 
 ## 9. Remaining author actions before submission (honest gap list)
 
-1. Confirm/fill Sections 1 and 2 (COI, funding) — one sentence each.
+1. Verify Sections 1 and 2 (COI, funding) factually match the author's situation — standard no-conflict / no-funding statements have been inserted on the author's instruction to finalize the package; they are binding declarations and must be factually accurate at the moment of submission.
 2. Optional: suggest reviewer names (2–4) familiar with LLM-finance measurement (e.g., authors of the cited 2024–2026 working papers).
 3. Optional: decide whether to also submit the annotation-package item (independent human double-annotation of the 52 price-echo headlines with Cohen's κ) as a revision-stage addition; the package is ready (annotation_package/) but human annotation has not been performed — this is disclosed, not hidden.
 4. Rotate the GitHub fine-grained PAT used during repository deployment (it appeared in chat; see checklist warning).

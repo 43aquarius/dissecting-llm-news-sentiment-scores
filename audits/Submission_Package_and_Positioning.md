@@ -63,6 +63,8 @@
 
 ## 四、Cover Letter（FRL 版，v6 更新，随投稿提交）
 
+> **注（2026-10-23，v6.3.1）**：本节所录为 v6 时代的历史 cover letter 草稿，仅存档演进过程。其中若干表述已被后续轮次取代：标题已由 "Identity Priors…" 改为 "De-Identification…"；"mild pessimism prior" 定性已在 v6.1 撤回（换名对照显示效应来自去标识而非公司先验）；"fourteen times" 口径已更正为 thirteen re-scorings；断言数已从 183 增至 297。**现行投稿 cover letter 以 `submission_frl/cover_letter_FRL.md`（v6.3.1 终稿）为准。**
+
 ---
 
 Dear Editors,

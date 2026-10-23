@@ -483,6 +483,17 @@ for _bad2 in ["a genuine negative prior", "statistically indistinguishable from 
     if _bad2 in _all_tex:
         failures.append(f"forbidden stale phrase present: {_bad2!r}")
 
+# ---------------- v6.3.1: s4-drift rounding fix (0.5645 -> "+0.56", not "+0.57") + declarations ----------------
+check("s4 drift pinned for rounding", s4["cross_session_341"]["s4_minus_s3"], 0.5645, 0.0005)
+in_tex("s4 drift +0.56 appendix", "at fixed composition is $+0.56$", "appendix.tex")
+in_tex("s4 drift +0.56 results", "at fixed composition measuring $+0.56$", "results.tex")
+for _bad3 in ["fixed composition is $+0.57$", "at fixed composition measuring $+0.57$"]:
+    n_checks[0] += 1
+    if _bad3 in _all_tex:
+        failures.append(f"stale rounding +0.57 present: {_bad3!r}")
+in_tex("COI declaration in titleblock", "no known competing financial interests or personal relationships", "titleblock.tex")
+in_tex("funding declaration in titleblock", "received no specific grant from funding agencies", "titleblock.tex")
+
 # ---------------- report ----------------
 n_total = n_checks[0]
 print(f"test_numbers.py: {n_total - len(failures)}/{n_total} checks passed")

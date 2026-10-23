@@ -72,3 +72,17 @@
 **文献核验轮**：Christensen & Hansen (AEA P&P 2026, DOI 10.1257/pandp.20261020) ✓、Bisharat & Hean (SSRN 7177498, 预印本如实标注) ✓、Kong et al. (arXiv:2602.14233, 十作者立场论文) ✓、Jo-Kim-Hee (arXiv:2610.22187, 量表敏感性——检索中的意外收获) ✓；**Licht 线索四轮检索不可核实→按诚信原则不引用**（详见 B 报告 B5 节）
 
 **验收**：Tectonic 0 error 0 overfull（39 页正文）；tests/test_numbers.py 237→**290 断言全过**（+53：TOST 数值/判定一致性/新措辞守卫/新引用存在性/3 条新禁用短语）；合并封面 40 页；pdf_qa 65/65 关键串、0 字体、0 页面问题（仅封面页脚设计元素）
+
+## v6.3.1（2026-10-23）：投稿就绪收尾轮——舍入笔误修正 + 声明补全
+
+**触发**：用户指令"做成可以直接最终提交的产物"。对照 v6.3 检查清单，距直接投稿剩余三项：(1) v6.3 轮发现的 WP 附录 G/正文 +0.57 舍入笔误（存档值 0.5645 正确舍入应为 +0.56）仍在两处；(2) COI/funding 声明缺位（FRL 要求 Declaration of Interest）；(3) 相应的测试守卫与重打包。
+
+**改动**：
+- **舍入修正**：appendix.tex（"at fixed composition is $+0.56$"）与 results.tex（"at fixed composition measuring $+0.56$"）两处 +0.57→+0.56，与存档 results_s4.json 的 0.564516 一致；letter 侧无此问题（v6.3 制作时已采用 +0.56）
+- **WP 声明补全**：titleblock.tex 声明区新增 "Competing interests and funding" 一句（无利益冲突 + 无专项资金资助），与 FRL declarations 文件口径一致；系作者指令下按标准默认语句填入，投稿前作者须事实性核对
+- **投稿文件填充**：declarations_FRL.md 第 1/2 节由占位改为正式语句；cover_letter_FRL.md 的 [AUTHOR TO CONFIRM] 同步落地；两文件第 9 节"剩余动作"相应更新（第 1 项改为"事实性核对"）
+- **测试网扩充**：test_numbers.py 290→**297 断言**（+7：s4 漂移钉值 0.5645±0.0005、+0.56 双文件渲染守卫、+0.57 两短语禁用守卫、COI/funding 声明存在守卫）
+
+**工程坑记录**：tectonic 首轮编译被宏包缓存重下载超时静默打断（EXIT 经管道误报为 0，PDF 时间戳未变即识别）；重跑真实完成（"Writing main.pdf"）。
+
+**验收**：Tectonic 0 error（39 页正文）；297/297 断言（项目级）；合并封面 40 页；pdf_qa_v6 65/65 关键串、0 字体问题、0 页尺寸问题（仅封面页脚设计元素在边距外，属封面设计）；pdftotext 独立复核：+0.56×2、+0.57×0、COI/funding 两句均渲染；letter 检查网 109/109（letter 无受影响内容，无需重编译）。

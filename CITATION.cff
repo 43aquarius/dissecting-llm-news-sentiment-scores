@@ -8,7 +8,7 @@ authors:
     email: aquars43@foxmail.com
 type: tech-report
 repository-code: "https://github.com/43aquarius/dissecting-llm-news-sentiment-scores"
-abstract: "A measurement audit of LLM news sentiment scoring in short-horizon return predictability: identity priors, batch composition, scoring noise, price echoes, and coverage selection, on 542 headlines about 36 U.S. large-cap firms."
+abstract: "A measurement audit of LLM news sentiment scoring in short-horizon return predictability: de-identification, batch composition, scoring noise, price echoes, and coverage selection, on 542 headlines about 36 U.S. large-cap firms."
 keywords:
   - large language models
   - sentiment analysis
@@ -17,6 +17,6 @@ keywords:
   - look-ahead bias
   - Loughran-McDonald dictionary
   - replication
-date-released: "2026-10-20"
-version: "6.2.0"
+date-released: "2026-10-23"
+version: "6.3.1"
 license: MIT
