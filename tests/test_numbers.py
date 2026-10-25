@@ -45,6 +45,20 @@ def in_tex(label, needle, *files):
         return False
     return True
 
+
+def not_in_tex(label, needle, *files):
+    n_checks[0] += 1
+    for f in files:
+        try:
+            text = open(f"{SEC}/{f}").read()
+        except FileNotFoundError:
+            failures.append(f"{label}: missing file {f}")
+            return False
+        if needle in text:
+            failures.append(f"{label}: '{needle}' should NOT be in {f}")
+            return False
+    return True
+
 # ---------------- Table 6 (coverage_table.py) ----------------
 cov = load("coverage_table.json")
 check("T6 tickers", cov["n_tickers"], 36)
@@ -124,7 +138,7 @@ check("V in rel30", ve["v_failure"]["n_v_in_rel30_sample"], 5)
 check("excl-V shift", ve["robustness"]["excluding_V"]["same_session_identity_repm_minus_anon"]["estimate"], -1.294, 0.005)
 check("excl-V p", ve["robustness"]["excluding_V"]["same_session_identity_repm_minus_anon"]["p"], 0.041, 0.0005)
 in_tex("V disclosure", "no-op", "appendix.tex")
-in_tex("excl-V row T3", "-1.29", "results.tex")
+in_tex("excl-V row T3", "-1.29", "appendix.tex")
 
 # ---------------- results_s3.json (session-3 interleaved experiment, v5) ----------------
 s3 = load("results_s3.json")
@@ -317,7 +331,7 @@ check("rank rho s3", bd["rank_stability"]["s3_v1c_vs_s3_named4"]["spearman"], 0.
 check("rank rho s4", bd["rank_stability"]["s4_v1c_vs_s4_orig"]["spearman"], 0.862, 0.005)
 check("rank rho rebatch", bd["rank_stability"]["s4_shuf_vs_s4_orig"]["spearman"], 0.807, 0.005)
 in_tex("downstream table", "batch\\_downstream.py", "appendix.tex")
-in_tex("threshold doubling text", "22 to 50 firm-days in session 3; 27 to 43 in session 4", "appendix.tex")
+in_tex("threshold doubling text", "22 to 50 firm-days in session 3; 27 to 43 in session 4", "results.tex")
 
 # (g) revision-log language must be gone; author block must be human
 _all_tex = "".join(open(f"{SEC}/{f}").read() for f in
@@ -418,13 +432,13 @@ for _bad in ["pessimism prior", "make no attempt to hide", "committed, in sequen
     n_checks[0] += 1
     if _bad in _all_tex:
         failures.append(f"forbidden phrase present: {_bad!r}")
-in_tex("thirteen passes intro", "thirteen independent passes across five sittings", "intro.tex")
-in_tex("fifteen draws robust", "fifteen archived named draws", "robustness.tex")
+in_tex("fourteen passes intro", "fourteen independent passes across six sittings", "intro.tex")
+in_tex("sixteen draws robust", "sixteen archived named draws", "robustness.tex")
 n_checks[0] += 1
-if "fourteen archived" in _all_tex or "twelve independent passes" in _all_tex:
+if "thirteen independent passes across five sittings" in _all_tex or "fifteen archived named draws" in _all_tex or "twelve independent passes" in _all_tex:
     failures.append("stale draw count (fourteen archived / twelve independent passes) still present")
 in_tex("checklist appendix present", "Minimal Viable Audit Protocol", "appendix.tex")
-in_tex("downstream figure present", "fig_downstream.png", "appendix.tex")
+in_tex("downstream figure present", "fig_downstream.png", "results.tex")
 
 # (n) equivalence testing (equivalence_testing.py, v6.2) and verified literature
 eq = load("results_equivalence.json")
@@ -494,6 +508,52 @@ for _bad3 in ["fixed composition is $+0.57$", "at fixed composition measuring $+
 in_tex("COI declaration in titleblock", "no known competing financial interests or personal relationships", "titleblock.tex")
 in_tex("funding declaration in titleblock", "received no specific grant from funding agencies", "titleblock.tex")
 
+# ============ v6.4 additions: session-6/6b, level TOST, leakage, econ margin ============
+in_tex("s6 fictional contrast main text", "fictional minus named $+1.20$, clustered $p=0.45$", "results.tex")
+in_tex("s6 deident replication", "named minus anonymized $-2.54$, clustered $p=0.15$", "results.tex")
+in_tex("s6 appendix section", "Session-6 Controls: Fictional Names and the Batch-Size Zero Point", "appendix.tex")
+in_tex("s6 prereg pointer", "P3\\_preregistration\\_session6.md", "appendix.tex")
+in_tex("s6 levels midway", "13.90", "appendix.tex")
+in_tex("level tost table", "Level-layer equivalence (points; $n=341$ paired headlines, session 5)", "appendix.tex")
+in_tex("level tost swap EMT", "Named $-$ swapped & $+0.34$ & $[-1.06,\\ +1.73]$ & 1.73 & No & 3.22", "appendix.tex")
+in_tex("level tost prefix passes", "Prefixed $-$ anonymized & $+0.13$ & $[-0.84,\\ +1.10]$ & 1.10 & Yes & 2.39", "appendix.tex")
+in_tex("econ margin sentence", "economics-anchored margin of 10 \\bps{} of next-day response per one-standard-deviation sentiment shock", "results.tex")
+in_tex("econ margin appendix", "11.5, 14.5, 18.9, 22.3, and 29.8 \\bps/SD", "appendix.tex")
+in_tex("leakage share sentence", "15.0\\% of swapped headlines", "results.tex")
+in_tex("name variant leak count", "six headlines, 1.8\\%", "results.tex")
+in_tex("leakage robustness", "+0.36$ to $+0.42", "results.tex")
+in_tex("batchsize zero point", "batch-size dose-response session narrows the residual further", "results.tex")
+in_tex("batchsize zero point number", "to within $-0.2$ points ($t=-0.1$)", "results.tex")
+in_tex("s6b appendix", "triangle solution of the three pairwise per-title variances", "appendix.tex")
+in_tex("abstract fictional clause", "(a fictional-name control recovers about half)", "titleblock.tex")
+in_tex("intro fictional midway", "lands almost exactly midway", "intro.tex")
+in_tex("conclusion fictional split", "splits the displacement about evenly between the real name and the rewrite itself", "conclusion.tex")
+not_in_tex("old replicates phrase gone", "First, the effect replicates under corrected anonymization", "results.tex")
+not_in_tex("old rules out phrase gone", "swap control rules out a firm-specific prior", "results.tex")
+not_in_tex("old settles phrase gone", "settles the identity level effect", "results.tex")
+not_in_tex("old server assertion gone", "partly server-side and survives", "results.tex")
+not_in_tex("old naive benchmark location", "The naive two-session benchmark it supersedes", "results.tex")
+in_tex("superseded bridge", "The superseded two-session benchmark", "results.tex")
+in_tex("archived naive benchmark", "The naive two-session benchmark, archived in full", "appendix.tex")
+
+# pinned JSON numbers for the new results
+import json as _json
+_r6 = _json.load(open("/home/z/my-project/data/results_s6.json"))
+assert abs(_r6["levels"]["N6"] - 12.70) < 0.05, "s6 N6 level"
+assert abs(_r6["levels"]["A6"] - 15.23) < 0.05, "s6 A6 level"
+assert abs(_r6["levels"]["F6"] - 13.90) < 0.05, "s6 F6 level"
+assert abs(_r6["p6a_fictional_minus_named"]["mean_diff"] - 1.20) < 0.01, "s6 F6-N6"
+assert abs(_r6["p6a_fictional_minus_anonv2"]["mean_diff"] - (-1.33)) < 0.01, "s6 F6-A6"
+assert abs(_r6["p6b_named_minus_anonv2"]["mean_diff"] - (-2.54)) < 0.01, "s6 N6-A6"
+_lt = _json.load(open("/home/z/my-project/data/results_level_tost.json"))
+assert abs(_lt["level_contrasts"]["L1_named_minus_swapped"]["EMT_points_headline"] - 1.73) < 0.01, "level TOST swap EMT"
+assert abs(_lt["level_contrasts"]["L3_prefixed_minus_anonv2"]["EMT_points_headline"] - 1.10) < 0.01, "level TOST prefix EMT"
+_lk = _json.load(open("/home/z/my-project/data/results_swap_leakage.json"))
+assert _lk["n_flagged_primary"] == 51 and _lk["n_flagged_sensitivity"] == 91, "leakage counts"
+assert _lk["n_name_variant_leaks"] == 6, "name-variant leaks"
+_r6b = _json.load(open("/home/z/my-project/data/results_s6b.json"))
+assert abs(_r6b["level_contrasts"][1]["mean"] - (-0.20)) < 0.05, "6b zero point"
+
 # ---------------- report ----------------
 n_total = n_checks[0]
 print(f"test_numbers.py: {n_total - len(failures)}/{n_total} checks passed")
@@ -503,3 +563,4 @@ if failures:
         print("  -", f)
     sys.exit(1)
 print("ALL REGRESSION CHECKS PASS")
+

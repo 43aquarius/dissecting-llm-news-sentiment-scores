@@ -58,14 +58,14 @@ must_have = [
     "Chang Tan", "Dalian University of Technology", "aquars43@foxmail.com",
     "Generative-AI use",
     # v6 new content
-    "thirteen re-scorings", "BatchPrompt", "104335",
+    "fourteen re-scorings", "BatchPrompt", "104335",
     "22 to 50 firm-days", "batch_downstream.py",
     "P2_preregistration_session5",
     "temperature", "glm-4-plus",
     # v6.1 session-5 integration and mechanism closure
     "De-Identification", "de-identification effect",
     "−2.05", "0.34", "83.3", "0.0179", "4.8",
-    "fifteen archived", "telescoping identity", "analysis_v5.py",
+    "sixteen archived", "telescoping identity", "analysis_v5.py",
     "Minimal Viable Audit Protocol", "model_fingerprint.log",
     # v6.2 equivalence testing and verified literature
     "Equivalence assessment (TOST)", "equivalence margin threshold",

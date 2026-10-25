@@ -1,0 +1,297 @@
+{
+ "design": {
+  "script": "swap_leakage_audit.py",
+  "seed": 20261025,
+  "method": "data-driven lexical cue lexicon; cue = token in >=3 of firm's in-window titles and in <=5 other firms' titles (primary), or >=2 titles and <=3 other firms (sensitivity); not the firm's own alias/ticker/name variants; finance-generic stoplist excluded; flagged = >=1 original-firm cue token present in the rebuilt swapped text",
+  "disclosure": "lexical heuristic, reproducible from archived corpus; not human annotation"
+ },
+ "n_flagged_primary": 51,
+ "n_flagged_sensitivity": 91,
+ "n_name_variant_leaks": 6,
+ "name_variant_leaks": [
+  {
+   "url": "https://www.tikr.com/blog/exxonmobil-stock-is-up-30-in-2026-is-it-too-late-to-buy-before-july-31-earnings",
+   "ticker": "XOM",
+   "residual": "Exxon",
+   "swapped_text": "ExxonMobil Stock Is Up 30% in 2026. Is It Too Late to Buy"
+  },
+  {
+   "url": "https://finance.yahoo.com/energy/articles/exxonmobil-xom-6-9-geopolitical-171024141.html",
+   "ticker": "XOM",
+   "residual": "Exxon",
+   "swapped_text": "ExxonMobil (NFLX) Is Up 6.9% After Geopolitical Oil Spike"
+  },
+  {
+   "url": "https://investor.exxonmobil.com/company-information/press-releases/detail/1208/exxonmobil-announces-second-quarter-2026-results",
+   "ticker": "XOM",
+   "residual": "Exxon",
+   "swapped_text": "ExxonMobil Announces Second-Quarter 2026 Results"
+  },
+  {
+   "url": "https://finance.yahoo.com/energy/articles/exxonmobil-40-2026-rising-oil-190811096.html",
+   "ticker": "XOM",
+   "residual": "Exxon",
+   "swapped_text": "ExxonMobil Is Up 40% in 2026: Can Rising Oil Prices and"
+  },
+  {
+   "url": "https://www.reuters.com/business/energy/exxonmobil-quarterly-profit-hits-four-year-high-misses-analyst-estimates-2026-07-31",
+   "ticker": "XOM",
+   "residual": "Exxon",
+   "swapped_text": "ExxonMobil misses second quarter profit estimates despite"
+  },
+  {
+   "url": "https://www.jpmorganchase.com/ir/news/2026/jpmc-to-host-third-quarter-2026-earnings-call",
+   "ticker": "JPM",
+   "residual": "JPMorgan",
+   "swapped_text": "JPMorganChase to Host Third-Quarter 2026 Earnings Call"
+  }
+ ],
+ "share_flagged_primary": 0.1496,
+ "share_flagged_sensitivity": 0.2669,
+ "named_titles_with_cues_share": 0.1496,
+ "contrasts_recheck": {
+  "excl_cue3": {
+   "named_minus_swapped": {
+    "n": 290,
+    "mean_diff": 0.3621,
+    "t_headline": 0.414,
+    "t_cluster": 0.185,
+    "ci90_headline": [
+     -1.08,
+     1.804
+    ],
+    "sd": 14.883
+   },
+   "swapped_minus_anonv2": {
+    "n": 290,
+    "mean_diff": -2.6379,
+    "t_headline": -3.463,
+    "t_cluster": -1.827,
+    "ci90_headline": [
+     -3.895,
+     -1.381
+    ],
+    "sd": 12.973
+   },
+   "named_minus_anonv2": {
+    "n": 290,
+    "mean_diff": -2.2759,
+    "t_headline": -2.855,
+    "t_cluster": -1.435,
+    "ci90_headline": [
+     -3.591,
+     -0.961
+    ],
+    "sd": 13.576
+   }
+  },
+  "excl_cue2": {
+   "named_minus_swapped": {
+    "n": 250,
+    "mean_diff": 0.42,
+    "t_headline": 0.437,
+    "t_cluster": 0.205,
+    "ci90_headline": [
+     -1.164,
+     2.004
+    ],
+    "sd": 15.183
+   },
+   "swapped_minus_anonv2": {
+    "n": 250,
+    "mean_diff": -2.52,
+    "t_headline": -3.0,
+    "t_cluster": -1.666,
+    "ci90_headline": [
+     -3.906,
+     -1.134
+    ],
+    "sd": 13.283
+   },
+   "named_minus_anonv2": {
+    "n": 250,
+    "mean_diff": -2.1,
+    "t_headline": -2.338,
+    "t_cluster": -1.163,
+    "ci90_headline": [
+     -3.582,
+     -0.618
+    ],
+    "sd": 14.202
+   }
+  },
+  "full_sample": {
+   "named_minus_swapped": {
+    "n": 341,
+    "mean_diff": 0.3372,
+    "t_headline": 0.399,
+    "t_cluster": 0.18,
+    "ci90_headline": [
+     -1.057,
+     1.732
+    ],
+    "sd": 15.614
+   },
+   "swapped_minus_anonv2": {
+    "n": 341,
+    "mean_diff": -2.39,
+    "t_headline": -3.263,
+    "t_cluster": -1.737,
+    "ci90_headline": [
+     -3.598,
+     -1.182
+    ],
+    "sd": 13.525
+   },
+   "named_minus_anonv2": {
+    "n": 341,
+    "mean_diff": -2.0528,
+    "t_headline": -2.846,
+    "t_cluster": -1.355,
+    "ci90_headline": [
+     -3.243,
+     -0.863
+    ],
+    "sd": 13.321
+   }
+  }
+ },
+ "per_firm_examples": [
+  {
+   "ticker": "AAPL",
+   "top_cues": [
+    [
+     "products",
+     3
+    ],
+    [
+     "event",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "COST",
+   "top_cues": [
+    [
+     "wholesale",
+     5
+    ],
+    [
+     "corporation",
+     5
+    ],
+    [
+     "items",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "GOOGL",
+   "top_cues": [
+    [
+     "goog",
+     6
+    ]
+   ]
+  },
+  {
+   "ticker": "GS",
+   "top_cues": [
+    [
+     "all",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "INTC",
+   "top_cues": [
+    [
+     "offer",
+     3
+    ],
+    [
+     "billion",
+     3
+    ],
+    [
+     "share",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "MA",
+   "top_cues": [
+    [
+     "inc",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "NFLX",
+   "top_cues": [
+    [
+     "movies",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "NVDA",
+   "top_cues": [
+    [
+     "aug",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "ORCL",
+   "top_cues": [
+    [
+     "what's",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "TSLA",
+   "top_cues": [
+    [
+     "roadster",
+     4
+    ],
+    [
+     "oct",
+     3
+    ]
+   ]
+  },
+  {
+   "ticker": "V",
+   "top_cues": [
+    [
+     "bulletin",
+     5
+    ]
+   ]
+  },
+  {
+   "ticker": "WFC",
+   "top_cues": [
+    [
+     "net",
+     3
+    ],
+    [
+     "income",
+     3
+    ]
+   ]
+  }
+ ]
+}

@@ -71,6 +71,21 @@ logs/model_fingerprint.log,probe run,fingerprint probe log with timestamps,archi
 paper/Dissecting_LLM_News_Sentiment_Scores_v6_1.pdf,compiled,v6.1 merged deliverable (cover + 37 pp.),final
 src/equivalence_testing.py,"python (TOST equivalence testing, day-cluster bootstrap B=9999, seed 20261020)",v6.2 round 2026-10-20,8 contrasts,App. E (tab:tost); Sec 5.1,verified (recomputable)
 data/results_equivalence.json,"json (TOST 90% CIs, EMTs, verdicts at delta*=0.0074, power, sample multiples)",equivalence_testing.py,8 contrasts,App. E; Sec 5.1,verified (recomputable)
-paper/Dissecting_LLM_News_Sentiment_Scores_v6_2.pdf,"compiled (v6.2 merged deliverable, cover + 39 pp.)",merge_final.py,40 pages,whole paper,verified (recompilable)
-paper/Dissecting_LLM_News_Sentiment_Scores_v6_3_2.pdf,"compiled (v6.3.2 merged deliverable, journal-compliance round: Glasserman-Lin JFDS 2024 citation update, Korikov et al. 2025 added)",merge_final.py,40 pages,whole paper,verified (recompilable)
+paper/Dissecting_LLM_News_Sentiment_Scores_v6_4.pdf,"compiled (v6.4 merged deliverable, cover + 42 pp.; adds session-6/6b, level TOST, leakage audit)",merge_final.py,40 pages,whole paper,verified (recompilable)
 audits/Submission_Readiness_Checklist.md,"markdown (deliverable 8: pre-submission checklist, 8-deliverable mapping)",v6.2 round 2026-10-20,-,not in paper,verified (report)
+llm_scores_s6_named.json,session-6 named anchor (341),llm_score_v6.mjs 2026-10-25,341 records,Sec 5.2 / App session6,verified (recomputable)
+llm_scores_s6_anonv2.json,session-6 anonymized-v2 (341),llm_score_v6.mjs 2026-10-25,341 records,Sec 5.2 / App session6,verified (recomputable)
+llm_scores_s6_fictional.json,session-6 fictional-name condition (341),llm_score_v6.mjs + s6_fictional_map.json,341 records,Sec 5.2 / App session6,verified (recomputable)
+llm_scores_s6b_b1a.json,session-6b singleton pass first half (25),llm_score_v6b_batchsize.mjs,25 records,App session6,verified
+llm_scores_s6b_b1b.json,session-6b singleton pass second half (25),llm_score_v6b_batchsize.mjs,25 records,App session6,verified
+llm_scores_s6b_b25.json,session-6b size-25 pass (50; 2 batches),llm_score_v6b_batchsize.mjs,50 records,App session6,verified
+llm_scores_s6b_b5.json,session-6b size-5 pass (50; 10 batches),llm_score_v6b_batchsize.mjs,50 records,App session6,verified
+s6b_sample.json,session-6b seeded 50-headline subsample order,llm_score_v6b_batchsize.mjs (seed 20261025),50 urls,App session6,verified
+s6_verify_report.json,session-6 verification gate report (both tiers zero),llm_score_v6.mjs,341 checks,App session6,verified
+results_s6.json,session-6 locked analysis,analysis_v6.py (seed 20261025),12 keys,Sec 5.2 / App session6,verified (recomputable)
+results_s6b.json,session-6b dose-response analysis,analysis_v6b.py,10 keys,App session6,verified (recomputable)
+results_level_tost.json,level-layer TOST + economics-margin battery,level_tost_and_margins.py (seed 20261025),5 level contrasts + 8 coef contrasts,App power,verified (recomputable)
+results_swap_leakage.json,swapped-text leakage audit,swap_leakage_audit.py,counts + rechecks,Sec 5.2 / App session6,verified (recomputable)
+s6_cue_lexicon.json,firm-specific cue lexicons (primary + sensitivity),swap_leakage_audit.py,36 firms,App session6,verified
+s6_fictional_map.json,36 invented firm names + synthetic tickers,construction (design choice),36 entries,App session6,archived (design input)
+paper/Audit_Protocol_Checklist_OnePage.pdf,"one-page Minimal Audit Protocol checklist (generated from app:checklist source)",build_onepage_checklist.py,1 page,App checklist,verified

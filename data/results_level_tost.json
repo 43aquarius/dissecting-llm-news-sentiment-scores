@@ -1,0 +1,243 @@
+{
+ "design": {
+  "script": "level_tost_and_margins.py",
+  "seed": 20261025,
+  "B": 9999,
+  "n_headlines": 341,
+  "clusters": 14,
+  "delta_level_points": 1.25,
+  "margin_rationale": "half the 2.5-point midpoint of the 2-3 point placeholder-rewrite (de-identification) effect family; pre-fixed before inspection",
+  "inference": "headline paired t + batch-call-clustered SE (14 clusters) + cluster bootstrap 90% CI"
+ },
+ "level_contrasts": {
+  "L1_named_minus_swapped": {
+   "mean_diff": 0.3372,
+   "sd_diff": 15.6141,
+   "t_headline": 0.399,
+   "se_cluster": 1.8737,
+   "t_cluster": 0.18,
+   "ci90_boot": [
+    -2.6657,
+    3.2198
+   ],
+   "EMT_points_cluster": 3.2198,
+   "ci90_headline": [
+    -1.0575,
+    1.732
+   ],
+   "EMT_points_headline": 1.732,
+   "pass_delta_level_cluster": false,
+   "pass_delta_level_headline": false,
+   "tost_p_cluster": 0.3131,
+   "power_at_delta_cluster": 0.0,
+   "power_at_delta_headline": 0.0,
+   "n_mult_for_power80_cluster": 19.2,
+   "n_mult_for_power80_headline": 3.9,
+   "as_pct_of_placeholder": 0.135
+  },
+  "L2_named_minus_prefixed": {
+   "mean_diff": -2.1848,
+   "sd_diff": 14.7508,
+   "t_headline": -2.735,
+   "se_cluster": 1.8223,
+   "t_cluster": -1.199,
+   "ci90_boot": [
+    -5.1548,
+    0.6305
+   ],
+   "EMT_points_cluster": 5.1548,
+   "ci90_headline": [
+    -3.5024,
+    -0.8671
+   ],
+   "EMT_points_headline": 3.5024,
+   "pass_delta_level_cluster": false,
+   "pass_delta_level_headline": false,
+   "tost_p_cluster": 0.696,
+   "power_at_delta_cluster": 0.0,
+   "power_at_delta_headline": 0.0,
+   "n_mult_for_power80_cluster": 18.2,
+   "n_mult_for_power80_headline": 3.5,
+   "as_pct_of_placeholder": 0.874
+  },
+  "L3_prefixed_minus_anonv2": {
+   "mean_diff": 0.132,
+   "sd_diff": 10.8805,
+   "t_headline": 0.224,
+   "se_cluster": 1.3384,
+   "t_cluster": 0.099,
+   "ci90_boot": [
+    -1.8714,
+    2.39
+   ],
+   "EMT_points_cluster": 2.39,
+   "ci90_headline": [
+    -0.8399,
+    1.1039
+   ],
+   "EMT_points_headline": 1.1039,
+   "pass_delta_level_cluster": false,
+   "pass_delta_level_headline": true,
+   "tost_p_cluster": 0.2018,
+   "power_at_delta_cluster": 0.0,
+   "power_at_delta_headline": 0.366,
+   "n_mult_for_power80_cluster": 9.8,
+   "n_mult_for_power80_headline": 1.9,
+   "as_pct_of_placeholder": 0.053
+  },
+  "L4_swapped_minus_anonv2": {
+   "mean_diff": -2.39,
+   "sd_diff": 13.5249,
+   "t_headline": -3.263,
+   "se_cluster": 1.3762,
+   "t_cluster": -1.737,
+   "ci90_boot": [
+    -4.5308,
+    -0.2286
+   ],
+   "EMT_points_cluster": 4.5308,
+   "ci90_headline": [
+    -3.5982,
+    -1.1819
+   ],
+   "EMT_points_headline": 3.5982,
+   "pass_delta_level_cluster": false,
+   "pass_delta_level_headline": false,
+   "tost_p_cluster": 0.7963,
+   "power_at_delta_cluster": 0.0,
+   "power_at_delta_headline": 0.049,
+   "n_mult_for_power80_cluster": 10.4,
+   "n_mult_for_power80_headline": 2.9,
+   "as_pct_of_placeholder": 0.956
+  },
+  "L5_named_minus_anonv2": {
+   "mean_diff": -2.0528,
+   "sd_diff": 13.3213,
+   "t_headline": -2.846,
+   "se_cluster": 1.5149,
+   "t_cluster": -1.355,
+   "ci90_boot": [
+    -4.3548,
+    0.4
+   ],
+   "EMT_points_cluster": 4.3548,
+   "ci90_headline": [
+    -3.2427,
+    -0.8629
+   ],
+   "EMT_points_headline": 3.2427,
+   "pass_delta_level_cluster": false,
+   "pass_delta_level_headline": false,
+   "tost_p_cluster": 0.7019,
+   "power_at_delta_cluster": 0.0,
+   "power_at_delta_headline": 0.07,
+   "n_mult_for_power80_cluster": 12.6,
+   "n_mult_for_power80_headline": 2.9,
+   "as_pct_of_placeholder": 0.821
+  }
+ },
+ "econ_margin_battery": {
+  "delta_econ_bps_per_sd": 10.0,
+  "delta_econ_coef": 0.002773,
+  "bps_per_coef_unit_per_sd": 3606.08,
+  "rationale": "10 bps of next-day response per 1-SD sentiment shock: round economic threshold, ~1/5 of the benchmark central 1-SD response (53.7 bps), anchor-independent of the unstable benchmark t-statistic",
+  "contrasts": {
+   "C1_named_vs_anon_crosssession": {
+    "ci90_coef": [
+     -0.0035003686969785307,
+     0.004010215561581853
+    ],
+    "EMT_bps_per_sd": 14.46,
+    "EMT_pct_of_benchmark": 0.2693,
+    "pass_delta_econ": false,
+    "pass_delta_star_half_benchmark": true,
+    "power_at_delta_econ": 0.0,
+    "n_mult_for_power80_econ": 5.8
+   },
+   "C8_s2repmean_vs_anon_samesession": {
+    "ci90_coef": [
+     -0.002706689138167511,
+     0.0031915441987470637
+    ],
+    "EMT_bps_per_sd": 11.51,
+    "EMT_pct_of_benchmark": 0.2143,
+    "pass_delta_econ": false,
+    "pass_delta_star_half_benchmark": true,
+    "power_at_delta_econ": 0.0,
+    "n_mult_for_power80_econ": 3.6
+   },
+   "C5_named_vs_lmdict": {
+    "ci90_coef": [
+     -0.06575847297005989,
+     0.04150420934417015
+    ],
+    "EMT_bps_per_sd": 237.13,
+    "EMT_pct_of_benchmark": 4.4158,
+    "pass_delta_econ": false,
+    "pass_delta_star_half_benchmark": false,
+    "power_at_delta_econ": 0.0,
+    "n_mult_for_power80_econ": 1183.9
+   },
+   "C2_named_vs_anon_interleaved": {
+    "ci90_coef": [
+     -0.002538659835248616,
+     0.0061828948423366
+    ],
+    "EMT_bps_per_sd": 22.3,
+    "EMT_pct_of_benchmark": 0.4152,
+    "pass_delta_econ": false,
+    "pass_delta_star_half_benchmark": true,
+    "power_at_delta_econ": 0.0,
+    "n_mult_for_power80_econ": 7.8
+   },
+   "C3_N5_vs_A5": {
+    "ci90_coef": [
+     -0.005230594633968066,
+     0.0020732465528766507
+    ],
+    "EMT_bps_per_sd": 18.86,
+    "EMT_pct_of_benchmark": 0.3512,
+    "pass_delta_econ": false,
+    "pass_delta_star_half_benchmark": true,
+    "power_at_delta_econ": 0.0,
+    "n_mult_for_power80_econ": 5.5
+   },
+   "C4_N5_vs_S5": {
+    "ci90_coef": [
+     -0.00827498845680626,
+     0.0003512363243015486
+    ],
+    "EMT_bps_per_sd": 29.84,
+    "EMT_pct_of_benchmark": 0.5557,
+    "pass_delta_econ": false,
+    "pass_delta_star_half_benchmark": false,
+    "power_at_delta_econ": 0.0,
+    "n_mult_for_power80_econ": 7.7
+   },
+   "C6_priced_vs_clean": {
+    "ci90_coef": [
+     0.0005071543718772262,
+     0.09756727089286825
+    ],
+    "EMT_bps_per_sd": 351.84,
+    "EMT_pct_of_benchmark": 6.5518,
+    "pass_delta_econ": false,
+    "pass_delta_star_half_benchmark": false,
+    "power_at_delta_econ": 0.0,
+    "n_mult_for_power80_econ": 969.4
+   },
+   "C7_clean_vs_zero": {
+    "ci90_coef": [
+     -0.007145193151570554,
+     0.01355033821300935
+    ],
+    "EMT_bps_per_sd": 48.86,
+    "EMT_pct_of_benchmark": 0.9099,
+    "pass_delta_econ": false,
+    "pass_delta_star_half_benchmark": false,
+    "power_at_delta_econ": 0.0,
+    "n_mult_for_power80_econ": 44.1
+   }
+  }
+ }
+}

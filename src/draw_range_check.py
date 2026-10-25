@@ -24,6 +24,7 @@ draws["s4_orig"] = load(f"{DATA}/llm_scores_s4_orig.json")
 draws["s4_v1comp"] = load(f"{DATA}/llm_scores_s4_v1comp.json")
 draws["s4_shuffle"] = load(f"{DATA}/llm_scores_s4_shuf.json")
 draws["s5_named"] = load(f"{DATA}/llm_scores_s5_named.json")
+draws["s6_named"] = load(f"{DATA}/llm_scores_s6_named.json")
 # session means
 draws["s2_repeat_mean"] = {u: np.mean([draws[k][u] for k in ("rep1", "rep2", "rep3")]) for u in url_order}
 draws["s3_named_mean"] = {u: np.mean([draws[f"s3_named_r{r}"][u] for r in (1, 2, 3, 4)]) for u in url_order}

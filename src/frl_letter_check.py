@@ -163,7 +163,7 @@ check("C6 n_multiple 144x", 144, round(c["C6_priced_vs_clean"]["delta_50pct"]["n
 check("C7 n_multiple 6x", 6, round(c["C7_clean_vs_zero"]["delta_50pct"]["n_multiple_for_80pct"]), 0.1)
 
 # ---------- wording guards ----------
-for phrase in ["thirteen re-scorings", "five sittings", "fifteen archived named draws",
+for phrase in ["fourteen re-scorings", "six sittings", "sixteen archived named draws",
                "exploratory", "not independent human annotation", "LLM-assisted"]:
     in_tex(f"phrase {phrase[:24]}", phrase, L)
 

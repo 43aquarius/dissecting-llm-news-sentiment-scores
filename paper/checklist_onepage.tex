@@ -1,0 +1,43 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{newtxtext,newtxmath}
+\usepackage{geometry}
+\geometry{a4paper, top=1.8cm, bottom=1.6cm, left=1.9cm, right=1.9cm}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\pagestyle{empty}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Minimal Audit Protocol}\\[3pt]
+{\large\itshape For LLM-sentiment return-predictability studies (one page, checklist form)}\\[6pt]
+{\small Companion to \emph{Dissecting LLM News Sentiment Scores: De-Identification, Batch Composition,
+Scoring Noise, and Price Echoes in Return Predictability} (working paper, Appendix).}\\[2pt]
+{\small Replication package: \url{https://github.com/43aquaris/dissecting-llm-news-sentiment-scores}}
+\end{center}
+\vspace{2pt}
+\rule{\textwidth}{0.6pt}
+The protocol below is the paper's working answer to ``what should a small-sample LLM-sentiment study run before reporting a predictability statistic?'' It is deliberately minimal: every component costs at most one additional scoring pass over the study's own corpus, and the whole protocol is executable in an afternoon at headline-scale prices. Each item names the failure mode it guards against, as documented somewhere in this paper.
+
+\vspace{2pt}
+\begin{enumerate}[leftmargin=1.4em, itemsep=4pt, topsep=2pt]
+\item \textbf{Anonymize once, and verify the anonymization.} Replace firm names and tickers with a neutral placeholder, then run a forced residual-identifier check over every transformed text. Guards against identity priors, and against silent no-op anonymizations (the ticker-V failure of Appendix~\ref{app:anon}: ten headlines whose ``anonymized'' text still named the firm).
+\item \textbf{Field the named-versus-anonymized contrast interleaved in a single sitting}, alternating condition order at the batch level. Guards against cross-session level drift masquerading as a treatment effect ($+5.79$ points over twelve hours here; Section~\ref{sec:results:h2}).
+\item \textbf{Freeze the batch composition} across every comparison~---conditions, sessions, or model versions~---and re-score once under an alternative composition to measure the channel on your own corpus. Guards against batch-composition level shifts ($+3.6$ points here; harmless to slopes and ranks, disqualifying for thresholds and time series; Appendix~\ref{app:interleaved}).
+\item \textbf{Score twice and report the noise floor:} an ICC or within-headline repeat SD alongside any single-call statistic, with inference clustered at the call level. Guards against response-level mood and overstated precision (ICC $0.92$ here; 13\% of residual variance is shared within a response; Section~\ref{sec:results:h3}).
+\item \textbf{Flag realized-price language and audit the flag} against a written rulebook, on every flagged headline if the count is small, on a sample otherwise. Guards against retrospective-coverage contamination (the echo channel of Section~\ref{sec:results:h4}: the predictive loading directionally sits in the 15\% of headlines that quote realized moves).
+\item \textbf{Test the sample for selection:} a two-line firm-and-day fixed-effects regression of realized activity on the coverage indicator. Guards against event-sampling bounds on external validity (coverage selected on volatility at $t=2.76$ here; Section~\ref{sec:results:h5}).
+\item \textbf{Declare the test family before the augmented inference, and compare instruments by difference tests, never by separate significances.} Guards against multiplicity and the genre's most common inference error (Sections~\ref{sec:framework:inference} and~\ref{sec:discussion}).
+\end{enumerate}
+\vspace{2pt}
+\rule{\textwidth}{0.4pt}
+\vspace{1pt}
+Items 1--4 protect the measurement; items 5--6 protect the interpretation of the return regression; item 7 protects the inference. A study that cannot run the full protocol should at minimum report which items it skipped, so that readers can price the corresponding channels themselves.
+
+\vspace{4pt}
+{\footnotesize\emph{Checklist form of Appendix ``A Minimal Viable Audit Protocol''; the paper's appendix is
+the authoritative text and the two are generated from the same source. Free to reuse with citation.}}
+\end{document}

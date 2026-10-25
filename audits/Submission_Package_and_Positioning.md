@@ -95,3 +95,18 @@ aquars43@foxmail.com
 - 新增：身份互换/中性前缀/温度0 对照（会话 5，预注册）；批次效应下游后果表；NLP 文献三角；人工标注包
 - 多模型验证在本环境不可执行（API 忽略 model 参数，探测存档）——已如实披露为限制
 - H4 价格回声全链降级为 directional（p=0.10, power 0.31）
+
+## 二·补·续、v6.3.2 letter 状态更新（2026-10-23，期刊指南合规终检轮）
+
+上节所述为 v6.3（2026-10-20）letter 初版状态。v6.3.2 终检轮（用户指令"参照期刊官网投稿指导做最后修改"）对 letter 做了三处更新：**正文 1,408→1,416 词**（引言接入 NLP 上下文效应括注、限制段接入跨模型对照句）；**文献表 18→19 条且正文-文献表双向一一对应**（修复 Elsevier 投稿清单"references ↔ citations"违规：原 4 条未引用文献已全部接入正文；新增 Korikov et al. 2025 EMNNP 批次构成外部证据）；**Glasserman & Lin 更新为 JFDS 6(1):25–42, 2024 正式发表版**（letter 与 WP 双侧）。letter 检查网 109/109 维持全过。当前投稿包以 `submission_frl/`（v6.3.2）与 GitHub Release v6.3.2 为准。
+
+
+## 三层修订终局与投稿路径（v6.4，2026-10-25）
+
+按用户三层指令全部执行完毕（详见 P2_v6_revision_log v6.4 节与 P3_experiments_report.md）。投稿路径按用户建议固定为：
+
+1. **预印本先行**：投稿前将 43 页 WP 挂 arXiv（或 SSRN）获取反馈；letter 版为 FRL 投稿主体。
+2. **首投 FRL**（letter 1,440 词 < 2,500 限；43 页 WP 作 online appendix；五件套+一页审计清单随复现包发布）。
+3. **升级路径**：若后续补齐跨模型复现（需合作者提供其他供应商访问）与两名独立人工标注员的 κ，目标可上抬一档（Expert Systems with Applications、Information Processing & Management，或 ACM ICAIF / FinNLP 会议，突出"批次构成 + temperature=0 仍不确定"的 NLP 贡献）；方法取向备选 JFDS（Glasserman & Lin 同刊）。
+4. **不冲** JF/JFE/RFS 与要求大样本强经济含义的 1 区期刊。
+5. **作者侧剩余两件事不变**：COI/funding 事实性核对一句；GitHub PAT 立即撤销轮换（令牌在聊天中明文出现过）。

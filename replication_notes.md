@@ -83,3 +83,24 @@
 - The echo-split contrast (`C6`/`C7`) replicates the P0-10 same-day-control specification with the >=25-obs-per-side guard.
 - Paper integration: `sections/appendix.tex` (new subsection `app:equiv`, table `tab:tost`), `sections/results.tex` (prediction layer, H4, two captions), `sections/theory.tex` (converse inference clause), `sections/intro.tex`, `sections/discussion.tex`, `sections/titleblock.tex`, `sections/litreview.tex`, `sections/references.tex` (+4 entries), `sections/robustness.tex`.
 - Verify with: `python src/equivalence_testing.py` (writes results_equivalence.json), `python tests/test_numbers.py` (290 checks), `bash`-free in-package compile: `cd paper && tectonic main.tex`.
+
+## v6.3.1 addendum (2026-10-23)
+
+- Fix: `sections/appendix.tex` + `sections/results.tex` display the session-3-vs-4 fixed-composition drift as **+0.56** (archived 0.5645 in `data/results_s4.json`); the stale "+0.57" display is gone from both files.
+- Declarations: `sections/titleblock.tex` gains the competing-interest and funding sentences (standard no-conflict / no-grant language; author verifies factually at submission).
+- Test net: `tests/test_numbers.py` and `src/test_numbers.py` grow to **297 checks** (+7: pinned drift value, rendering guards, stale-phrase forbidden list, declaration presence).
+- Verify with: `python tests/test_numbers.py` (297 checks), `cd paper && tectonic main.tex` (39 pp. body), then `python ../src/pdf_qa_v6.py` against the merged deliverable.
+
+## v6.3.2 addendum (2026-10-23)
+
+- Journal-guideline compliance round (FRL Guide for Authors). Paper changes: `sections/references.tex` (Glasserman and Lin updated from the 2023 arXiv working paper to the published *Journal of Financial Data Science* 6(1), 25-42, 2024 version; new entry Korikov, Du, Sanner, and Rekabsaz 2025, EMNLP 2025, arXiv:2505.12570) and `sections/litreview.tex` (the NLP context-effects sentence now also credits batch composition/permutation work in information retrieval). No numbers, tables, or figures change.
+- Verify with: `cd paper && tectonic main.tex` (39 pp., 0 errors), `python tests/test_numbers.py` (297 checks), `python src/pdf_qa_v6.py` (65/65 key strings; run against the merged deliverable).
+
+## v6.4 addendum (2026-10-25) — three-layer revision: session-6/6b experiments, level TOST, leakage audit
+
+- New staged sessions (pre-registered in `audits/P3_preregistration_session6.md`, archived before collection): session 6 (fictional-name control: N6/A6/F6 over the identical 341, one sitting, three-way rotation; 41 calls) and session 6b (batch-size dose-response: 50 seeded headlines scored alone / in 5s / in 25s, one pass per size; 62 calls).
+- Headline results: fictional-name condition lands midway between named and anonymized (+1.20 / -1.33; clustered p=0.45), splitting the de-identification displacement into ~half real-name and ~half placeholder-rewrite; de-identification effect replicates a third time (N6-A6 = -2.54); singleton-vs-25-batch level gap -0.20 (batch-size-1 zero point: composition requires changed mates); mood decomposition underpowered at one pass per size (disclosed).
+- New analyses: level-layer TOST battery at a pre-fixed 1.25-point margin (`level_tost_and_margins.py`; prefix passes, swap EMT 1.73 headline / 3.22 clustered); economics-anchored 10 bps/SD margin on the prediction-layer battery (no contrast passes; verdicts margin-specific); swapped-text leakage audit (`swap_leakage_audit.py`; 15.0%/26.7% cue-flagged, 1.8% identity leaks via concatenated name variants; conclusions unchanged after exclusion).
+- Wording downgrades throughout WP+letter per the referee directive (no "replicates/settles/rules out" for clustered-insignificant contrasts; temperature-0 attribution is "consistent with server-side nondeterminism"); the naive two-session benchmark paragraph moved from §5.2 to Appendix (app:session); the downstream-consequences table+figure promoted from the appendix into §5.2.
+- Draw-stability count updated: 14 independent named passes across 6 sittings (16 archived draws incl. 2 within-condition means); ranges unchanged (beta [0.0104,0.0161], t [1.47,2.12]).
+- Verify with: `cd paper && tectonic main.tex` (42 pp., 0 errors), `python tests/test_numbers.py` (323 checks), `python src/frl_letter_check.py` (109 checks; letter body 1,440 words), `python src/pdf_qa_v6.py` (65/65 key strings on the merged deliverable, 43 pp.).

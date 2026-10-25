@@ -1,0 +1,102 @@
+{
+ "https://www.wsj.com/livecoverage/june-jobs-report-stock-market-07-02-2026/card/tesla-sales-jump-ZP21Ndr3FysX55OapsVd": {
+  "sentiment": -30,
+  "relevance": 80
+ },
+ "https://www.reuters.com/business/autos-transportation/tesla-signals-oct-1-launch-long-delayed-roadster-2026-09-12": {
+  "sentiment": 70,
+  "relevance": 90
+ },
+ "https://www.cnbc.com/2026/09/02/broadcom-avgo-q3-earnings-report-2026.html": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://variety.com/feature/whats-on-netflix-movies-shows-1203517873": {
+  "sentiment": 0,
+  "relevance": 60
+ },
+ "https://www.intc.com/news-events/press-releases/detail/1782/intel-to-report-third-quarter-2026-financial-results": {
+  "sentiment": 0,
+  "relevance": 70
+ },
+ "https://blogs.oracle.com/ai-and-datascience/whats-new-in-oracle-ai-october-2026": {
+  "sentiment": 40,
+  "relevance": 80
+ },
+ "https://www.proactiveinvestors.com/companies/news/1097666/salesforce-shares-jump-on-blowout-results-raised-outlook-1097666.html": {
+  "sentiment": 90,
+  "relevance": 100
+ },
+ "https://www.barchart.com/story/news/4024140/dear-salesforce-stock-fans-mark-your-calendars-for-august-26": {
+  "sentiment": 0,
+  "relevance": 30
+ },
+ "https://investor.salesforce.com/news/news-details/2026/Salesforce-Delivers-Record-Second-Quarter-Fiscal-2027-Results/default.aspx": {
+  "sentiment": 75,
+  "relevance": 100
+ },
+ "https://www.hedgefundtips.com/october-2026-bank-of-america-global-fund-manager-survey-results-summary": {
+  "sentiment": 0,
+  "relevance": 30
+ },
+ "https://qz.com/goldman-sachs-third-quarter-earnings-beat-101326": {
+  "sentiment": 75,
+  "relevance": 100
+ },
+ "https://tickeron.com/blogs/morgan-stanley-ms-delivers-q3-2026-earnings-beat-led-by-equities-trading-19307": {
+  "sentiment": 75,
+  "relevance": 100
+ },
+ "https://newsroom.wf.com/news-releases/news-details/2026/Wells-Fargo-to-Announce-Second-Quarter-2026-Earnings-on-July-14-2026/default.aspx": {
+  "sentiment": 0,
+  "relevance": 100
+ },
+ "https://investor.visa.com/news/news-details/2026/Visa-to-Announce-Fiscal-Third-Quarter-2026-Financial-Results-on-July-28-2026/default.aspx": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.investors.com/research/mastercard-leads-10-to-best-stock-lists": {
+  "sentiment": 75,
+  "relevance": 90
+ },
+ "https://investor.mastercard.com/investor-news/investor-news-details/2026/Mastercard-Incorporated-Second-Quarter-2026-Financial-Results-Available-on-Companys-Website/default.aspx": {
+  "sentiment": 0,
+  "relevance": 100
+ },
+ "https://www.mastercard.com/us/en/news-and-trends/press/2026/october/mastercard-at-money-2020-2026.html": {
+  "sentiment": 30,
+  "relevance": 80
+ },
+ "https://investor.exxonmobil.com/company-information/press-releases/detail/1208/exxonmobil-announces-second-quarter-2026-results": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.reuters.com/business/energy/exxonmobil-quarterly-profit-hits-four-year-high-misses-analyst-estimates-2026-07-31": {
+  "sentiment": -60,
+  "relevance": 90
+ },
+ "https://tickeron.com/blogs/bank-of-america-bac-climbs-8-2-as-earnings-momentum-builds-15625": {
+  "sentiment": 80,
+  "relevance": 100
+ },
+ "https://www.cnbc.com/2026/07/29/procter-gamble-pg-q4-2026-earnings.html": {
+  "sentiment": 0,
+  "relevance": 80
+ },
+ "https://www.usatoday.com/story/shopping/deals/retailers/walmart/2026/10/05/live-walmart-deals-event-october/92097144007": {
+  "sentiment": 0,
+  "relevance": 70
+ },
+ "https://shopping.yahoo.com/deals/articles/15-items-costco-price-cuts-142321403.html": {
+  "sentiment": 20,
+  "relevance": 90
+ },
+ "https://www.pfizer.com/news/press-release/press-release-detail/pfizer-declares-fourth-quarter-2026-dividend": {
+  "sentiment": 30,
+  "relevance": 90
+ },
+ "https://www.biopharmadive.com/news/pfizer-cost-cuts-savings-2q-2026-earnings/826930": {
+  "sentiment": -30,
+  "relevance": 90
+ }
+}

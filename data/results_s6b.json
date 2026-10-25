@@ -1,0 +1,81 @@
+{
+ "design": {
+  "session": "2026-10-25, single sitting, named protocol",
+  "preregistration": "audits/P3_preregistration_session6.md",
+  "seed": 20261025,
+  "n_titles": 50,
+  "sizes": [
+   1,
+   5,
+   25
+  ],
+  "pass_order": "B1a(25) -> B25(2) -> B5(10) -> B1b(25)",
+  "note": "one pass per size; singleton level centered in session time; single-pass-per-size noise bounds level contrasts; cross-session comparisons descriptive only"
+ },
+ "levels": {
+  "B1": 27.2,
+  "B5": 21.7,
+  "B25": 27.4
+ },
+ "level_contrasts": [
+  {
+   "contrast": "B1_minus_B5",
+   "mean": 5.5,
+   "se": 2.3872535667240578,
+   "t": 2.3039027259879443,
+   "n": 50
+  },
+  {
+   "contrast": "B1_minus_B25",
+   "mean": -0.2,
+   "se": 2.347208502690385,
+   "t": -0.08520759863078152,
+   "n": 50
+  },
+  {
+   "contrast": "B5_minus_B25",
+   "mean": -5.7,
+   "se": 2.276813025046283,
+   "t": -2.50349938150241,
+   "n": 50
+  }
+ ],
+ "batch_mean_variance": {
+  "v_size1": 1575.6734693877552,
+  "v_size5": 274.67777777777775,
+  "v_size25": 58.31999999999997
+ },
+ "triangle_per_call_noise": {
+  "V_1_5": 284.94897959183675,
+  "V_1_25": 275.46938775510205,
+  "V_5_25": 259.1938775510204,
+  "n1_sq": 150.6122448979592,
+  "n5_sq": 134.33673469387753,
+  "n25_sq": 124.85714285714283,
+  "n1_sd_points": 12.272418054236875,
+  "n5_sd_points": 11.590372500220928,
+  "n25_sd_points": 11.173949295443524,
+  "n25sq_minus_n1sq": -25.755102040816354,
+  "benchmark_s3_mood_sq": 6.76,
+  "note": "V(a,b) = n_a^2 + n_b^2 per title; three pairwise variances solve the three per-call noise variances; SE(V) ~ V*sqrt(2/49), so the ~6.8 mood^2 benchmark is inside the noise of this single-pass design"
+ },
+ "mood2_primary": {
+  "estimate": -50.57114512471662,
+  "mood_sd_points": 0.0,
+  "ci95_boot": [
+   -274.9121882086168,
+   408.9101899092965
+  ],
+  "share_of_singleton_variance": -0.032094939787471695,
+  "formula": "mood^2 = (5*v5 - v1)/4"
+ },
+ "ols_1_over_k": {
+  "intercept_mood2": -23.170294784580687,
+  "slope_true_plus_idio": 1595.30817058006
+ },
+ "benchmarks_descriptive": {
+  "s3_mood_sd_points": 2.6,
+  "s3_within_sd_points": 7.2,
+  "note": "session-3 decomposition from the paper; cross-session, descriptive only"
+ }
+}

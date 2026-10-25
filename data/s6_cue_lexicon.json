@@ -1,0 +1,198 @@
+{
+ "primary_ge3": {
+  "AAPL": [
+   "products",
+   "event"
+  ],
+  "MSFT": [],
+  "NVDA": [
+   "aug"
+  ],
+  "META": [],
+  "TSLA": [
+   "oct",
+   "roadster"
+  ],
+  "AVGO": [],
+  "AMD": [],
+  "NFLX": [
+   "movies"
+  ],
+  "INTC": [
+   "offer",
+   "billion",
+   "share"
+  ],
+  "ORCL": [
+   "what's"
+  ],
+  "CRM": [],
+  "ADBE": [],
+  "QCOM": [],
+  "GS": [
+   "all"
+  ],
+  "MS": [],
+  "WFC": [
+   "net",
+   "income"
+  ],
+  "V": [
+   "bulletin"
+  ],
+  "MA": [
+   "inc"
+  ],
+  "XOM": [
+   "exxonmobil"
+  ],
+  "PG": [],
+  "KO": [],
+  "IBM": [],
+  "JPM": [],
+  "BAC": [],
+  "JNJ": [],
+  "LLY": [],
+  "DIS": [],
+  "BA": [],
+  "CAT": [],
+  "GE": [],
+  "WMT": [
+   "oct",
+   "deals",
+   "sale",
+   "deal"
+  ],
+  "COST": [
+   "wholesale",
+   "items",
+   "corporation"
+  ],
+  "GOOGL": [
+   "goog"
+  ],
+  "AMZN": [],
+  "CVX": [],
+  "PFE": []
+ },
+ "sensitivity_ge2": {
+  "AAPL": [
+   "products",
+   "iphone",
+   "coming",
+   "event",
+   "are"
+  ],
+  "MSFT": [
+   "larges"
+  ],
+  "NVDA": [],
+  "META": [],
+  "TSLA": [
+   "oct",
+   "last",
+   "reveal",
+   "roadster"
+  ],
+  "AVGO": [
+   "inc"
+  ],
+  "AMD": [],
+  "NFLX": [
+   "movies",
+   "what's",
+   "coming"
+  ],
+  "INTC": [
+   "offer",
+   "billion",
+   "offering"
+  ],
+  "ORCL": [
+   "driven",
+   "triple",
+   "monday",
+   "digit",
+   "going",
+   "what's"
+  ],
+  "CRM": [
+   "saas",
+   "delivers",
+   "raised"
+  ],
+  "ADBE": [
+   "month"
+  ],
+  "QCOM": [],
+  "GS": [
+   "all"
+  ],
+  "MS": [],
+  "WFC": [
+   "company",
+   "net",
+   "income"
+  ],
+  "V": [
+   "bulletin"
+  ],
+  "MA": [
+   "inc"
+  ],
+  "XOM": [
+   "exxonmobil",
+   "oil"
+  ],
+  "PG": [],
+  "KO": [
+   "near"
+  ],
+  "IBM": [],
+  "JPM": [
+   "posts"
+  ],
+  "BAC": [
+   "declares",
+   "preferred"
+  ],
+  "JNJ": [
+   "relations"
+  ],
+  "LLY": [],
+  "DIS": [
+   "walt"
+  ],
+  "BA": [],
+  "CAT": [],
+  "GE": [
+   "hold"
+  ],
+  "WMT": [
+   "oct",
+   "slump",
+   "deals",
+   "sale",
+   "shop",
+   "deal"
+  ],
+  "COST": [
+   "wholesale",
+   "items",
+   "finds",
+   "corporation"
+  ],
+  "GOOGL": [
+   "goog"
+  ],
+  "AMZN": [
+   "prime",
+   "days",
+   "deal"
+  ],
+  "CVX": [
+   "corporation"
+  ],
+  "PFE": []
+ }
+}

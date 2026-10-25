@@ -1,6 +1,6 @@
 Highlights (Elsevier format: 3-5 bullets, <=85 characters each including spaces)
 
-- De-identification raises LLM sentiment scores 2-3 points; name-swapping does not
+- De-identification raises scores 2-3 points; fictional names recover about half
 - Batch composition, not text meaning, moves score levels by 3.6 points
 - Temperature-zero decoding restores bitwise determinism for only 83% of headlines
 - Predictive content formally equivalent under identity manipulations (TOST battery)
