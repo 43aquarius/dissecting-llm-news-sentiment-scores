@@ -106,3 +106,11 @@ GitHub：`https://github.com/43aquarius/dissecting-llm-news-sentiment-scores`（
 1. **作者事实性核对 COI/funding 两句**（约束性声明；无变化则直接提交）
 2. **GitHub PAT 轮换**（安全，仍为唯一安全待办）
 3. 可选：在 Editorial Manager 提交时补 ORCID 与审稿人建议（2–4 名 LLM 金融测量方向学者）
+
+
+## 第四轮状态更新（v6.4，2026-10-25）
+
+- 三层修订指令全部执行完毕（L1 措辞/封面/引用统一；L2 四项新分析 + 两场新实验；L3 下游表图提升 + 一页清单 + 投稿路径定稿）——详见 P2_v6_revision_log.md v6.4 节与 P3_experiments_report.md。
+- 就绪状态：WP 43 页（封面+42）、letter 1,440 词、三网全过（323 + 109 + 65）、复现包 232 文件重打包、一页审计清单随附。
+- **GitHub 阻塞（如实记录）**：本会话中原令牌经 API 实测已失效（401 Bad credentials，疑似已被撤销/过期），推送与 Release 无法执行。本地仓库已提交并打 tag（b0e3615 + f2d52a2，tag v6.4.0），`scripts/release_v6_4.sh` 已就绪——提供新令牌后一条命令完成推送+发布（5 项资产）。
+- 作者侧剩余：COI/funding 事实性核对一句；提供新 GitHub PAT（旧令牌已失效；新令牌请勿在聊天中明文出现后长期保留，用后轮换）。
