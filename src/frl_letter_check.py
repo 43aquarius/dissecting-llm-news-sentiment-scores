@@ -167,6 +167,19 @@ for phrase in ["fourteen re-scorings", "six sittings", "sixteen archived named d
                "exploratory", "not independent human annotation", "LLM-assisted"]:
     in_tex(f"phrase {phrase[:24]}", phrase, L)
 
+# ---------- v6.5 guards: pooled estimate, batch-size wide null ----------
+in_tex("letter pooled abstract", "2.6 points pooled across three sessions", L)
+in_tex("letter pooled CI", "95\\% CI $[1.06, 4.08]$", L)
+in_tex("letter pooled conservative", "$[0.58, 4.56]$", L)
+in_tex("letter point-estimate split", "the point estimates split about evenly", L)
+in_tex("letter batchsize wide null", "leaves the presence channel open", L)
+in_tex("letter batchsize anomaly", "unexplained size-5 anomaly", L)
+for stale in ["locates the zero point", "requires a changed mate pool, not batch context in general"]:
+    if stale in tex:
+        fail += 1; print(f"  FAIL stale batch-size phrasing: {stale!r}")
+    else:
+        ok += 1
+
 # ---------- expansion-round numbers (added after the first pass) ----------
 rr = read("results_revision.json")
 sd_ = rr["session_confounding"]["session_drift_named_oct15_minus_oct16"]

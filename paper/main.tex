@@ -22,6 +22,9 @@
 \usepackage{setspace}
 \usepackage{needspace}
 \usepackage[round,authoryear]{natbib}
+% cross-document references: Appendix A--K live in the companion Online Appendix
+\usepackage{xr}
+\externaldocument{online_appendix}
 
 % hyperref last among content packages
 \usepackage[
@@ -83,8 +86,6 @@
 % ---------- bibliography (manual, natbib-compatible) ----------
 \input{sections/references}
 
-% ---------- appendices ----------
-\appendix
-\input{sections/appendix}
+% ---------- appendices: published as the companion Online Appendix (online_appendix.tex) ----------
 
 \end{document}

@@ -1,0 +1,95 @@
+{
+ "design": {
+  "purpose": "pool the de-identification level effect across sessions 3/5/6; document batch-size wide null",
+  "convention": "named minus anonymized (negative = anonymized scores sit above named)",
+  "inputs": "archived score files; clustered SEs from results_s5/s6 cluster_t and the paper's session-3 clustered CI"
+ },
+ "session_estimates": {
+  "s3": {
+   "beta": -2.8226,
+   "se_cluster": 1.0357,
+   "t_cluster": 2.725,
+   "p": 0.017
+  },
+  "s5": {
+   "beta": -2.0528,
+   "se_cluster": 1.5149,
+   "t_cluster": -1.3551,
+   "p": 0.17539686458327197
+  },
+  "s6": {
+   "beta": -2.5367,
+   "se_cluster": 1.7757,
+   "t_cluster": -1.4285,
+   "p": 0.15313927860556303
+  }
+ },
+ "headline_level_diff_correlations": {
+  "note": "Pearson correlation of per-headline anonymized-minus-named differences across sessions; same 341 headlines re-scored in each session",
+  "n": 341,
+  "rho_s3_s5": 0.4511,
+  "rho_s3_s6": 0.4044,
+  "rho_s5_s6": 0.3161,
+  "mean_rbar": 0.3905
+ },
+ "dl_random_effects": {
+  "pooled_beta": -2.57,
+  "se": 0.77,
+  "ci95": [
+   -4.08,
+   -1.06
+  ],
+  "z": -3.34,
+  "p_normal": 0.00085,
+  "fixed_effect_beta": -2.57,
+  "Q": 0.176,
+  "df": 2,
+  "tau2": 0.0,
+  "I2_pct": 0.0
+ },
+ "correlation_adjusted_conservative": {
+  "note": "empirical rho applied to full clustered SEs (conservative; only headline-level error is plausibly shared)",
+  "se": 1.017,
+  "ci95": [
+   -4.56,
+   -0.58
+  ]
+ },
+ "s6b_batch_size": {
+  "b1_vs_b25": {
+   "mean": -0.2,
+   "se": 2.347,
+   "t": -0.085,
+   "n": 50,
+   "ci95_t": [
+    -4.92,
+    4.52
+   ],
+   "ci90_t": [
+    -4.14,
+    3.74
+   ],
+   "EMT_points": 4.14,
+   "note": "EMT = minimum TOST margin; exceeds the +3.61 composition effect -> singleton contrast cannot certify level neutrality at the composition-effect scale"
+  },
+  "b1_vs_b5": {
+   "mean": 5.5,
+   "t": 2.304
+  },
+  "b5_vs_b25": {
+   "mean": -5.7,
+   "t": -2.503
+  }
+ },
+ "fictional_control_coincidence": {
+  "note": "the two clustered p-values are near-identical because the fictional level sits almost exactly midway: both contrasts share clustered |t| ~ 0.755",
+  "fict_minus_named": {
+   "cluster_t": 0.754639276960673,
+   "cluster_p": 0.4504654502265628
+  },
+  "fict_minus_anonv2": {
+   "cluster_t": -0.755126482264082,
+   "cluster_p": 0.4501730948328495
+  }
+ }
+}

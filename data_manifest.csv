@@ -89,3 +89,5 @@ results_swap_leakage.json,swapped-text leakage audit,swap_leakage_audit.py,count
 s6_cue_lexicon.json,firm-specific cue lexicons (primary + sensitivity),swap_leakage_audit.py,36 firms,App session6,verified
 s6_fictional_map.json,36 invented firm names + synthetic tickers,construction (design choice),36 entries,App session6,archived (design input)
 paper/Audit_Protocol_Checklist_OnePage.pdf,"one-page Minimal Audit Protocol checklist (generated from app:checklist source)",build_onepage_checklist.py,1 page,App checklist,verified
+results_meta_deident.json,cross-session DL pooled estimate + s6b wide-null TOST/EMT + p45 coincidence documentation,meta_deident_pooling.py,session estimates + Q/tau2 + CIs + rhos + EMT,Sec 5.2 / App session6,verified (recomputable)
+paper/Dissecting_LLM_News_Sentiment_Scores_Online_Appendix_v6_5.pdf,online appendix deliverable (appendices A-K + relocated figures and downstream accounting),tectonic paper/online_appendix.tex,18 pages,Online appendix,verified

@@ -438,7 +438,7 @@ n_checks[0] += 1
 if "thirteen independent passes across five sittings" in _all_tex or "fifteen archived named draws" in _all_tex or "twelve independent passes" in _all_tex:
     failures.append("stale draw count (fourteen archived / twelve independent passes) still present")
 in_tex("checklist appendix present", "Minimal Viable Audit Protocol", "appendix.tex")
-in_tex("downstream figure present", "fig_downstream.png", "results.tex")
+in_tex("downstream figure present", "fig_downstream.png", "appendix.tex")
 
 # (n) equivalence testing (equivalence_testing.py, v6.2) and verified literature
 eq = load("results_equivalence.json")
@@ -511,7 +511,7 @@ in_tex("funding declaration in titleblock", "received no specific grant from fun
 # ============ v6.4 additions: session-6/6b, level TOST, leakage, econ margin ============
 in_tex("s6 fictional contrast main text", "fictional minus named $+1.20$, clustered $p=0.45$", "results.tex")
 in_tex("s6 deident replication", "named minus anonymized $-2.54$, clustered $p=0.15$", "results.tex")
-in_tex("s6 appendix section", "Session-6 Controls: Fictional Names and the Batch-Size Zero Point", "appendix.tex")
+in_tex("s6 appendix section", "Session-6 Controls: Fictional Names and the Batch-Size Dose-Response", "appendix.tex")
 in_tex("s6 prereg pointer", "P3\\_preregistration\\_session6.md", "appendix.tex")
 in_tex("s6 levels midway", "13.90", "appendix.tex")
 in_tex("level tost table", "Level-layer equivalence (points; $n=341$ paired headlines, session 5)", "appendix.tex")
@@ -522,12 +522,15 @@ in_tex("econ margin appendix", "11.5, 14.5, 18.9, 22.3, and 29.8 \\bps/SD", "app
 in_tex("leakage share sentence", "15.0\\% of swapped headlines", "results.tex")
 in_tex("name variant leak count", "six headlines, 1.8\\%", "results.tex")
 in_tex("leakage robustness", "+0.36$ to $+0.42", "results.tex")
-in_tex("batchsize zero point", "batch-size dose-response session narrows the residual further", "results.tex")
-in_tex("batchsize zero point number", "to within $-0.2$ points ($t=-0.1$)", "results.tex")
+in_tex("batchsize wide null", "leaves the presence channel open rather than closed", "results.tex")
+in_tex("batchsize wide null number", "its 95\\% CI of $[-4.92, +4.52]$ points cannot exclude", "results.tex")
+in_tex("batchsize anomaly in main text", "the size-5 pass sits $5.5$--$5.7$ points below both neighbors", "results.tex")
+in_tex("batchsize noise in main text", "per-call noise SDs of 11--12 points across all three sizes", "results.tex")
 in_tex("s6b appendix", "triangle solution of the three pairwise per-title variances", "appendix.tex")
-in_tex("abstract fictional clause", "(a fictional-name control recovers about half)", "titleblock.tex")
+in_tex("abstract fictional clause", "a fictional-name control points to about half", "titleblock.tex")
+in_tex("abstract pooled number", "2.6 points pooled across three sessions", "titleblock.tex")
 in_tex("intro fictional midway", "lands almost exactly midway", "intro.tex")
-in_tex("conclusion fictional split", "splits the displacement about evenly between the real name and the rewrite itself", "conclusion.tex")
+in_tex("conclusion fictional split", "splits the displacement, in point estimates, about evenly between the real name and the rewrite itself", "conclusion.tex")
 not_in_tex("old replicates phrase gone", "First, the effect replicates under corrected anonymization", "results.tex")
 not_in_tex("old rules out phrase gone", "swap control rules out a firm-specific prior", "results.tex")
 not_in_tex("old settles phrase gone", "settles the identity level effect", "results.tex")
@@ -553,6 +556,40 @@ assert _lk["n_flagged_primary"] == 51 and _lk["n_flagged_sensitivity"] == 91, "l
 assert _lk["n_name_variant_leaks"] == 6, "name-variant leaks"
 _r6b = _json.load(open("/home/z/my-project/data/results_s6b.json"))
 assert abs(_r6b["level_contrasts"][1]["mean"] - (-0.20)) < 0.05, "6b zero point"
+
+# ============ v6.5 additions: cross-session pooling, batch-size wide null, count unification ============
+_meta = _json.load(open("/home/z/my-project/data/results_meta_deident.json"))
+_dl = _meta["dl_random_effects"]
+assert abs(_dl["pooled_beta"] - (-2.57)) < 0.005, "pooled beta"
+assert abs(_dl["ci95"][0] - (-4.08)) < 0.01 and abs(_dl["ci95"][1] - (-1.06)) < 0.01, "pooled CI"
+assert abs(abs(_dl["z"]) - 3.34) < 0.02, "pooled z"
+assert abs(_dl["tau2"]) < 1e-9 and abs(_dl["I2_pct"]) < 1e-9, "heterogeneity nil"
+_ca = _meta["correlation_adjusted_conservative"]
+assert abs(_ca["ci95"][0] - (-4.56)) < 0.01 and abs(_ca["ci95"][1] - (-0.58)) < 0.01, "conservative CI"
+_rc = _meta["headline_level_diff_correlations"]
+assert abs(_rc["rho_s5_s6"] - 0.32) < 0.01 and abs(_rc["rho_s3_s5"] - 0.45) < 0.01, "cross-session rhos"
+_bs = _meta["s6b_batch_size"]["b1_vs_b25"]
+assert abs(_bs["ci95_t"][0] - (-4.92)) < 0.01 and abs(_bs["ci95_t"][1] - 4.52) < 0.01, "batch-size CI"
+assert abs(_bs["EMT_points"] - 4.14) < 0.01, "batch-size EMT"
+
+in_tex("pooled sentence", "pools the de-identification effect at $-2.57$ points", "results.tex")
+in_tex("pooled caveat", "widens the pooled interval to $[-4.56, -0.58]$", "results.tex")
+in_tex("pooled table row", "Identity, pooled sess.\\ 3/5/6, random effects & $-$2.57", "results.tex")
+in_tex("pooled appendix paragraph", "Cross-session pooled estimate of the de-identification effect", "appendix.tex")
+in_tex("pooled appendix rhos", "$\\rho=0.45$ for sessions 3--5, $0.40$ for 3--6, $0.32$ for 5--6", "appendix.tex")
+in_tex("p45 coincidence note", "The two clustered $p$-values are near-identical", "appendix.tex")
+in_tex("6b wide null appendix", "a wide null rather than a zero point", "appendix.tex")
+in_tex("counts robust fourteen", "fourteen individual passes (the original, three October-16 repeats, four October-18 rounds, the October-18 542-composition pass, the three session-4 passes, the session-5 named pass, and the session-6 named anchor)", "robustness.tex")
+in_tex("counts results enumeration", "fourteen independent passes plus the two within-condition means", "results.tex")
+in_tex("pooled in conclusion", "$-2.6$ points pooled across the three sessions that fielded the contrast", "conclusion.tex")
+in_tex("pooled in intro", "the pooled de-identification effect is $-2.6$ points", "intro.tex")
+in_tex("pooled in discussion", "$-2.6$ points pooled across three sessions", "discussion.tex")
+
+not_in_tex("old batchsize overclaim 1", "mere batch-mate presence does not move levels", "results.tex", "appendix.tex")
+not_in_tex("old batchsize overclaim 2", "the batch-size-1 zero point is level-neutral", "results.tex", "appendix.tex")
+not_in_tex("old appendix title", "Batch-Size Zero Point", "appendix.tex")
+not_in_tex("old thirteen enumeration", "thirteen individual passes", "robustness.tex", "results.tex")
+not_in_tex("old abstract clause", "recovers about half", "titleblock.tex")
 
 # ---------------- report ----------------
 n_total = n_checks[0]
