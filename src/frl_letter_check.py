@@ -219,6 +219,62 @@ print(f"\nBody word count (excl. abstract/tables/refs/captions): {n_words}")
 if n_words < 2500: ok += 1
 else: fail += 1; print(f"  FAIL word budget: {n_words} >= 2500")
 
+# ---------- double-anonymized submission set (Elsevier: title page + anon manuscript) ----------
+ANON_IDENT = ["Chang Tan", "Dalian University", "aquars43", "foxmail",
+              "43aquarius", "github.com"]
+def not_in(name, needles, path):
+    global ok, fail
+    src = open(path).read()
+    hits = [s for s in needles if s in src]
+    if not hits: ok += 1
+    else:
+        fail += 1; print(f"  FAIL {name}: identifying strings present {hits}")
+
+TP = os.path.join(BASE, "submission_frl/frl_titlepage.tex")
+LA = os.path.join(BASE, "submission_frl/frl_letter_anon.tex")
+OAA = os.path.join(BASE, "paper/online_appendix_anon.tex")
+# fallbacks for the in-repo layout (github_repo: submission/, paper/)
+if not os.path.exists(TP):
+    TP = os.path.join(BASE, "submission/frl_titlepage.tex")
+if not os.path.exists(LA):
+    LA = os.path.join(BASE, "submission/frl_letter_anon.tex")
+if not os.path.exists(OAA):
+    OAA = os.path.join(BASE, "paper/online_appendix_anon.tex")
+
+# (a) title page: the five required elements (title, author, affiliation,
+#     acknowledgements, corresponding email) plus the repository link that is
+#     withheld from the anonymized manuscript.
+for el in ["Manuscript title", "Chang Tan", "Dalian University of Technology",
+           "Corresponding author", "aquars43@foxmail.com", "Acknowledgements",
+           "github.com/43aquarius/dissecting-llm-news-sentiment-scores"]:
+    in_tex(f"titlepage element: {el[:30]}", el, TP)
+
+# (b) anonymized manuscript + anonymized online appendix: zero identifying strings
+not_in("anon letter identification-free", ANON_IDENT, LA)
+not_in("anon online appendix identification-free", ANON_IDENT, OAA)
+
+# (c) anon letter keeps the v6.5 content intact below the title block
+for needle in ["2.6 points pooled across three sessions",
+                "available from the corresponding author",
+                "Batch composition, which headlines share an API call"]:
+    in_tex(f"anon letter content: {needle[:35]}", needle, LA)
+
+# (d) compiled PDFs exist (titlepage 1 pp., anon letter 7 pp., anon OA 18 pp.)
+for rel in ["submission_frl/frl_titlepage.pdf", "submission_frl/frl_letter_anon.pdf",
+            "paper/online_appendix_anon.pdf"]:
+    if os.path.exists(os.path.join(BASE, rel)): ok += 1
+    else:
+        for alt in [rel.replace("submission_frl", "submission")]:
+            if os.path.exists(os.path.join(BASE, alt)): ok += 1; break
+        else:
+            fail += 1; print(f"  FAIL missing PDF: {rel}")
+
+# (e) the generator script exists (anon files are derived, never hand-edited)
+in_tex("generator script present", "make_anon_versions",
+       os.path.join(BASE, "scripts/make_anon_versions.py") if
+       os.path.exists(os.path.join(BASE, "scripts/make_anon_versions.py")) else
+       os.path.join(BASE, "src/make_anon_versions.py"))
+
 print(f"\nfrl_letter_check: {ok}/{ok+fail} checks passed")
 if fail: sys.exit(1)
 print("ALL LETTER CHECKS PASS")
